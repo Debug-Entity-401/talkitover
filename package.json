@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Debug-Entity-401/talkitover/issues"
   },
-  "homepage": "https://github.com/Debug-Entity-401/talkitover#readme"
+  "homepage": "https://github.com/Debug-Entity-401/talkitover#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "react-bootstrap": "^1.2.2"
+  }
 }
