@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-
+import cookie from 'react-cookies';
 const signUp = createSlice({
 
   name: 'signup',
@@ -26,6 +26,7 @@ const signUp = createSlice({
               state.loggedIn=false;
                 console.log('Error:', '\n', err, '\n');
             }
+            
             console.log('Verified JSON Token:', '\n', decodedToken); // bar
           state.loggedIn=true;
      
@@ -57,6 +58,7 @@ export const post = (obj) => async dispatch => {
     console.log('response===> ',response);
     let token = await response.data;
     console.log('token ===> ', token);
+    cookie.save('remember token', token);
    dispatch(validateToken(token));
   } catch (err) {
     dispatch(userExist(false));
