@@ -1,8 +1,10 @@
+//entry point file
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+//import BrowserRouter and wrap the whole app with it (instead of React.StrictMode) -> set up the app in a way that we have the ability to do routing
 ReactDOM.render(
   <React.StrictMode>
     <App />
