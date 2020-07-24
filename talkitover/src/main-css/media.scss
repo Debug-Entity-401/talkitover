@@ -1,0 +1,123 @@
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+    .website-introduction h1 {
+     
+        font-size: 60px;
+    }
+    .full-footer {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .footer-nav {
+        margin-top: 3%;
+        text-align: left;
+    }
+    .talkitover-intro-title h3
+    {
+        text-align: center;
+    }
+    .overcome-card
+    {
+        height: 21rem;
+    }
+    .talkitover-intro-image img
+    {
+width: 100%;
+text-align: center;
+    }
+    
+  }
+  @media (min-width: 481px) and (max-width: 767px) {
+    .talkitover-intro-title h3
+    {
+        text-align: center;
+    }
+    .talkitover-intro-image
+    {
+text-align: center;
+    }
+    .footer-nav ul li a
+{
+    margin-bottom: 20;
+}
+    .talkitover-intro-description
+    {
+        margin: 3%;
+        text-align: center;
+    }
+    .talkitover-intro-image img
+    {
+text-align: center;
+    }
+    .overcome-card
+    {
+        width: 14rem;
+        height: 18rem;
+        text-align: center;
+    }
+    .website-introduction
+    {
+        display: none;
+    }
+    .footer-nav {
+        margin-top: 1%;
+        text-align: left;
+    }
+    .hero-slider    {
+        clip-path: none !important;
+    }
+    .container
+    {
+        max-width: 767px;
+    }
+    .full-footer {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .footer ul li
+    {
+        margin-bottom: 30%;
+    }
+  }
+  @media (min-width: 120px) and (max-width: 480px) {
+    .talkitover-intro-title h3
+    {
+        text-align: center;
+    }
+  
+    .website-introduction
+    {
+        display: none;
+    }
+    .talkitover-intro-image img
+    {
+width: 100%;
+text-align: center;
+    }
+    .hero-slider    {
+        clip-path: none !important;
+    }
+    .container
+    {
+        max-width: 767px;
+    }
+    .full-footer {
+        display: flex;
+        justify-content: flex-start;
+        padding: 0;
+    }
+    .footer-nav {
+        margin-top: 3%;
+        text-align: left;
+    }
+    footer ul {
+        li
+    
+        {
+            margin-bottom: 20%;
+        }
+    }
+  }
+
+ 

@@ -1,0 +1,46 @@
+@import '../../main-css//variables.scss';
+.logo 
+{
+    width: 50%;
+    animation: moveInLeft 1s ease-in;
+}
+.login-register
+{
+    display: inline-block;
+}
+
+.navbar-nav
+{
+    
+    ul {
+        text-align: center;
+       
+        margin: 0;
+    }
+    ul li
+    {
+        display: inline-block;
+        padding-left: 20px;
+        text-align: center;
+    }  
+    ul li a
+    {
+        font-family: $nav-font;
+    }  
+    
+}
+.signin
+{
+    margin: 0 38%;
+}
+
+@keyframes moveInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-10rem); }
+    80% {
+      transform: translateX(1rem); }
+    100% {
+      opacity: 1;
+      transform: translate(0); } }
+  
