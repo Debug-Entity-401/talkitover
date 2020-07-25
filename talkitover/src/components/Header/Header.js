@@ -55,10 +55,10 @@ class Header extends React.Component {
                         <Nav className="justify-content-end  " style={{ width: "50%" }}>
                     
                 <Show condition={this.context.loggedIn}>
-                    <button  onClick={this.context.logout}>Logout</button>
+                    <Button variant="primary" onClick={this.context.logout}>Logout</Button>
                 </Show>
                 <Show condition={!this.context.loggedIn}>
-                <Button variant="primary" onClick={() => this.handleModalShowHide()}>
+                <Button variant="success" onClick={() => this.handleModalShowHide()}>
                     Sign in 
                 </Button>
                 </Show>
