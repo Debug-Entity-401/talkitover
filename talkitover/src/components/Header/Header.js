@@ -51,6 +51,7 @@ class Header extends React.Component {
                             <li><Nav.Link  className="scroll" href="#services">Services</Nav.Link></li>
                             <li><Nav.Link  className="scroll" href="#overcome">Overcome</Nav.Link></li>
                             <li> <Nav.Link  className="scroll" href="#testominals">testmonials</Nav.Link></li>
+                            {/* <NavLink to="/chat" activeClassName="here">chat</NavLink> */}
                         </Nav>
                         <Nav className="justify-content-end  " style={{ width: "50%" }}>
                     
@@ -63,6 +64,7 @@ class Header extends React.Component {
                 </Button>
                 </Show>
                 <Modal show={this.state.showHide}>
+        
                     <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
                     <Modal.Title>Sign in</Modal.Title>
                     </Modal.Header                >

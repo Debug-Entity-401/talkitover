@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Auth from './components/auth/auth';
 import Login from './components/auth/login';
 import LoginContext from './components/auth/context.js';
+import Chat from './components/chat/chat';
 const  ReadLink=props=>{
   return(
     <Auth capability="READ">
@@ -40,7 +41,7 @@ class App extends React.Component  {
        <EditLink />
       <DeleteLink/>
      </LoginContext>
-
+<Chat />
       <Main />
       <Testmonial />
       <Footer />
