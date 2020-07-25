@@ -13,7 +13,7 @@ class Testominial extends React.Component {
     render() {
         return (
             <section>
-                <div className="testmonials">
+                <div className="testmonials" id="testominals">
                     <h1>testmonials</h1>
                     <Container>
                         <Carousel className="testominal-slider" style={{ height: "450px" }}>

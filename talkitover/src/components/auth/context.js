@@ -1,9 +1,10 @@
 import React from 'react';
 import cookie from 'react-cookies';
-import Jwt from 'jsonwebtoken';
-require('dotenv').config();
-const Api = process.env.signin_api;
-console.log('apiiiiiiiii',Api);
+import jwt from 'jsonwebtoken';
+import axios from 'axios'
+const API =  'https://talkitover-staging.herokuapp.com/signin';
+var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhbGFhYWxtYXNyaSIsImNhcGFiaWxpdGllcyI6WyJSRUFEIiwiQ1JFQVRFIl0sInJvbGUiOiJMaXN0ZW5lciIsImlhdCI6MTU5NTYzMTk5NX0.X8-kWJu4NRLKmF_k-pkTfKEzrUSmmkkAVPch0ZnW0jw';
+
 export const LoginContext = React.createContext();
 
 class LoginProvider extends React.Component {
@@ -14,63 +15,75 @@ class LoginProvider extends React.Component {
             login: this.login,
             logout: this.logout,
             user: {}
-
         }
     }
-    login = async (username, password) => {
-        console.log('api',Api);
+
+    login = async(username, password) => {
         try {
-            console.log('hello there');
-            const UserResults = await fetch(`${Api}`, {
-                method: 'POST',
+            let obj = {user_name: username,password}
+            const API = 'https://talkitover-staging.herokuapp.com/signin';
+            let config = {
                 mode: 'cors',
                 cache: 'no-cache',
-                //encoding the username and password
-                headers: new Headers({
-                    'Authorization': `Basic ${btoa(`${username}:${password}`)}`
-                })
-            })
-            let Result = await UserResults.json();
-            console.log('result', Result);
-            this.validatetoken(Result.token);
-        }
-        catch (err) {
+                credentials: 'same-origin',
+                headers:{
+                    authorization: `Basic ${btoa(`${username}:${password}`)}`
+                },
+                referrerPolicy: 'no-referrer',
+              }
+              console.log('obj->>>>>>>>>>>>>>>>>>>.',obj)
+              const response = await axios.post(`${API}`, obj, config);
+              console.log('response===> ',response);
+              let token = await response.data;
+              this.validateToken(token);
 
+
+
+        } catch(ex) {
+            
         }
     }
-    validatetoken = token => {
+
+    logout = () => {
+        this.setLoginState(false,null,{})
+    }
+
+    validateToken = token => {
+
         try {
-            console.log({ token });
-            let user = Jwt.verify(token, 'supersecret');
-            console.log('user',user);
-            this.setLoginState(true,token,user);
-        }
-        catch (error) {
+            console.log({token});
+            let user = jwt.verify(token,'thisissecret');
+            console.log("user: ",user);
+            // update the login context to loggedin
+            this.setLoginState(true, token, user);
+
+        } catch (ex) {
+             // on err update the login context to loggedout
             this.logout();
-            console.log('token error')
+            console.log("token Validation error")
         }
     }
-    setLoginState=(loggedIn,token,user)=>{
-        cookie.save('auth',token);
-        this.setState({token,loggedIn,user})
-    }
-    logout=()=>{
-        this.setLoginState(false,null,{});
+    
+    setLoginState = (loggedIn, token, user) => {
+   
+        cookie.save('remember token', token);
+        this.setState({loggedIn,token,user});
     }
 
-    componentDidMount()
-    {
-        const cookieToken=cookie.load('auth');
-        const token=cookieToken ||null;
-        this.validatetoken(token);
+    componentDidMount() {
+        const cookieToken = cookie.load('remember token');
+        const token = cookieToken || null;
+        this.validateToken(token);
     }
-    render()
-    {
-        return(
+
+    render() {
+        return (
             <LoginContext.Provider value={this.state}>
                 {this.props.children}
             </LoginContext.Provider>
         )
     }
 }
+
 export default LoginProvider;
+

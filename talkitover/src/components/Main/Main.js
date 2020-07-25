@@ -73,7 +73,7 @@ const Main = () => {
                 <h2>Our Objective</h2>
 
                 <Container>
-                    <div className="talkitover-intro">
+                    <div className="talkitover-intro" id="misson">
                         <Row>
                             <Col xs={12} sm={12} md={6}>
                                 <div className="talkitover-intro-title">
@@ -97,7 +97,7 @@ const Main = () => {
             </div>
             <div className="feature">
                 <h2>Our Services</h2>
-                <div className="features-items">
+                <div className="features-items" id="services">
                     <Container>
                         <Row>
                             <Col xs={12} sm={6} md={3}>
@@ -188,7 +188,7 @@ const Main = () => {
                     </Container>
                 </div>
             </div>
-            <div className="overcome">
+            <div className="overcome" id="overcome">
                 <h2>Ways to help you overcome Mental Issues</h2>
                 <Container>
                     <div className="overcome-cards">

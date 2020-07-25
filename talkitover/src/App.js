@@ -7,6 +7,13 @@ import Header from './components/Header/Header';
 import Auth from './components/auth/auth';
 import Login from './components/auth/login';
 import LoginContext from './components/auth/context.js';
+const  ReadLink=props=>{
+  return(
+    <Auth capability="READ">
+      <span>Fake update link</span>
+    </Auth>
+  )
+}
 const  EditLink=props=>{
   return(
     <Auth capability="update">
@@ -25,10 +32,11 @@ class App extends React.Component  {
       render() {
   return (
     <React.Fragment>
-      <Header />
       <LoginContext>
+      <Header />
       <hr />
-      <Login />
+      <ReadLink />
+
        <EditLink />
       <DeleteLink/>
      </LoginContext>
