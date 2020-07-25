@@ -9,6 +9,11 @@ html {
 .profile {
     background-color: yellowgreen;
     height: 80%;
+    text-align: center;
+}
+
+.profile ul li {
+    text-decoration: none;
 }
 
 .profile-img {

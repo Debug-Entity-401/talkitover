@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {get, fetchData } from '../../store/profile-store';
-import {Accordion, Card, Button } from 'react-bootstrap'
+import {Accordion, Card, Button , Navbar} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Reviews = props => {
 
@@ -10,30 +11,24 @@ const Reviews = props => {
     }, []);
 
 return (
-          <div>
-<Accordion defaultActiveKey="0">
+	<>
+<Accordion>
   <Card>
     <Card.Header>
       <Accordion.Toggle as={Button} variant="link" eventKey="0">
-        Click me!
+        Reviews
       </Accordion.Toggle>
     </Card.Header>
+    {console.log(props.profile)}
     <Accordion.Collapse eventKey="0">
-      <Card.Body>Hello! I'm the body</Card.Body>
-    </Accordion.Collapse>
-  </Card>
-  <Card>
-    <Card.Header>
-      <Accordion.Toggle as={Button} variant="link" eventKey="1">
-        Click me!
-      </Accordion.Toggle>
-    </Card.Header>
-    <Accordion.Collapse eventKey="1">
-      <Card.Body>Hello! I'm another body</Card.Body>
+	    {/* {props.profile.results.reviews.map(rev=>{
+	return 	    
+	    })} */}
+     <Card.Body >rev</Card.Body>
     </Accordion.Collapse>
   </Card>
 </Accordion>
-          </div>
+	</>
         )
 }
 const mapStateToProps = state => ({
