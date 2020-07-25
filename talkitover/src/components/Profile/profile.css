@@ -1,0 +1,23 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.profile {
+    background-color: yellowgreen;
+    height: 80%;
+}
+
+.profile-img {
+    border: 1rem;
+    width: 30%;
+    height: auto;
+}
+
+.img-container {
+    width: 100%;
+    text-align: center;
+}
