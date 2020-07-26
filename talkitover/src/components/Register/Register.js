@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { add, post } from '../../store/signup';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button, Container, Col } from 'react-bootstrap';
 import './Register.scss';
@@ -12,10 +13,14 @@ function Register(props) {
     }
     const handelSubmit = (e) => {
         e.preventDefault();
+
         props.post(props.signUp);
     }
 
+    /////////////////////////////////////////
+
     return (
+        <>
         <Container>
             <div className="signup">
                 <Form className="signup-form" onSubmit={handelSubmit}>
@@ -41,6 +46,7 @@ function Register(props) {
                             <Form.Group as={Col} controlId="formRole">
                                 <Form.Label>Role:</Form.Label>
                                 <Form.Control as="select" name="role" onChange={handelChange}>
+                                    <option>Select Role</option>
                                     <option value="ventor">ventor</option>
                                     <option value="Listener">Listener</option>
                                 </Form.Control>
@@ -56,8 +62,11 @@ function Register(props) {
 
             </div>
         </Container>
+        
+      </>
     )
 }
+
 const mapStateToProps = state => ({
     signUp: state.signUp
 });

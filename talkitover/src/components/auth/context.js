@@ -2,8 +2,6 @@ import React from 'react';
 import cookie from 'react-cookies';
 import jwt from 'jsonwebtoken';
 import axios from 'axios'
-const API =  'https://talkitover-staging.herokuapp.com/signin';
-var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhbGFhYWxtYXNyaSIsImNhcGFiaWxpdGllcyI6WyJSRUFEIiwiQ1JFQVRFIl0sInJvbGUiOiJMaXN0ZW5lciIsImlhdCI6MTU5NTYzMTk5NX0.X8-kWJu4NRLKmF_k-pkTfKEzrUSmmkkAVPch0ZnW0jw';
 
 export const LoginContext = React.createContext();
 
