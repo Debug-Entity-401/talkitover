@@ -11,14 +11,14 @@ const posts = createSlice({
     }
     },
     reducers: {
-        addpost(state, action) {
+        renderpost(state, action) {
         state.posts = action.payload;
         }
     }
 
 
 });
-export const { addpost } = posts.actions;
+export const { renderpost } = posts.actions;
 let API = 'https://talkitover-staging.herokuapp.com';
 let config = {
     mode: 'cors',
@@ -36,7 +36,14 @@ export const getPost = ( ) => async dispatch =>{
    console.log('respone ====> ',response);
     let posts = await response;
     console.log('response posts ===> ',posts.data);
-    dispatch(addpost(posts.data));
+    dispatch(renderpost(posts.data));
 }
+export const addPost = (obj ) => async dispatch =>{
+    let response = axios.post(`${API}/talkitoverposts`,obj,config);
+    console.log('respone ====> ',response);
+     let posts = await response;
+     console.log('response posts ===> ',posts);
+    //  dispatch(renderpost(posts.data));
+ }
 
 export default posts.reducer;
