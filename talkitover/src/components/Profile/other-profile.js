@@ -1,32 +1,34 @@
-import React, { useEffect , useState} from 'react';
-import {get, fetchOtherProfile , adding ,addNewReview} from '../../store/other-profile-srore';
+import React, { useEffect, useState } from 'react';
+import {get, fetchOtherProfile, adding, addNewReview } from '../../store/other-profile-srore';
 import { connect } from 'react-redux'
-import {Image , Container , Modal , Button , Form } from 'react-bootstrap'
+import { Image, Container, Modal, Button, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OtherReviews from './other-reviews'
 import './profile.scss';
 
 const OtherProfile = props => {
-	
-	const [show, setShow] = useState(false);
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
 
-useEffect(() => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    useEffect(() => {
         props.fetchOtherProfile();
-}, []);
+    }, []);
 
-const onChangeHandler =async event =>{
-	console.log(event.target.value);
-props.adding({ [event.target.name]: event.target.value })
-}
-const addReview = async event =>{
-    event.preventDefault();
-    props.addNewReview(props.other.review);
-    props.fetchOtherProfile()
-    setShow(false);
+    const onChangeHandler = async event => {
+        console.log(event.target.value);
+        props.adding({
+            [event.target.name]: event.target.value
+        })
     }
-return (
+    const addReview = async event => {
+        event.preventDefault();
+        props.addNewReview(props.other.review);
+        props.fetchOtherProfile()
+        setShow(false);
+    }
+    return (
 <>
     <Container className="img-container">
         <Image src={ props.other.results.photo} className="profile-img" roundedCircle />
@@ -45,7 +47,6 @@ return (
         <Button variant="primary" onClick={handleShow}>
       Add Review
       </Button>
-      
 	        <Modal show={show} onHide={handleClose}>
 		  <Modal.Header closeButton>
 		      <Modal.Title>Edit Your Profile</Modal.Title>
@@ -77,16 +78,15 @@ return (
 		  </Modal.Body>
 	        </Modal>
         <OtherReviews />
-
     </Container>
 </>
-)
+    )
 }
 
 const mapStateToProps = state => ({
     other: state.otherProfile
 });
 
-const mapDispatchToProps = {get, fetchOtherProfile , adding , addNewReview };
+const mapDispatchToProps = {get, fetchOtherProfile, adding, addNewReview };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OtherProfile)

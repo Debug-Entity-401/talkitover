@@ -68,26 +68,4 @@ export const addNewReview = (body) => async dispatch => {
 
 }
 
-export const deleteReview = (id) => async dispatch => {
-    const axiosConfig = {
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-            'cookies': `${document.cookie.split('=')[1]}`,
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-    };
-    let url2 = `http://localhost:3031/deletereview/zain/${id}`
-    console.log('this id ====>', id);
-    return axios.delete(url2, axiosConfig)
-        .then(data => {
-            console.log(data);
-        })
-        .catch(err => { alert('you cannot delete this') })
-}
-
-
 export default otherProfile.reducer;
