@@ -6,26 +6,26 @@ import axios from 'axios'
 export const LoginContext = React.createContext();
 
 class LoginProvider extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loggedIn: false,
-            login: this.login,
-            logout: this.logout,
-            user: {}
+        constructor(props) {
+            super(props);
+            this.state = {
+                loggedIn: false,
+                login: this.login,
+                logout: this.logout,
+                user: {}
+            }
         }
-    }
 
-    login = async(username, password) => {
-        try {
-            let obj = {user_name: username,password}
-            const API = 'https://talkitover-staging.herokuapp.com/signin';
-            let config = {
-                mode: 'cors',
-                cache: 'no-cache',
-                credentials: 'same-origin',
-                headers:{
-                    authorization: `Basic ${btoa(`${username}:${password}`)}`
+        login = async(username, password) => {
+                try {
+                    let obj = { user_name: username, password }
+                    const API = 'https://talkitover-staging.herokuapp.com/signin';
+                    let config = {
+                            mode: 'cors',
+                            cache: 'no-cache',
+                            credentials: 'same-origin',
+                            headers: {
+                                authorization: `Basic ${btoa(`${username}:${password}`)}`
                 },
                 referrerPolicy: 'no-referrer',
               }
@@ -84,4 +84,3 @@ class LoginProvider extends React.Component {
 }
 
 export default LoginProvider;
-
