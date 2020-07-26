@@ -18,6 +18,9 @@ class Auth extends React.Component {
         } catch (e) {
             console.warn('Not Authorized!');
         }
+
+        
+
         return (
             <Show condition={okToRender}>
                 {this.props.children}

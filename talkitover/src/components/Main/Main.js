@@ -9,7 +9,7 @@ import heroimg from '../../assets/images/hero-slier-img.webp';
 import heroimg2 from '../../assets/images/hero-slider-img-2.webp';
 import heroimg3 from '../../assets/images/hero-slier-img-3.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTwitter, faYoutube, faInstagram, faSnapchat } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import Aos from 'aos';
 import "aos/dist/aos.css";
 const Main = () => {
@@ -56,6 +56,7 @@ const Main = () => {
                                         <img
                                             className="d-block w-100"
                                             src={heroimg3}
+                                            alt="hero"
                                         />
 
                                         <Carousel.Caption>
@@ -87,7 +88,7 @@ const Main = () => {
                             <Col xs={12} sm={12} md={6}>
                                 <div data-aos="fade-left">
                                     <div className="talkitover-intro-image">
-                                        <img src={talkitoverintroImage} />
+                                        <img src={talkitoverintroImage} alt="introduction-for-web"/>
                                     </div>
                                 </div>
                             </Col>

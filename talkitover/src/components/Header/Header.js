@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container,Form, Nav, Navbar, Button, Modal } from 'react-bootstrap';
 import './header.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../assets/images/logo.png';
-import {Link} from 'react-router-dom';
 import { LoginContext } from '../auth/context';
 import Show from '../auth/show';
 
@@ -42,11 +41,11 @@ class Header extends React.Component {
 
             <Navbar bg="light" expand="lg">
                 <Container>
-                    <Navbar.Brand ><img className="logo" src={logo} /></Navbar.Brand>
+                    <Navbar.Brand ><img className="logo" src={logo} alt="main-logo"/></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="justify-content-end main-div" style={{ width: "50%" }} >
-                            <li><Nav.Link  href="/">Home</Nav.Link></li>
+                            <li><Nav.Link  href="/">Main</Nav.Link></li>
                             <li><Nav.Link  className="scroll" href="#misson">Misson</Nav.Link></li>
                             <li><Nav.Link  className="scroll" href="#services">Services</Nav.Link></li>
                             <li><Nav.Link  className="scroll" href="#overcome">Overcome</Nav.Link></li>
@@ -73,7 +72,7 @@ class Header extends React.Component {
                     <Modal.Body>
                     <Form onSubmit={this.handleSubmit} >
                         <div className="signin-logo">
-                        <Navbar.Brand ><img  src={logo} /></Navbar.Brand>
+                        <Navbar.Brand ><img  src={logo} alt="logo" /></Navbar.Brand>
 
                         </div>
                         <Form.Control
@@ -91,10 +90,8 @@ class Header extends React.Component {
                         </div>
                     </Form>
                     </Modal.Body>
-                </Modal>
-        
-
-                            <li> <Nav.Link href="#">Sign up</Nav.Link></li>
+                </Modal>  
+                            <li> <Nav.Link href="/signup">Sign up</Nav.Link></li>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

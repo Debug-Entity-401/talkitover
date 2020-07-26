@@ -3,8 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTwitter, faYoutube, faInstagram, faSnapchat } from '@fortawesome/free-brands-svg-icons';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/Col';
 import './testmonial.scss';
@@ -23,7 +21,7 @@ class Testominial extends React.Component {
 
                                         <Card className="testmonial-card" >
                                             <div className="user-image">
-                                                <img src="https://randomuser.me/api/portraits/men/11.jpg" />
+                                                <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="portrait" />
                                             </div>
                                             <Card.Body>
                                                 <Card.Title>Card Title</Card.Title>
@@ -39,7 +37,7 @@ class Testominial extends React.Component {
                                         <Card className="testmonial-card" >
                                             <div className="user-image">
 
-                                                <img src="https://randomuser.me/api/portraits/men/94.jpg" />
+                                                <img src="https://randomuser.me/api/portraits/men/94.jpg" alt="men" />
                                             </div>
                                             <Card.Body>
                                                 <Card.Title>Card Title</Card.Title>
@@ -55,7 +53,7 @@ class Testominial extends React.Component {
                                         <Card className="testmonial-card" >
                                             <div className="user-image">
 
-                                                <img src="https://randomuser.me/api/portraits/women/26.jpg" />
+                                                <img src="https://randomuser.me/api/portraits/women/26.jpg" alt="women" />
                                             </div>                                    <Card.Body>
                                                 <Card.Title>Card Title</Card.Title>
                                                 <Card.Text>
@@ -74,7 +72,7 @@ class Testominial extends React.Component {
                                         <Card className="testmonial-card" >
                                             <div className="user-image">
 
-                                                <img src="https://randomuser.me/api/portraits/men/94.jpg" />
+                                                <img src="https://randomuser.me/api/portraits/men/94.jpg" alt="men-portaits" />
                                             </div>                                            <Card.Body>
                                                 <Card.Title>Card Title</Card.Title>
                                                 <Card.Text>
@@ -89,7 +87,7 @@ class Testominial extends React.Component {
                                         <Card className="testmonial-card" >
                                         <div className="user-image">
 
-<img src="https://randomuser.me/api/portraits/women/66.jpg" />
+<img src="https://randomuser.me/api/portraits/women/66.jpg" alt="women-protiates" />
 </div>                                            <Card.Body>
                                                 <Card.Title>Card Title</Card.Title>
                                                 <Card.Text>
@@ -104,7 +102,7 @@ class Testominial extends React.Component {
                                         <Card className="testmonial-card" >
                                         <div className="user-image">
 
-<img src="https://randomuser.me/api/portraits/men/60.jpg" />
+<img src="https://randomuser.me/api/portraits/men/60.jpg" alt="men-1" />
 </div>                                            <Card.Body>
                                                 <Card.Title>Card Title</Card.Title>
                                                 <Card.Text>
