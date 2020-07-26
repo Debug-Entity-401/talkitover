@@ -5,16 +5,29 @@ let url = 'https://talkitover-staging.herokuapp.com/profile';
 
 const profileSlice = createSlice({
     name: 'profile',
-    initialState: { results: {} },
+    initialState: {
+        results: {},
+        profile: {
+            username: '',
+            email: '',
+            country: '',
+            phonNumber: '',
+            photo: '',
+        }
+    },
     reducers: {
         get(state, action) {
-            console.log('act', action, 'state', state);
             state.results = action.payload;
+        },
+        add(state, action) {
+            Object.keys(action.payload).forEach(key => {
+                state.profile[key] = action.payload[key];
+            })
         }
     }
 })
 
-export const { get } = profileSlice.actions;
+export const {get, add: adding } = profileSlice.actions;
 
 export const fetchData = () => async dispatch => {
 
@@ -24,21 +37,26 @@ export const fetchData = () => async dispatch => {
         credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
-            'cookies': `${document.cookie.split('=')[1]}`,
+	  'cookies': `${document.cookie.split('=')[1]}`,
+	  
         },
         redirect: 'follow',
         referrerPolicy: 'no-referrer',
     };
-
     return axios
         .get(
-            'http://localhost:3031/profile', axiosConfig
+            `${url}`, axiosConfig
         )
         .then(data => {
-            console.log('data-->', data.data);
             dispatch(get(data.data))
         })
         .catch(err => { /* not hit since no 401 */ })
 
+}
+
+export const updateProfile = (id, data) => async dispatch => {
+    return axios.put(`${url}/${id}`, data)
+        .then(res => {
+        });
 }
 export default profileSlice.reducer;

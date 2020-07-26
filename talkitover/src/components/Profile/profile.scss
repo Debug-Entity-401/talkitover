@@ -1,14 +1,7 @@
-body,
-html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
+@import "../../main-css/variables.scss";
 .profile {
-    background-color: yellowgreen;
-    height: 80%;
+    background-color: #86beb47c;
+    height: 100%;
     text-align: center;
 }
 
@@ -19,10 +12,14 @@ html {
 .profile-img {
     border: 1rem;
     width: 30%;
-    height: auto;
+    height: 30%;
 }
 
 .img-container {
     width: 100%;
+    text-align: center;
+}
+
+.img-container .col {
     text-align: center;
 }
