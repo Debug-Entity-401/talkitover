@@ -1,40 +1,33 @@
-import React, { useState } from 'react';
-// import {connect} from 'react-redux';
-// import {get} from '../../store/oauth';
+import React from 'react';
+import { connect } from 'react-redux';
+import { loginFacbook } from '../../store/signup';
+import FacebookLogin from 'react-facebook-login';
 
 
-function Oauth(props){
-    const [oauth,setOauth] = useState('');
-    let URL = 'https://www.facebook.com/v4.0/dialog/oauth';
 
-    let options = {
-        client_id: '344385293198787',
-        redirect_uri: 'https://talkitover-staging.herokuapp.com/authorize',
-        response_type: 'code',
-        scope: ['email', 'user_friends'].join(','), // comma seperated string
-        auth_type: 'rerequest',
-        display: 'popup',
-        state: 'asldfjdfs'
+function Oauth(props) {
+    const responseFacebook = response => {
+        props.loginFacbook(response);   
     }
-    
-    let QueryString = Object.keys(options).map((key) => {
-        return `${key}=` + encodeURIComponent(options[key]);
-    }).join("&");
-    
-    let authURL = `${URL}?${QueryString}`;
-    // props.get(authURL);
 
-    setOauth(authURL);
-    return(
-        <button> <a href={oauth}>Sign Up By Facebook</a> </button>
+    let facebookData = (<FacebookLogin
+        appId="344385293198787"
+        autoLoad={true}
+        fields="id,email,first_name,last_name"
+        callback={responseFacebook} />);
+    return (
+        <>
+            {facebookData}
+        </>
     )
 }
-// const mapStateToProps = state => ({
-//     oauth: state.oauth
-// });
-// const mapDispatchToProps = state =>({
-//     get
-// });
-// connect(mapStateToProps,mapDispatchToProps)
-export default (Oauth);
+
+const mapStateToProps = state => ({
+    signUp: state.signUp
+});
+
+const mapDispatchToProps = { loginFacbook };
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Oauth);
 

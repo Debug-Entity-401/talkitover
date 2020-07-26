@@ -6,44 +6,64 @@ const signUp = createSlice({
 
   name: 'signup',
   initialState: {
-    user:{user_name: '',
-    password: '',
-    email: '',
-    role:''
-  },
-    loggedIn: ''
+    user: {
+      user_name: '',
+      password: '',
+      email: '',
+      country:'',
+      photo:'',
+      status:'',
+      role: ''
+    },
+    loggedIn: '',
+    assessment: false,
+    facebook: {
+      email: '',
+      first_name: '',
+      last_name: ''
+    }
   },
   reducers: {
-    add(state, action) {
+    loginFacbook(state, action) {
+      if(action.payload !== 'unknown')
+      Object.keys(action.payload).forEach(key => {
+        state.facebook[key] = action.payload[key];
+      });
+      let token = jwt.sign({ user_name: `${state.facebook.first_name} ${state.facebook.last_name}`, capabilities: ['READ', 'CREATE', 'POST'],role: 'ventor' }, 'thisissecret');
+      state.loggedIn = true;
+      cookie.save('remember token', token);
+    }
+    , add(state, action) {
       Object.keys(action.payload).forEach(key => {
         state.user[key] = action.payload[key];
       })
     },
-    validateToken(state,action){
+    validateToken(state, action) {
       let token = action.payload;
-          jwt.verify(token, 'thisissecret',  function(err, decodedToken) {
-            if (err) {
-              state.loggedIn=false;
-                console.log('Error:', '\n', err, '\n');
-            }
-            
-            console.log('Verified JSON Token:', '\n', decodedToken); // bar
-          state.loggedIn=true;
-     
-        });      
-  },
+      jwt.verify(token, 'thisissecret', function (err, decodedToken) {
+        if (err) {
+          state.loggedIn = false;
+          console.log('Error:', '\n', err, '\n');
+        }
+        state.assessment = true;
+        console.log('Verified JSON Token:', '\n', decodedToken); // bar
+        cookie.save('remember token', token);
+        state.loggedIn = true;
 
-  userExist(state,action){
-    state.loggedIn=action.payload;
-  }
+      });
+    },
+
+    userExist(state, action) {
+      state.loggedIn = action.payload;
+    }
   }
 });
 
-export const { add ,validateToken,userExist} = signUp.actions;
+export const { add, validateToken, userExist, loginFacbook } = signUp.actions;
 const API = 'https://talkitover-staging.herokuapp.com';
 export const post = (obj) => async dispatch => {
   try {
-
+    console.log('input ====>',obj.user);
     let config = {
       mode: 'cors',
       cache: 'no-cache',
@@ -55,11 +75,10 @@ export const post = (obj) => async dispatch => {
       referrerPolicy: 'no-referrer',
     }
     const response = await axios.post(`${API}/signup`, obj.user, config);
-    console.log('response===> ',response);
+    console.log('response===> ', response);
     let token = await response.data;
     console.log('token ===> ', token);
-    cookie.save('remember token', token);
-   dispatch(validateToken(token));
+    dispatch(validateToken(token));
   } catch (err) {
     dispatch(userExist(false));
     console.log('error ===>', err);
