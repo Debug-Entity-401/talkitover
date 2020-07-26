@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { add, post } from '../../store/signup';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Form, Button, Container, Col } from 'react-bootstrap';
+import './Register.scss';
 
 function Register(props) {
 
@@ -18,89 +20,53 @@ function Register(props) {
     /////////////////////////////////////////
 
     return (
-        <Form noValidate onSubmit={handelSubmit}>
-            <Form.Row>
-                <Form.Group md="4" controlId="validationCustomUsername">
-                    <Form.Label>Username</Form.Label>
-                    <InputGroup>
-                        <InputGroup.Prepend>
-                            <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <Form.Control
-                            name="user_name"
-                            onChange={handelChange}
-                            type="text"
-                            placeholder="Username"
-                            aria-describedby="inputGroupPrepend"
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Please choose a username.
-                  </Form.Control.Feedback>
-                    </InputGroup>
-                </Form.Group>
-                <Form.Group md="4" controlId="validationCustom02">
-                    <Form.Label>E-mail</Form.Label>
-                    <Form.Control
-                        required
-                        name="email"
-                        onChange={handelChange}
-                        type="text"
-                        placeholder="e-mail"
+        <>
+        <Container>
+            <div className="signup">
+                <Form className="signup-form" onSubmit={handelSubmit}>
+                    <div className="signup-header">
 
-                    />
-                    {/* <Form.Control.Feedback>Looks good!</Form.Control.Feedback> */}
-                </Form.Group>
-                <Form.Group md="4" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        required
-                        name="password"
-                        onChange={handelChange}
-                    />
-                </Form.Group>
-            </Form.Row>
-            <Form.Row>
-                <Form.Group md="6">
-                    <Form.Label>Country</Form.Label>
-                    <Form.Control name="country" onChange={handelChange} type="text" placeholder="Country" required />
-                    <Form.Control.Feedback type="invalid">
-                        Please provide a valid city.
-                </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="exampleForm.SelectCustom">
-                    <Form.Label>Role</Form.Label>
-                    <Form.Control as="select" custom name="role" onChange={handelChange}>
-                        <option>Select Role</option>
-                        <option value="ventor">ventor</option>
-                        <option value="Listener">Listener</option>
-                    </Form.Control>
-                    {/* <div className="mb-3">
-                        <Form.File onChange={handelChange} id="formcheck-api-regular">
-                            <Form.File.Label>Photo</Form.File.Label>
-                            <Form.File.Input />
-                        </Form.File>
-                    </div> */}
-                </Form.Group>
+                    </div>
+                    <div className="signup-form-elements">
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="text" name="email" onChange={handelChange} placeholder="email" />
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="formUsername">
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control type="text" name="user_name" onChange={handelChange} autoComplete="username" placeholder="username" />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" name="password" onChange={handelChange} autoComplete="current-password" placeholder="password" />
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="formRole">
+                                <Form.Label>Role:</Form.Label>
+                                <Form.Control as="select" name="role" onChange={handelChange}>
+                                    <option>Select Role</option>
+                                    <option value="ventor">ventor</option>
+                                    <option value="Listener">Listener</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </Form.Row>
 
-            </Form.Row>
-            <Form.Group>
-                <Form.Check
-                    required
-                    label="Agree to terms and conditions"
-                    feedback="You must agree before submitting."
-                />
-            </Form.Group>
-            
-            <Button type="submit">Sign Up</Button>
-           
-        </Form>
-    );
+                        <div className="sign-section">
+                            <Button  type="submit" className="signup-btn" variant="success">Sign Up</Button>
+                        </div>
 
+                    </div>
+                </Form>
+
+            </div>
+        </Container>
+        
+      </>
+    )
 }
-// isActive={props.signUp.assessment}
+
 const mapStateToProps = state => ({
     signUp: state.signUp
 });

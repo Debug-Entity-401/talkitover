@@ -12,7 +12,6 @@ const assessment = createSlice({
     },
     reducers: {
      sum(state,action){
-         console.log('action payload ===> ',action.payload);
         if(state.answer === '')state.answer=action.payload.answer;
         state.score.push(action.payload.score);
      },
@@ -26,15 +25,15 @@ const assessment = createSlice({
   export const { sum ,addStatus} = assessment.actions;
 
   const API = 'https://talkitover-staging.herokuapp.com';
+  // const API = 'http://localhost:3031';
+
 export const postAssess = (scores) => async dispatch => {
   try {
-      console.log('scores ===> ',scores);
       let numbers = scores.slice(1,5).map(val=> parseInt(val));
       let sumScore = numbers.reduce((val,acc)=>{
           return acc = val + acc;
       },0);
       let token = cookie.load('remember token');
-    console.log('input ====>',sumScore + 3);
     let config = {
       mode: 'cors',
       cache: 'no-cache',
@@ -46,9 +45,7 @@ export const postAssess = (scores) => async dispatch => {
       referrerPolicy: 'no-referrer',
     }
     const response = await axios.post(`${API}/assessment`, {score:sumScore,token}, config);
-    console.log('response=assessment==> ', response);
     let username = await response.data;
-    console.log('username ===> ', username);
     dispatch(addStatus(username.status));
   } catch (err) {
     console.log('error ===>', err);

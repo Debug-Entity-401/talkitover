@@ -1,36 +1,84 @@
 import React from 'react';
-import {Route,Link} from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import Register from './components/Register/Register';
 import LoginAccess from './components/login-access';
 import UserExist from './components/user-exist';
 import Oauth from './components/Oauth/Oauth';
 import Assessment from './components/assessment/assessment';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Alert } from 'react-bootstrap';
+import './main-css/reset.scss';
+import Footer from './components/Footer/Footer';
+import Main from './components/Main/Main';
+import Testmonial from './components/Testominal/testomnial';
+import Header from './components/Header/Header';
+// import Auth from './components/auth/auth';
+import LoginContext from './components/auth/context.js';
+
+
 function App() {
+  // const ReadLink = props => {
+  //   return (
+  //     <Auth capability="READ">
+  //       <span>Fake update link</span>
+  //     </Auth>
+  //   )
+  // }
+  // const EditLink = props => {
+  //   return (
+  //     <Auth capability="update">
+  //       <span>Fake update link</span>
+  //     </Auth>
+  //   )
+  // }
+  // const DeleteLink = props => {
+  //   return (
+  //     <Auth capability="delete">
+  //       <span>Fake update link</span>
+  //     </Auth>
+  //   )
+  // }
+
   return (
-    <div className="App">
-      <header className="App-header">
-
-      </header>
+    <React.Fragment>
+      <LoginContext>
+          <Header />
+          <hr />
+          
+      <Route path='/' exact>
+         
+          {/* <ReadLink />
+          <EditLink />
+          <DeleteLink />*/}
       
-      <Register />
-      <Oauth />
-      
-      
-      <LoginAccess>
-        <h2>hi every body u are logged in</h2>
-        <Link to="/assess">
-          Go To Assessment
-        </Link>
+        <Main />
+        <Testmonial />
+        
+      </Route>
+      <Route path='/signup'>
+        <Register />
+        <Oauth />
+        <LoginAccess>
+          <Alert variant="success" className="user-msg">
+            <Link to="/assess">
+              Go To Assessment
+            </Link>
+          </Alert>
+        </LoginAccess>
+        
+        <UserExist>
+          <Alert variant="warning" className="user-msg">
+            the user already exist
+  </Alert>
+        </UserExist>
+      </Route>
+      <Route path='/assess'>
+        <Assessment />
+      </Route>
 
-        <Route path='/assess'>
-          <Assessment/>
-        </Route>
-      </LoginAccess>
-      <UserExist>
-        <h1>the user already exist</h1>
-      </UserExist>
-
-    </div>
+      <Footer />
+      </LoginContext>
+    </React.Fragment>
   );
 }
 

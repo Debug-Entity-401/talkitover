@@ -63,7 +63,6 @@ export const { add, validateToken, userExist, loginFacbook } = signUp.actions;
 const API = 'https://talkitover-staging.herokuapp.com';
 export const post = (obj) => async dispatch => {
   try {
-    console.log('input ====>',obj.user);
     let config = {
       mode: 'cors',
       cache: 'no-cache',
@@ -75,9 +74,7 @@ export const post = (obj) => async dispatch => {
       referrerPolicy: 'no-referrer',
     }
     const response = await axios.post(`${API}/signup`, obj.user, config);
-    console.log('response===> ', response);
     let token = await response.data;
-    console.log('token ===> ', token);
     dispatch(validateToken(token));
   } catch (err) {
     dispatch(userExist(false));

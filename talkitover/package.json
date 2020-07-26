@@ -11,6 +11,14 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "jsonwebtoken": "^8.5.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
+    "aos": "^2.3.4",
+    "dotenv": "^8.2.0",
+    "font-awesome": "^4.7.0",
+    "materialize-css": "^1.0.0-rc.2",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.2.2",
@@ -19,8 +27,9 @@
     "react-facebook-login": "^4.1.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
-    "redux": "^4.0.5"
+    "react-scripts": "^3.4.1",
+    "redux": "^4.0.5",
+    "superagent": "^5.3.1"
   },
   "scripts": {
     "start": "react-scripts start",

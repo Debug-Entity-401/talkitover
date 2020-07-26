@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -40,21 +39,16 @@ function Assessment(props) {
 
     function handelSubmit(e) {
         e.preventDefault();
-        console.log('event ++++>>>', e.target.answer);
         let score = e.target.answer.value.split('-')[0];
         let answer = e.target.answer.value.split('-')[1];
-        console.log('score + answe=====', score, '  +  ', answer);
         props.sum({ score, answer });
         // e.target.answer.checked = false;
         // document.querySelector('.ans').setAttribute('checked',false);
         setCount(count + 1);
-        console.log('count====>', count);
-        console.log('scoressss =====> ', props.assessment.score);
         if (count === 4) props.postAssess(props.assessment.score);
     }
 
     function renderAnswer(answer) {
-        console.log('answer =======', answer)
         return answer.map((ans, i) => {
             return <Form.Check
                 key={i}
@@ -76,7 +70,6 @@ function Assessment(props) {
         `Have you ever sought or received professional help (therapy, counseling, self-help, group support, or medication) for ${props.assessment.answer} is:`
     ];
     function questions(number) {
-        console.log('questions in number = ', number)
         let button = 'Next';
         if (number === 4) button = 'Finish';
         if (number < 5) {
@@ -101,10 +94,10 @@ function Assessment(props) {
 
     return (
         <>
-            <Route path='/assess'>
+            {/* <Route path='/assess'> */}
                 {questions(count)}
                 {userStatus()}
-            </Route>
+            {/* </Route> */}
 
 
         </>
