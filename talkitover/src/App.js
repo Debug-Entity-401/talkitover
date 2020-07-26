@@ -1,26 +1,54 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import './main-css/reset.scss';
+import Footer from './components/Footer/Footer';
+import Main from './components/Main/Main';
+import Testmonial from './components/Testominal/testomnial';
+import Header from './components/Header/Header';
+import Auth from './components/auth/auth';
+import Login from './components/auth/login';
+import LoginContext from './components/auth/context.js';
+const  ReadLink=props=>{
+  return(
+    <Auth capability="READ">
+      <span>Fake update link</span>
+    </Auth>
+  )
+}
+const  EditLink=props=>{
+  return(
+    <Auth capability="update">
+      <span>Fake update link</span>
+    </Auth>
+  )
+}
+const  DeleteLink=props=>{
+  return(
+    <Auth capability="delete">
+      <span>Fake update link</span>
+    </Auth>
+  )
+}
+class App extends React.Component  {
+      render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <LoginContext>
+      <Header />
+      <hr />
+      <ReadLink />
+
+       <EditLink />
+      <DeleteLink/>
+     </LoginContext>
+
+      <Main />
+      <Testmonial />
+      <Footer />
+    </React.Fragment>
+
+
   );
+      }
 }
 
 export default App;
