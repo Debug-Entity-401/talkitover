@@ -5,6 +5,7 @@ import LoginAccess from './components/login-access';
 import UserExist from './components/user-exist';
 import Oauth from './components/Oauth/Oauth';
 import Assessment from './components/assessment/assessment';
+import Posts from './components/Posts/Posts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert } from 'react-bootstrap';
 import './main-css/reset.scss';
@@ -74,6 +75,9 @@ function App() {
       </Route>
       <Route path='/assess'>
         <Assessment />
+      </Route>
+      <Route path="/posts">
+        <Posts/>
       </Route>
 
       <Footer />
