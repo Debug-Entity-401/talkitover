@@ -1,22 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import cookie from 'react-cookies';
+import context from 'react-bootstrap/esm/AccordionContext';
 const posts = createSlice({
     name: 'posts',
     initialState: {posts:[],
     newpost:{
         description:'',
         availability:'',
-        user_name:''
+        user_name:'',
+        view_as:''
     }
     },
     reducers: {
         renderpost(state, action) {
         state.posts = action.payload;
         }
+        
     }
-
-
 });
 export const { renderpost } = posts.actions;
 let API = 'https://talkitover-staging.herokuapp.com';
@@ -45,5 +46,17 @@ export const addPost = (obj ) => async dispatch =>{
      console.log('response posts ===> ',posts);
     //  dispatch(renderpost(posts.data));
  }
+ export const deletepost=(id)=>async dispatch=>{
+    let response = axios.delete(`${API}/talkitoverposts/${id}`,config);
+    console.log('respnse=>>>>>>.',response);
+    let posts=await response;
+    console.log('response posts ===> ',posts);
+ }
 
+ export const updatepost=(obj,id)=> async dispatch=>{
+let response=axios.put(`${API}/talkitoverposts/${id}`,obj,config);
+console.log('response=>>>>>>',response);
+let posts=await response;
+console.log('response update posts=>>>>>',posts);
+ }
 export default posts.reducer;

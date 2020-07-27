@@ -3,15 +3,10 @@ import { Container, Form, Nav, Navbar, Button, Modal } from 'react-bootstrap';
 import './header.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../assets/images/logo.png';
-
 import { LoginContext } from '../auth/context';
 import Show from '../auth/show';
-
-
 class Header extends React.Component {
-
     static contextType = LoginContext;
-
     constructor(props) {
         super(props);
         this.state = {
@@ -20,9 +15,7 @@ class Header extends React.Component {
             showHide: false,
 
         };
-
     }
-
     handleModalShowHide() {
         this.setState({ showHide: !this.state.showHide })
     }
@@ -40,6 +33,7 @@ class Header extends React.Component {
             <header>
 
                 <Navbar bg="light" expand="lg">
+                <i class="fas fa-caret-right"></i>
                     <Container>
                         <Navbar.Brand ><img className="logo" src={logo} alt="main-logo" /></Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -89,8 +83,6 @@ class Header extends React.Component {
                                         </Form>
                                     </Modal.Body>
                                 </Modal>
-
-
 
                             </Nav>
                         </Navbar.Collapse>
