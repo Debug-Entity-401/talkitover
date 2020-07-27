@@ -15,9 +15,9 @@ function Post(props) {
     const [user, setUser] = useState('');
     // const onChange = availability => setAvailability({ availability });
     const context = useContext(LoginContext);
-    // useEffect(()=>{
-    //     props.getPost();
-    // });
+    useEffect(()=>{
+        props.getPost();
+    },[]);
     const handelClick = (e) => {
         let user = e.target.user.value;
         setUser(user);
@@ -29,11 +29,10 @@ function Post(props) {
     const handelSubmit = (e) => {
         e.preventDefault();
         let user = e.target.user.value;
-        console.log('selector ===> ',e.target.user.value);
         let description = document.getElementById('main').value;
         let obj = { availability: value[1].toString(), description, user_name:user }
-        console.log('obj in post ===> ', obj);
         props.addPost(obj);
+        props.getPost();
     }
     function renderPost() {
         return props.posts.posts.map((val, i) => {
