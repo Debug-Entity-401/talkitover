@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button,Modal } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sum, postAssess } from "../../store/assessment";
 
@@ -81,24 +82,36 @@ function Assessment(props) {
 
                         <Button type="submit">{button}</Button>
                     </Form>
-                </div></>
+                </div>
+                
+                </>
         }
 
     }
-    function userStatus() {
-        if (props.assessment.status !== '') {
-            return <h2>Your Status: {props.assessment.status}</h2>
-        }
-    }
+    // function userStatus() {
+    //     if (props.assessment.status !== '') {
+    //         return <h2>Your Status: {props.assessment.status}</h2>
+    //     }
+    // }
 
 
     return (
         <>
             {/* <Route path='/assess'> */}
                 {questions(count)}
-                {userStatus()}
+                
             {/* </Route> */}
-
+            <Modal show={props.assessment.status !== ''}>
+                <Modal.Header >
+                  <Modal.Title>Status</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+    <p>Your status is:{props.assessment.status}</p>
+                  <Link to="/">
+                Done
+            </Link>
+                </Modal.Body>
+              </Modal>
 
         </>
     )

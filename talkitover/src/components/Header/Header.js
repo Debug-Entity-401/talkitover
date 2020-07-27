@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Container, Form, Nav, Navbar, Button, Modal } from 'react-bootstrap';
 import './header.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -57,10 +58,10 @@ class Header extends React.Component {
                             </Nav>
                             <Nav className="justify-content-end  " style={{ width: "50%" }}>
 
-                                <Show condition={this.context.loggedIn}>
+                                <Show condition={this.context.loggedIn || this.props.signUp.loggedIn}>
                                     <Button variant="primary" onClick={this.context.logout}>Logout</Button>
                                 </Show>
-                                <Show condition={!this.context.loggedIn}>
+                                <Show condition={!this.context.loggedIn && this.props.signUp.loggedIn===''}>
                                     <Button variant="success" onClick={() => this.handleModalShowHide()}>
                                         Sign in
                 </Button>
@@ -69,7 +70,7 @@ class Header extends React.Component {
                                 <Modal show={this.state.showHide}>
                                     <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
                                         <Modal.Title>Sign in</Modal.Title>
-                                    </Modal.Header                >
+                                    </Modal.Header>
                                     <Modal.Body>
                                         <Form onSubmit={this.handleSubmit} >
                                             <div className="signin-logo">
@@ -100,4 +101,8 @@ class Header extends React.Component {
     }
 };
 
-export default Header;
+const mapStateToProps = state => ({
+    signUp: state.signUp
+  });
+  
+  export default connect(mapStateToProps)(Header);

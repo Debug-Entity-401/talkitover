@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { add, post } from '../../store/signup';
-
+import Oauth from '../Oauth/Oauth';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button, Container, Col } from 'react-bootstrap';
 import './Register.scss';
@@ -55,12 +55,19 @@ function Register(props) {
 
                         <div className="sign-section">
                             <Button  type="submit" className="signup-btn" variant="success">Sign Up</Button>
-                        </div>
+                           
+                            <div className="log-fb">
+                <p>Or:</p>
+        <Oauth />
 
+            </div>
+                        </div>
+                        
                     </div>
                 </Form>
 
             </div>
+            
         </Container>
         
       </>

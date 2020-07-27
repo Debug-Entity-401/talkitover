@@ -1,13 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
 import Register from './components/Register/Register';
 import LoginAccess from './components/login-access';
 import UserExist from './components/user-exist';
-import Oauth from './components/Oauth/Oauth';
 import Assessment from './components/assessment/assessment';
 import Posts from './components/Posts/Posts';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Alert } from 'react-bootstrap';
+import { Alert, Modal } from 'react-bootstrap';
 import './main-css/reset.scss';
 import Footer from './components/Footer/Footer';
 import Main from './components/Main/Main';
@@ -19,7 +19,7 @@ import OtherProfile from './components/Profile/other-profile';
 import LoginContext from './components/auth/context.js';
 
 
-function App() {
+function App(props) {
   // const ReadLink = props => {
   //   return (
   //     <Auth capability="READ">
@@ -41,57 +41,68 @@ function App() {
   //     </Auth>
   //   )
   // }
-
+  // closeButton onClick={() => this.handleModalShowHide()}
   return (
     <React.Fragment>
       <LoginContext>
-          <Header />
-          <hr />
-          
-      <Route path='/' exact>
-         
+        <Header />
+        <hr />
+
+        <Route path='/' exact>
+
           {/* <ReadLink />
           <EditLink />
           <DeleteLink />*/}
-      
-        <Main />
-        <Testmonial />
-        
-      </Route>
-      <Route path='/signup'>
-        <Register />
-        <Oauth />
-        <LoginAccess>
-          <Alert variant="success" className="user-msg">
-            <Link to="/assess">
-              Go To Assessment
-            </Link>
-          </Alert>
-        </LoginAccess>
-        
-        <UserExist>
-          <Alert variant="warning" className="user-msg">
-            the user already exist
-  </Alert>
-        </UserExist>
-      </Route>
-      <Route path='/assess'>
-        <Assessment />
-      </Route>
-      <Route path="/posts">
-        <Posts/>
-      </Route>
 
-      <Route path="/profile" exact>
- 	<Profile />
- 	</Route>
-	 <Route path="/otherProfile" exact>
-      <OtherProfile />
-      </Route>
-      <Footer />
+          <Main />
+          <Testmonial />
+
+        </Route>
+        <Route path='/signup'>
+          <Register />
+          <LoginAccess>
+           
+              <Modal show={props.signUp.loggedIn}>
+                <Modal.Header >
+                  <Modal.Title>Sign Up Successfully</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <p>Welcome in Our Website Let's do a quick Assessment</p>
+                  <Link to="/assess">
+                Go To Assessment
+            </Link>
+                </Modal.Body>
+              </Modal>
+              
+           
+          </LoginAccess>
+
+          <UserExist>
+            <Alert variant="warning" className="user-msg">
+              the user already exist
+  </Alert>
+          </UserExist>
+        </Route>
+        <Route path='/assess'>
+          <Assessment />
+        </Route>
+        <Route path="/posts">
+          <Posts />
+        </Route>
+
+        <Route path="/profile" exact>
+          <Profile />
+        </Route>
+        <Route path="/otherProfile" exact>
+          <OtherProfile />
+        </Route>
+        <Footer />
       </LoginContext>
     </React.Fragment>
   );
 }
+const mapStateToProps = state => ({
+  signUp: state.signUp
+});
 
-export default App;
+export default connect(mapStateToProps)(App);

@@ -11,6 +11,7 @@ function Oauth(props) {
     }
 
     let facebookData = (<FacebookLogin
+        id='fb-login'
         appId="344385293198787"
         autoLoad={true}
         fields="id,email,first_name,last_name"
