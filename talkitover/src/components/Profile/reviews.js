@@ -20,7 +20,6 @@ const Reviews = props => {
 			  </Accordion.Toggle>
 		        </Card.Header>
 		        <Accordion.Collapse eventKey="0">
-	      
 			  <Card.Body> {props.profile.results.reviews.map((rev,idx)=>{ return (
 			      <ul key={idx}>
 				<h3 key={idx + "name"}>{rev.reviewer_name}</h3>

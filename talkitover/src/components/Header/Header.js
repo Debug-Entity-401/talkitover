@@ -33,7 +33,6 @@ class Header extends React.Component {
         e.preventDefault();
         this.context.login(this.state.username, this.state.password);
     }
-    
     render()
     {
     return (
@@ -89,6 +88,9 @@ class Header extends React.Component {
                         <Button type="submit" onClick={() => this.handleModalShowHide()}>Login</Button>
                         </div>
                     </Form>
+		<div>
+			
+		</div>
                     </Modal.Body>
                 </Modal>  
                             <li> <Nav.Link href="/signup">Sign up</Nav.Link></li>

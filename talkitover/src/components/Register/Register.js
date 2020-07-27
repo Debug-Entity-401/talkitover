@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { add, post } from '../../store/signup';
+import { add, post  } from '../../store/signup';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button, Container, Col } from 'react-bootstrap';
@@ -71,6 +71,6 @@ const mapStateToProps = state => ({
     signUp: state.signUp
 });
 
-const mapDispatchToProps = { add, post };
+const mapDispatchToProps = { add, post  };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

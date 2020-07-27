@@ -19,7 +19,8 @@ const Profile = props => {
 
     const onChangeHandler = async event => {
         props.adding({
-            [event.target.name]: event.target.value })
+	  [event.target.name]: event.target.value
+	})
     }
     const onUpdate = async event => {
         event.preventDefault();
@@ -30,7 +31,7 @@ const Profile = props => {
     return (
 <>
     <Container className="img-container">
-        <Image src={ props.profile.results.photo} className="profile-img" roundedCircle />
+        <Image src={ props.profile.results.photo} className="profile-img" />
         <section className="profile">
             <ul>
                 <li>
@@ -42,9 +43,8 @@ const Profile = props => {
                 <li>Country: {props.profile.results.country}</li>
             </ul>
             <Button variant="primary" onClick={handleShow}>
-      Edit Profile
-      </Button>
-
+    	  Edit Profile
+      	  </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Your Profile</Modal.Title>
@@ -53,39 +53,26 @@ const Profile = props => {
                     <Form onSubmit={onUpdate}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>user Name</Form.Label>
-                            <Form.Control type="userName" name="username" placeholder="Enter username" onChange={onChangeHandler}>
+                            <Form.Control type="userName" name="username" placeholder="Enter username" defaultValue={props.profile.results.username} onChange={onChangeHandler}>
                             </Form.Control>
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" name="email" placeholder="Enter email" onChange={onChangeHandler}>
+                            <Form.Control type="email" name="email" placeholder="Enter email" defaultValue={props.profile.results.email} onChange={onChangeHandler}>
                             </Form.Control>
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Country</Form.Label>
-                            <Form.Control type="text" placeholder="country" name="country" onChange={onChangeHandler}/>
-                        </Form.Group>
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Phon Number</Form.Label>
-                            <Form.Control type="text" placeholder="phonNumber" name="phonNumber" onChange={onChangeHandler}/>
+                            <Form.Control type="text" placeholder="country" name="country" defaultValue={props.profile.results.country} onChange={onChangeHandler}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Photo</Form.Label>
-                            <Form.Control type="text" placeholder="photo" name="photo" onChange={onChangeHandler}/>
+                            <Form.Control type="text" placeholder="photo" name="photo" defaultValue={props.profile.results.photo} onChange={onChangeHandler}/>
                         </Form.Group>
-                        <Form.Group>
-                            <input type="file" onChange={onChangeHandler}></input>
-                        </Form.Group>
-
                         <Modal.Footer>
                             <Button variant="primary" type="submit">Save Changes</Button>
                             <Button variant="secondary" onClick={handleClose}>Close</Button>
-
                         </Modal.Footer>
                     </Form>
                 </Modal.Body>
-
             </Modal>
         </section>
         <Reviews />

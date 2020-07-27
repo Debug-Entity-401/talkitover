@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { LoginContext } from './context.js';
 import Show from '../auth/show';
 
@@ -45,6 +44,9 @@ class Login extends React.Component {
                             onChange={this.handleChange}
                         />
                         <button>Login</button>
+                       <div>
+			   
+		   </div>
                     </form>
                 </Show>
             </>
