@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Button,Modal } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { Form, Button, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sum, postAssess } from "../../store/assessment";
-
+import './assessment.scss';
 function Assessment(props) {
     const [count, setCount] = useState(0);
     // useEffect(()=>{
@@ -74,44 +74,34 @@ function Assessment(props) {
         let button = 'Next';
         if (number === 4) button = 'Finish';
         if (number < 5) {
-            return <><p>{question[number]}</p>
+            return <div className="contain"><p>{question[number]}</p>
                 <div className="mb-3">
                     <Form onSubmit={handelSubmit}>
                         {renderAnswer(answers[number])}
-                        {/* <Button type="submit">Submit</Button> */}
-
-                        <Button type="submit">{button}</Button>
+                        <Button id='btn-ass' type="submit">{button}</Button>
                     </Form>
                 </div>
-                
-                </>
+            </div>
         }
 
     }
-    // function userStatus() {
-    //     if (props.assessment.status !== '') {
-    //         return <h2>Your Status: {props.assessment.status}</h2>
-    //     }
-    // }
+
 
 
     return (
         <>
-            {/* <Route path='/assess'> */}
-                {questions(count)}
-                
-            {/* </Route> */}
+            {questions(count)}
             <Modal show={props.assessment.status !== ''}>
                 <Modal.Header >
-                  <Modal.Title>Status</Modal.Title>
+                    <Modal.Title>Status</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-    <p>Your status is:{props.assessment.status}</p>
-                  <Link to="/">
-                Done
+                    <p>Your status is:{props.assessment.status}</p>
+                    <Link to="/">
+                        Done
             </Link>
                 </Modal.Body>
-              </Modal>
+            </Modal>
 
         </>
     )
