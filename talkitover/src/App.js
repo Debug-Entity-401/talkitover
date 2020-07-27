@@ -13,6 +13,8 @@ import Footer from './components/Footer/Footer';
 import Main from './components/Main/Main';
 import Testmonial from './components/Testominal/testomnial';
 import Header from './components/Header/Header';
+import Profile from './components/Profile/Profile';
+import OtherProfile from './components/Profile/other-profile';
 // import Auth from './components/auth/auth';
 import LoginContext from './components/auth/context.js';
 
@@ -80,6 +82,12 @@ function App() {
         <Posts/>
       </Route>
 
+      <Route path="/profile" exact>
+ 	<Profile />
+ 	</Route>
+	 <Route path="/otherProfile" exact>
+      <OtherProfile />
+      </Route>
       <Footer />
       </LoginContext>
     </React.Fragment>
