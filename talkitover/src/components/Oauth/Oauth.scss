@@ -1,0 +1,47 @@
+#log-fb{
+width: 20%;
+}
+.kep-login-facebook {
+    font-family: Helvetica,sans-serif;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0px !important;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color .3s,border-color .3s;
+     border:none !important;
+    padding: none !important;
+    margin:  0 auto;
+    background-repeat: no-repeat;
+    opacity: 0;
+
+}
+
+.facebook-btn i {
+    width: 100%;
+    font-size: 35px;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.kep-login-facebook.metro {
+    border-radius: 0;
+    position: relative;
+    height: 40px;
+    bottom: 44px;
+}
+.facebook-btn {
+    margin: 4% 43%;
+    text-align: center;
+}
+
+
+.facebook-btn i:hover
+    {
+        color: #3b5998;
+    } 

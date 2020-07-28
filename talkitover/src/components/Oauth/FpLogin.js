@@ -15,7 +15,6 @@ function FbLogin(props) {
 	      status: '',
 	      role: 'ventor'
 	    }
-	    await  props.post2(data);
 	}
 	let facebookData = (<FacebookLogin
 	    appId="344385293198787"
