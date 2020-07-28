@@ -1,0 +1,25 @@
+@import "../../main-css/variables.scss";
+.profile {
+    background-color: #86beb47c;
+    height: 100%;
+    text-align: center;
+}
+
+.profile ul li {
+    text-decoration: none;
+}
+
+.profile-img {
+    border: 1rem;
+    width: 30%;
+    height: 30%;
+}
+
+.img-container {
+    width: 100%;
+    text-align: center;
+}
+
+.img-container .col {
+    text-align: center;
+}

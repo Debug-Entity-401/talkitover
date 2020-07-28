@@ -9,7 +9,7 @@ import heroimg from '../../assets/images/hero-slier-img.webp';
 import heroimg2 from '../../assets/images/hero-slider-img-2.webp';
 import heroimg3 from '../../assets/images/hero-slier-img-3.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTwitter, faYoutube, faInstagram, faSnapchat } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import Aos from 'aos';
 import "aos/dist/aos.css";
 const Main = () => {
@@ -56,6 +56,7 @@ const Main = () => {
                                         <img
                                             className="d-block w-100"
                                             src={heroimg3}
+                                            alt="hero"
                                         />
 
                                         <Carousel.Caption>
@@ -80,14 +81,13 @@ const Main = () => {
                                     <h3>Talkit Over</h3>
                                 </div>
                                 <div className="talkitover-intro-description">
-
-                                </div>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ex arcu, venenatis eu dignissim eu, molestie id est. In interdum risus et pulvinar convallis. Fusce vel elit pharetra, semper libero eu, fringilla lorem. Aenean eget ligula quis massa mattis rhoncus. Aliquam in aliquam nibh. Integer at consectetur leo. Nam elementum iaculis vestibulum. Nulla elit turpis, condimentum id augue at, sodales facilisis est. Aliquam nec dolor metus. Nullam tempus, arcu nec aliquet accumsan, velit ipsum eleifend est, ut convallis urna ligula fermentum nisi. Pellentesque eu dignissim lacus. Sed scelerisque, ligula id hendrerit blandit, nunc purus commodo neque, sit amet mattis sapien turpis ut mauris. Sed feugiat pellentesque venenatis. Suspendisse convallis eget orci a convalli </p>
+                                </div>
                             </Col>
                             <Col xs={12} sm={12} md={6}>
                                 <div data-aos="fade-left">
                                     <div className="talkitover-intro-image">
-                                        <img src={talkitoverintroImage} />
+                                        <img src={talkitoverintroImage} alt="introduction-for-web"/>
                                     </div>
                                 </div>
                             </Col>

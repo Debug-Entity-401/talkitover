@@ -1,0 +1,49 @@
+
+.signup {
+    height: 520px;
+    width: 90%;
+    border-radius: 4px;
+    margin: 3% auto;
+    border: 1px solid #f3f3f3;
+    background-color: #ffffff;
+}
+
+
+
+.form-control {
+    width: 100%;
+    margin: 3% auto;
+    padding-left: 7%;
+}
+.form-label
+{
+    color: #000000;
+}
+.signup-header {
+    background-image: linear-gradient(to bottom , rgba(9, 9, 125, 0.8), rgba(0, 212, 255, 0.5)),url('https://mdbootstrap.com/img/Photos/Slides/img%20(73).jpg');
+    background-size: 100% 100%;
+    background-color: average( rgba(228, 225, 219, 1), red);
+
+    height: 517px;
+    border-radius: 2px 0px 0px 6px;
+}
+.signup-form-elements
+{
+    padding: 4%;
+}
+
+.sign-section
+{
+    text-align: center;
+}
+.user-msg {
+    width: 47.5%;
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    bottom: 77px;
+}
+
+.log-fb{
+    margin-top: 2%;
+}

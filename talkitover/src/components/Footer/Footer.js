@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './footer.scss';
 import logo from '../../assets/images/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTwitter, faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faTwitter, faYoutube, faInstagram, } from '@fortawesome/free-brands-svg-icons';
 
 function Footer() {
 
@@ -13,7 +13,7 @@ function Footer() {
             <Container>
                 <Row>
                     <Col xs={6} sm={6} md={8}>
-                        <img className="footer-logo" src={logo} />
+                        <img className="footer-logo" src={logo} alt="logo"/>
                         <ul>
                             <li><a href="http://facebookc.com"><FontAwesomeIcon className="social-icon" icon={faFacebookF} /></a></li>
                             <li><a href="https://twitter.com/login"><FontAwesomeIcon className="social-icon" icon={faTwitter} /></a></li>

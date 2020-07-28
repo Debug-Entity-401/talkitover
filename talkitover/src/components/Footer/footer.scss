@@ -1,7 +1,7 @@
 @import "../../main-css/variables.scss";
 footer {
-    background-color: $color1;
-    margin-top: 20%;
+    background-color: #5ba497;
+    margin-top: 5%;
 }
 footer img {
     margin: 0 3%;
@@ -18,7 +18,7 @@ footer ul {
         border-radius: 50%;
         height: 40px;
         text-align: center;
-        padding: 8px;
+        padding: 1.5% 1%;
         border: 1px solid #ffffff;
         background-color: #9bcdc3;
     }
@@ -28,10 +28,10 @@ footer ul {
 .footer-nav
 {
     margin-top: 10%;
+    width: 100% !important;
     text-align: right;
-    
-
 }
+
 
 .full-footer
 {
