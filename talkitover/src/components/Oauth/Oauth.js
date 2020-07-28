@@ -24,14 +24,20 @@ const handleChange = event =>{
 	let facebookData = (<FacebookLogin
         appId="344385293198787"
         autoLoad={true}
-        fields="id,email,first_name,last_name,picture"
+        fields="id,email,first_name,last_name,picture.type(large)"
         callback={responseFacebook} />);
     return (
         <>
+        <div>
+        <hr />
+        <label>password</label>
         <input type="text" onChange={handleChange} name="password" required></input>
+        <br />
+        <label>country</label>
         <input type="text" onChange={handleChange} name="country" ></input>
-
+        <br />
             {facebookData}
+	</div>
         </>
     )
 }
