@@ -4,9 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
 import { LoginContext } from '../auth/context';
 import { getPost, addPost, deletepost,updatepost } from '../../store/posts';
-
 import { Form, Button,  Card, Accordion,Container } from 'react-bootstrap';
 import './posts.scss';
+import DateAndTimePickers from './datetime-picker.js'
 import {Link} from 'react-router-dom';
 function Post(props) {
     
@@ -20,9 +20,10 @@ function Post(props) {
         await props.getPost();
 
     }
+    //for posting posts
     const handelSubmit = (e) => {
         e.preventDefault();
-        let user = e.target.user.value;
+        let user = e.target.user.value || context.user.user_name;
         console.log('selector ===> ', e.target.user.value);
         let description = document.getElementById('main').value;
         let obj = { availability: value[1].toString(), description, view_as: user, user_name: context.user.user_name }
@@ -31,9 +32,10 @@ function Post(props) {
         props.getPost();
     }
 
+    //for post update
     const handelSubmited = async (e) => {
         e.preventDefault();
-        let user = e.target.user.value;
+        let user = e.target.user.value || context.user.user_name;
         console.log('selector ===> ', e.target.user.value);
         let description = document.getElementById('mains').value;
         let id = e.target.id.value;
@@ -42,6 +44,7 @@ function Post(props) {
        await props.updatepost(obj,id);
        await props.getPost();
     }
+
     function show(user, id,description) {
 
         if (user === context.user.user_name) {
@@ -59,29 +62,27 @@ function Post(props) {
                                 <Form id={id} onSubmit={handelSubmited}>
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
                                         <Form.Label>User POST</Form.Label>
-                                        <Form.Check
+                                    {  /*  <Form.Check
                                             className="user"
                                             // onClick={handelClick}
                                             value={context.user.user_name}
                                             type='radio'
                                             name='user'
                                             label={context.user.user_name}
-                                        />
+                                    />*/}
                                         <Form.Check
                                             className="user"
                                             // onClick={handelClick}
                                             value='Anonymous'
                                             type='radio'
                                             name='user'
-                                            label='Anonymous'
+                                            label='Post Anonymously'
                                         />
                                         <div>
                                             <Form.Control type='hidden' value={id} name='id' />
-                                            <DateTimeRangePicker
-                                                onChange={onChange}
-                                                value={value}
-                                            />
+                                            
                                         </div>
+                                        <DateAndTimePickers />
         <textarea name="description" rows="3" id="mains" defaultValue={description}/>
                                         <Button type="submit">Save Change</Button>
                                     </Form.Group>
@@ -95,7 +96,7 @@ function Post(props) {
 
     }
    function renderChatLink(user){
-   if(context.user.role === 'Listener' || context.user.user_name === user ){
+   if(context.user.role === 'Listener' || context.user.user_name === user){
 	return <Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=chat`}>chat</Link>
    }
    }
@@ -125,14 +126,14 @@ function Post(props) {
                 <Form onSubmit={handelSubmit}>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="user-post-title">User POST</Form.Label>
-                        <Form.Check
+            {         /*   <Form.Check
                             className="user"
                             // onClick={handelClick}
                             value={context.user.user_name}
                             type='radio'
                             name='user'
                             label={context.user.user_name}
-                        />
+            /> */}
                         <Form.Check
                             className="user"
                             // onClick={handelClick}
@@ -142,10 +143,7 @@ function Post(props) {
                             label='Anonymous'
                         />
                         <div>
-                            <DateTimeRangePicker
-                                onChange={onChange}
-                                value={value}
-                            />
+                        <DateAndTimePickers />
 
                         </div>
                         <Form.Control as="textarea" rows="3" id="main" />
@@ -162,7 +160,8 @@ function Post(props) {
     )
 }
 const mapStateToProps = state => ({
-    posts: state.posts
+    posts: state.posts,
+    fullRoom: state.chatSlice
 });
 const mapDispatchToProps = { getPost, addPost, deletepost,updatepost };
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

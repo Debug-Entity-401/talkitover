@@ -2,7 +2,7 @@ import React, { useState, useEffect,useContext} from 'react';
 import { connect} from 'react-redux'
 import io from 'socket.io-client';
 import { LoginContext } from '../auth/context';
-import { add } from '../../store/chat-store';
+import { add, fullRoom } from '../../store/chat-store';
 import {Link} from'react-router-dom';
 let socket;
 
@@ -25,6 +25,12 @@ const name=context.user.user_name;
     socket.on('user-disconnected',(endData)=>{
 	props.add({name :endData.name , message:{message:endData.message}})
     })
+    socket.on('full-room',(payload)=>{
+      if (payload === 'Room is full.') {
+        props.fullRoom(true);
+        console.log('full room', payload);
+      }
+        })
   },[room, name])
 
 
@@ -83,6 +89,6 @@ const endChat = e =>{
 const mapStateToProps = state =>({
 	chat : state.chatSlice
 })
-const mapDispatchAction = {add};
+const mapDispatchAction = {add, fullRoom};
 
 export default connect(mapStateToProps , mapDispatchAction) (Chat);
