@@ -1,13 +1,26 @@
 import React from 'react';
-
+import './styles/articles.scss';
 //a general functional component that returns an article as a list element 
 
 function Article(props) {
     return (
-        <li>
-            <a href={props.url}> {props.title} </a>
-            <p> {props.text} </p>    
-        </li>
+        <>
+        <ul>
+        {
+          props.articles.map((article, idx) => {
+            return (
+                <>
+                <li key={idx}>
+                    <a href={article.url}> {article.title} </a>
+                    <p> {article.text} </p>    
+                </li>
+                <hr className="drop-shadow-hr"/>
+                </>
+            )
+          })
+        }
+      </ul>
+      </>
     )
 }
 

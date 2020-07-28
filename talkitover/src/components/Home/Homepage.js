@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import Article from '../Articles/Articles.js';
+import Sidebar from '../Sidebar/Sidebar';
+import './styles/home.scss';
 
 let once = 0;
 
 function Homepage(props) {
   const [articles, setArticles] = useState([]);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");  //NOTE: take the username from the global state
   let url = "https://talkitover-staging.herokuapp.com/";
 
   
@@ -71,20 +73,18 @@ function Homepage(props) {
 if (articles.length > 0) {  
   return (
     <React.Fragment>
-    <h1>Welcome To Homepage, {username}</h1>
-    <div>
-      <ul>
-        {
-          articles.map((article, idx) => {
-            return <Article url = {article.url} title = {article.title} text = {article.text} key = {idx} />
-          })
-        }
-      </ul>
-      {articles[0].text}
-    </div>
+    <main id="home-body">
+      <h1 id="home-welcome">Welcome To Homepage, {username}</h1>
+      <h2 id="articles-heading">Selected Articles:</h2>
+      <hr id="gradiant-trans-hr"/>
+      <div className="articles">
+        <Article articles={articles} />
+      </div>
+    </main>
+      <Sidebar />
     </React.Fragment>
   )
-}
+} 
 return (
   <React.Fragment>
   <h1>Welcome To Homepage, {username}</h1>
