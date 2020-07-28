@@ -4,9 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
 import { LoginContext } from '../auth/context';
 import { getPost, addPost, deletepost,updatepost } from '../../store/posts';
-import { Form, Button,  Card, Accordion } from 'react-bootstrap';
+import { Form, Button,  Card, Accordion,Container } from 'react-bootstrap';
 import './posts.scss';
 function Post(props) {
+    
     const [value, onChange] = useState([new Date(), new Date()]);
     const context = useContext(LoginContext);
     useEffect(() => {
@@ -73,7 +74,7 @@ function Post(props) {
                                             label='Anonymous'
                                         />
                                         <div>
-                                            <input type='hidden' value={id} name='id' />
+                                            <Form.Control type='hidden' value={id} name='id' />
                                             <DateTimeRangePicker
                                                 onChange={onChange}
                                                 value={value}
@@ -111,9 +112,10 @@ function Post(props) {
     return (
         <>
             <div>
+                <Container>
                 <Form onSubmit={handelSubmit}>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>User POST</Form.Label>
+                        <Form.Label className="user-post-title">User POST</Form.Label>
                         <Form.Check
                             className="user"
                             // onClick={handelClick}
@@ -137,10 +139,11 @@ function Post(props) {
                             />
 
                         </div>
-                        <textarea name="description" rows="3" id="main" />
-                        <Button type="submit">Post</Button>
+                        <Form.Control as="textarea" rows="3" id="main" />
+                                                <Button type="submit">Post</Button>
                     </Form.Group>
                 </Form>
+                </Container>
             </div>
             <div className="user-posts">
                 {renderPost()}

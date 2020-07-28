@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Form, Nav, Navbar, Button, Modal } from 'react-bootstrap';
+import Oauth from '../Oauth/Oauth';
 import './header.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../assets/images/logo.png';
 import { LoginContext } from '../auth/context';
 import Show from '../auth/show';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
+
 class Header extends React.Component {
     static contextType = LoginContext;
     constructor(props) {
@@ -20,6 +24,7 @@ class Header extends React.Component {
     handleModalShowHide() {
         this.setState({ showHide: !this.state.showHide })
     }
+
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
     }
@@ -28,15 +33,14 @@ class Header extends React.Component {
         e.preventDefault();
         this.context.login(this.state.username, this.state.password);
     }
+    // facebookicon.appendChild(``)
 
 
 
     render() {
         return (
             <header>
-
                 <Navbar bg="light" expand="lg">
-                <i class="fas fa-caret-right"></i>
                     <Container>
                         <Navbar.Brand ><img className="logo" src={logo} alt="main-logo" /></Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -56,37 +60,68 @@ class Header extends React.Component {
                                 <Show condition={this.context.loggedIn || this.props.signUp.loggedIn}>
                                     <Button variant="primary" onClick={this.context.logout}>Logout</Button>
                                 </Show>
-                                <Show condition={!this.context.loggedIn && this.props.signUp.loggedIn===''}>
+                                <Show condition={!this.context.loggedIn && this.props.signUp.loggedIn === ''}>
                                     <Button variant="success" onClick={() => this.handleModalShowHide()}>
                                         Sign in
                 </Button>
                                     <li> <Nav.Link href="/signup">Sign up</Nav.Link></li>
                                 </Show>
-                                <Modal show={this.state.showHide}>
+                                <Modal show={this.state.showHide} onHide={() => this.handleModalShowHide()}>
                                     <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
-                                        <Modal.Title>Sign in</Modal.Title>
+                                        <Modal.Title>
+                                            <div className="sign-in-header">
+
+                                                <h1>Sign in</h1>
+                                            </div>
+
+                                        </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <Form onSubmit={this.handleSubmit} >
-                                            <div className="signin-logo">
-                                                <Navbar.Brand ><img src={logo} alt="logo" /></Navbar.Brand>
+                                            <div className="user-inputs">
+                                                <Form.Control className="user-input"
+                                                    placeholder="Username"
+                                                    name="username"
+                                                    onChange={this.handleChange}
+
+                                                />
+                                                <div className="border">
+                                                </div>
+
+                                                <Form.Control className="user-input"
+                                                    placeholder="Password"
+                                                    name="password"
+                                                    type="password"
+                                                    onChange={this.handleChange}
+                                                />
+                                                <div className="border">
+                                                </div>
                                             </div>
-                                            <Form.Control
-                                                placeholder="userName"
-                                                name="username"
-                                                onChange={this.handleChange}
-                                            />
-                                            <Form.Control
-                                                placeholder="password"
-                                                name="password"
-                                                onChange={this.handleChange}
-                                            />
+
                                             <div className="login-btn">
-                                                <Button type="submit" onClick={() => this.handleModalShowHide()}>Login</Button>
+                                                <Button type="submit" className="btn btn-login" onClick={() => this.handleModalShowHide()}>Login</Button>
                                             </div>
+                                            <div className="auth-login">
+                                                <span>or Sign in with:</span>
+                                                <br />
+
+                                            </div>
+                                            <div className="facebook-btn">
+                                            <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fa fa-facebook text-center"></i></button>
+                                                <Oauth>
+                                                </Oauth>
+                                            </div>
+
                                         </Form>
+
+
+
+
+
+
                                     </Modal.Body>
                                 </Modal>
+
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
@@ -98,6 +133,6 @@ class Header extends React.Component {
 
 const mapStateToProps = state => ({
     signUp: state.signUp
-  });
-  
-  export default connect(mapStateToProps)(Header);
+});
+
+export default connect(mapStateToProps)(Header);
