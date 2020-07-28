@@ -5,21 +5,19 @@ import LoginAccess from './components/login-access';
 import UserExist from './components/user-exist';
 import Oauth from './components/Oauth/Oauth';
 import Assessment from './components/assessment/assessment';
+import Posts from './components/Posts/Posts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert } from 'react-bootstrap';
-import './main-css/reset.scss';
 import Footer from './components/Footer/Footer';
 import Main from './components/Main/Main';
 import Testmonial from './components/Testominal/testomnial';
 import Header from './components/Header/Header';
-import Profile from './components/Profile/Profile';
-import OtherProfile from './components/Profile/other-profile';
 // import Auth from './components/auth/auth';
 import LoginContext from './components/auth/context.js';
-
-
 function App() {
-  // const ReadLink = props => {
+
+
+{/* // const ReadLink = props => {
   //   return (
   //     <Auth capability="READ">
   //       <span>Fake update link</span>
@@ -39,13 +37,14 @@ function App() {
   //       <span>Fake update link</span>
   //     </Auth>
   //   )
-  // }
+  // } */}
 
   return (
+
     <React.Fragment>
+
       <LoginContext>
           <Header />
-          <hr />
           
       <Route path='/' exact>
          
@@ -77,12 +76,10 @@ function App() {
       <Route path='/assess'>
         <Assessment />
       </Route>
-      <Route path="/profile" exact>
- 	<Profile />
- 	</Route>
-	 <Route path="/otherProfile" exact>
-      <OtherProfile />
+      <Route path="/posts">
+        <Posts/>
       </Route>
+
       <Footer />
       </LoginContext>
     </React.Fragment>
