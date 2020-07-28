@@ -9,8 +9,12 @@
     display: inline-block;
 }
 
+.main-div {
+    width: 68% !important;
+}
 .navbar-nav
 {
+  
     
     ul {
         text-align: center;
@@ -29,14 +33,58 @@
     }  
     
 }
+.modal-title {
+    width: 100%;
+}
+.user-input
+{
+    border:none;
+}
+.border
+{
+    width: 94%;
+    bottom: 18px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.modal-header
+{
+    border-bottom: none !important;
+}
+.modal-content
+{
+    width: 80%;
+    margin: 0 auto;
+}
+.sign-in-header
+{
+    text-align: center;
+}
 .signin
 {
     margin: 0 38%;
 }
 
 .form-control {
-    width: 90%;
+    width: 100%;
     margin: 5% auto;
+    padding-left: 7%;
+}
+
+.user-inputs {
+    margin-bottom: 10%;
+}
+.auth-login
+{
+    text-align: center;
+    margin-top: 8%;
+    color:#4f4f4f;
+}
+.btn-login
+{
+    width: 75%;
+    border-radius: 30px;
 }
 .signin-logo
 {
@@ -46,6 +94,7 @@
 {
     text-align: center;
 }
+
 @keyframes moveInLeft {
     0% {
       opacity: 0;

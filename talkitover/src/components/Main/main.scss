@@ -7,13 +7,17 @@
     font-weight: 700;
     margin-bottom: 27px;
     line-height: 75px;
-}
+    font-family: 'Bebas Neue', cursive;}
 .website-introduction span {
   color: $color2;
 }
 .website-introduction
 {
     margin-top: 10%;
+}
+.carousel-indicators
+{
+    bottom: -20px;
 }
 .hero-slider
 {
@@ -40,16 +44,13 @@
     font-weight: 700;
     text-transform: uppercase;
     }
-    .talkitover-intro-description
-
-{
+}
+.talkitover-intro-description p {
     color: #707070;
     font-family: "Quicksand", Sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.5em;
-}
-
+    line-height: 1.8em;
 }
 .feature h2
 {
@@ -163,4 +164,7 @@ font-size: 15px;
     color: $color1;
     transition: 0.3s ease;
 }
-
+.talkitover-intro-image
+{
+    margin-top: 5%;
+}
