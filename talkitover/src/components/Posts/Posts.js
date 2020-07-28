@@ -90,13 +90,15 @@ function Post(props) {
                         </Accordion.Collapse>
                     </Card>
                 </Accordion>
-
-
             </div>
         }
 
     }
-   
+   function renderChatLink(user){
+   if(context.user.role === 'Listener' || context.user.user_name === user ){
+	return <Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=chat`}>chat</Link>
+   }
+   }
     function renderPost() {
         return props.posts.posts.map((val, i) => {
             console.log(props.posts.posts);
@@ -105,11 +107,14 @@ function Post(props) {
                 <p>{val.description}</p>
                 <p>{val.availability}</p>
                 <span>{val.date}</span>
+
                 {/* to={`/chat?name=${name}&room=${room}`} */}
-        <Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=chat`}>chat</Link>
+      
                 
                 {show(val.user_name, val._id,val.description)}
-
+	      <div>
+		  {renderChatLink(val.user_name)}
+	  </div>
             </div>
         })
     }
@@ -144,7 +149,7 @@ function Post(props) {
 
                         </div>
                         <Form.Control as="textarea" rows="3" id="main" />
-                                                <Button type="submit">Post</Button>
+                              <Button type="submit">Post</Button>
                     </Form.Group>
                 </Form>
                 </Container>
@@ -152,6 +157,7 @@ function Post(props) {
             <div className="user-posts">
                 {renderPost()}
             </div>
+
         </>
     )
 }

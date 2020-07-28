@@ -1,29 +1,32 @@
-import React, { useState, useEffect,useContext} from 'react'
-import query from 'query-string';
-import io from 'socket.io-client'
+import React, { useState, useEffect,useContext} from 'react';
+import { connect} from 'react-redux'
+import io from 'socket.io-client';
 import { LoginContext } from '../auth/context';
+import { add } from '../../store/chat-store';
+import {Link} from'react-router-dom';
 let socket;
+
 function Chat(props) {
+
   const context = useContext(LoginContext);
   const [state, setState] = useState({ message: ''})
-  const [chat, setChat] = useState([])
-const room='chat';
-const ENDPOINT = 'http://localhost:3031';
 
+const room='chat';
+const ENDPOINT = 'http://localhost:5000';
 const name=context.user.user_name;
+
   useEffect(() => {  
     socket = io(ENDPOINT);
-    //  const data = query.parse(location.search);
     if(context.user.user_name)
-    socket.emit('new-user', ({room:'chat',name:context.user.user_name}));
-    // console.log(data);
+    socket.emit('new-user', ({room:room , name:name}));
     socket.on('chat-message', (message) => {
-      console.log('messageeeeeeeeeeeeeeeeeeeeeee',message);
-      setChat([...chat, message])
-  
+      props.add(message)
     })
-    console.log('im hereeeeeeeeeee');
-  },[context.user.user_name])
+    socket.on('user-disconnected',(endData)=>{
+	props.add({name :endData.name , message:{message:endData.message}})
+    })
+  },[room, name])
+
 
   const onTextChange = e => {
     setState({ ...state, [e.target.name]: e.target.value })
@@ -36,28 +39,26 @@ const name=context.user.user_name;
     console.log(state);
     socket.emit('send-chat-message', {room:'chat' , message:state })
     setState({ message: '' })
-
+    props.add({name:'You', message : state})
   }
- 
+const endChat = e =>{
+	socket.emit('disconnected')
+}
   const renderChat = () => {
-    console.log('chat messages',chat)
-    return chat.map((message, index) => (
-      
+    console.log('chat messages',props.chat.messages)
+    return props.chat.messages.map((message, index) => (
       <div key={index}>
               {console.log('messgassde',message)}
-
         <h3>
          {message.name}:<span>{message.message.message}</span>
         </h3>
       </div>
     ))
   }
-
   return (
     <div className="card">
       <form onSubmit={onMessageSubmit}>
         <h1>Messanger</h1>
-      
         <div>
           <input
             name="message"
@@ -74,8 +75,14 @@ const name=context.user.user_name;
         <h1>Chat Log</h1>
         {renderChat()}
       </div>
+     <Link to="/posts"><button onClick={endChat}>End Chat</button></Link>
     </div>
   )
 }
 
-export default Chat
+const mapStateToProps = state =>({
+	chat : state.chatSlice
+})
+const mapDispatchAction = {add};
+
+export default connect(mapStateToProps , mapDispatchAction) (Chat);
