@@ -20,7 +20,8 @@ io.on('connection', socket => {
         rooms[obj.room] = user;
         rooms[obj.room].users[socket.id] = obj.name;
         current_connections++;
-        if (current_connections >= max_connections) {
+        console.log('curent connection',current_connections);
+        if (current_connections > max_connections) {
             socket.emit('full-room', 'Room is full.');
             socket.disconnect(true);
         } else {
@@ -30,6 +31,7 @@ io.on('connection', socket => {
             socket.to(obj.room).broadcast.emit('user-disconnected', { name: obj.name, message: 'disconnected' });
             delete rooms[obj.room].users[socket.id];
         });
+    
 
         socket.join(obj.room);
         socket.to(obj.room).broadcast.emit('user-connected', obj.name);
