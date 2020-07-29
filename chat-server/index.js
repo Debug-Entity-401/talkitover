@@ -17,20 +17,14 @@ io.on('connection', socket => {
     socket.on('new-user', (obj) => {
         console.log('room', obj.room);
         console.log('name', obj.name);
-        if (role.length == 2 && role[0] === role[1]) {
-            role.pop();
-            socket.emit('disconnected', 'You cannot enter the room');
-            socket.disconnect(true);
-        }
         rooms[obj.room] = user;
         rooms[obj.room].users[socket.id] = obj.name;
-        // current_connections++;
-        // if (current_connections > max_connections) {
-        //     socket.emit('disconnected', 'Sorry. room is full.');
-        //     socket.disconnect(true);
-        // } else {
-        socket.on('disconnect', function() {
-            //       current_connections--;
+        current_connections++;
+        if (current_connections >= max_connections) {
+            socket.emit('full-room', 'Room is full.');
+            socket.disconnect(true);
+        } else {
+        socket.on('disconnected', function() {
             console.log(obj.name, 'disconnected');
             socket.leave(obj.room);
             socket.to(obj.room).broadcast.emit('user-disconnected', { name: obj.name, message: 'disconnected' });
@@ -39,7 +33,7 @@ io.on('connection', socket => {
 
         socket.join(obj.room);
         socket.to(obj.room).broadcast.emit('user-connected', obj.name);
-        // }
+        }
         socket.on('send-chat-message', (payload) => {
             console.log('messagessssssss', payload.message);
             console.log('rooooooooooooom', obj.room);
