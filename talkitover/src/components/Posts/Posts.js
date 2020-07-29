@@ -25,11 +25,13 @@ function Post(props) {
     //for posting posts
     const handelSubmit = (e) => {
         e.preventDefault();
-        let user = e.target.user.checked || context.user.user_name;
-        console.log('post user>>>>>>>', user);
-        console.log('selector ===> ', e.target.user.value);
-        let description = document.getElementById('main').value;
-        let obj = { availability: value[1].toString(), description, view_as: user, user_name: context.user.user_name }
+        let user;
+        e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
+        console.log('selector ===> ', e.target.user.checked);
+        let description = document.getElementById('mains').value;
+        let availableTime = document.getElementById("datetime-local").value;
+        console.log('availableTime>>>>>>>>>', availableTime);
+        let obj = { availability: availableTime, description, view_as: user, user_name: context.user.user_name }
         console.log('obj in post ===> ', obj);
         props.addPost(obj);
         props.getPost();
@@ -40,9 +42,8 @@ function Post(props) {
         e.preventDefault();
         let user;
         e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
-        // let user = e.target.user.checked || context.user.user_name;/
         console.log('selector ===> ', e.target.user.checked);
-        let description = document.getElementById('mains').value;
+        let description = document.getElementById('main').value;
         let id = e.target.id.value;
         let availableTime = document.getElementById("datetime-local").value;
         console.log('availableTime>>>>>>>>>', availableTime);
@@ -69,37 +70,12 @@ function Post(props) {
                                 <Form id={id} onSubmit={handelSubmited}>
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
                                         <Form.Label>User POST</Form.Label>
-                                        {  /*  <Form.Check
-                                            className="user"
-                                            // onClick={handelClick}
-                                            value={context.user.user_name}
-                                            type='radio'
-                                            name='user'
-                                            label={context.user.user_name}
-                                    />*/}
-             {                        /*   <Checkbox
-                                            className="user"
-                                            value="checkedA"
-                                            inputProps={{ 'title': 'Post Anonymously' }}
-                                            name='user'
-
-                                            label='Post Anonymously'
-             />*/}
                                         <FormGroup row>
                                             <FormControlLabel
                                                 control={<Checkbox name="user" />}
                                                 label="Post Anonymously"
                                             />
                                         </FormGroup>
-                                        {/*<Form.Check
-                                            className="user"
-                                            // onClick={handelClick}
-                                            checked='Anonymous'
-                                            type='checkbox'
-                                            defaultChecked={false}
-                                            name='user'
-                                            label='Post Anonymously'
-                                        />*/}
                                         <div>
                                             <input type='hidden' value={id} name='id' />
 
@@ -117,9 +93,9 @@ function Post(props) {
         }
 
     }
-    function renderChatLink(user) {
+    function renderChatLink(user, id) {
         if (context.user.role === 'Listener' || context.user.user_name === user) {
-            return <Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=chat`}>chat</Link>
+            return <Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link>
         }
     }
     function renderPost() {
@@ -130,17 +106,14 @@ function Post(props) {
                 <p>{val.description}</p>
                 <p>{val.availability}</p>
                 <span>{val.date}</span>
-
-                {/* to={`/chat?name=${name}&room=${room}`} */}
-
-
                 {show(val.user_name, val._id, val.description)}
                 <div>
-                    {renderChatLink(val.user_name)}
+                    {renderChatLink(val.user_name, val._id)}
                 </div>
             </div>
         })
     }
+
     return (
         <>
             <div>
@@ -148,25 +121,14 @@ function Post(props) {
                     <Form onSubmit={handelSubmit}>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                             <Form.Label className="user-post-title">User POST</Form.Label>
-                            {         /*   <Form.Check
-                            className="user"
-                            // onClick={handelClick}
-                            value={context.user.user_name}
-                            type='radio'
-                            name='user'
-                            label={context.user.user_name}
-            /> */}
-                            <Form.Check
-                                className="user"
-                                // onClick={handelClick}
-                                value='Anonymous'
-                                type='checkbox'
-                                name='user'
-                                label='Anonymous'
-                            />
+                            <FormGroup row>
+                                <FormControlLabel
+                                    control={<Checkbox name="user" />}
+                                    label="Post Anonymously"
+                                />
+                            </FormGroup>
                             <div>
                                 <DateAndTimePickers />
-
                             </div>
                             <Form.Control as="textarea" rows="3" id="main" />
                             <Button type="submit">Post</Button>
