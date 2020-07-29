@@ -88,6 +88,7 @@ if (articles.length > 0) {
 return (
   <React.Fragment>
   <h1>Welcome To Homepage, {username}</h1>
+  <Sidebar />
   </React.Fragment>
 )
   
