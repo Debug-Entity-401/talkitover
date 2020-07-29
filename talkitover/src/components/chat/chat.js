@@ -20,11 +20,12 @@ function Chat(props) {
   const room = query.get('room');
   const ENDPOINT = 'http://localhost:5000';
   const name = context.user.user_name;
+  const role = context.user.role;
   let modalpayload;
   useEffect(() => {
     socket = io(ENDPOINT);
     if (context.user.user_name)
-      socket.emit('new-user', ({ room: room, name: name }));
+      socket.emit('new-user', ({ room: room, name: name, role: role }));
     socket.on('chat-message', (message) => {
       props.add(message)
     })
@@ -47,6 +48,7 @@ function Chat(props) {
     const { message } = state;
     socket.emit('send-chat-message', { room: room, message: state });
     props.add({ name: 'You', message: state });
+    document.getElementById('chat-form').reset();
   }
   const endChat = e => {
     socket.emit('disconnected')
