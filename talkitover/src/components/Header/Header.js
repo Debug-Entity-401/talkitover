@@ -6,6 +6,7 @@ import './header.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../assets/images/logo.png';
 import { LoginContext } from '../auth/context';
+import { Alert } from 'react-bootstrap';
 import Show from '../auth/show';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
@@ -18,22 +19,27 @@ class Header extends React.Component {
             username: '',
             password: '',
             showHide: false,
-
+            showAlert: false
         };
     }
     handleModalShowHide() {
         this.setState({ showHide: !this.state.showHide })
     }
 
+
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
-        this.context.login(this.state.username, this.state.password);
+        document.getElementById("login-form").reset();
+        await this.context.login(this.state.username, this.state.password);
+        console.log('>>>>>>>>>>>>>>>>>>>>', this.state.showAlert);
+        if (this.context.loggedIn === 'invalid') this.setState({ showAlert: !this.state.showAlert });
+        else if (this.context.loggedIn) this.handleModalShowHide();
     }
-  // facebookicon.appendChild(``)
+    // facebookicon.appendChild(``)
 
 
 
@@ -57,13 +63,13 @@ class Header extends React.Component {
                             </Nav>
                             <Nav className="justify-content-end  " style={{ width: "50%" }}>
 
-                                <Show condition={this.context.loggedIn || this.props.signUp.loggedIn}>
+                                <Show condition={this.context.loggedIn === true || this.props.signUp.loggedIn}>
                                     <Button variant="primary" onClick={this.context.logout}>Logout</Button>
                                 </Show>
-                                <Show condition={!this.context.loggedIn && this.props.signUp.loggedIn === ''}>
+                                <Show condition={(this.context.loggedIn === false || this.context.loggedIn === 'invalid') && this.props.signUp.loggedIn === ''}>
                                     <Button variant="success" onClick={() => this.handleModalShowHide()}>
                                         Sign in
-                </Button>
+                                    </Button>
                                     <li> <Nav.Link href="/signup">Sign up</Nav.Link></li>
                                 </Show>
                                 <Modal show={this.state.showHide} onHide={() => this.handleModalShowHide()}>
@@ -77,7 +83,7 @@ class Header extends React.Component {
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <Form onSubmit={this.handleSubmit} >
+                                        <Form onSubmit={this.handleSubmit} id="login-form" >
                                             <div className="user-inputs">
                                                 <Form.Control className="user-input"
                                                     placeholder="Username"
@@ -97,27 +103,24 @@ class Header extends React.Component {
                                                 <div className="border">
                                                 </div>
                                             </div>
-				    
+                                            
+                                            <Alert variant="warning" className="user-msg" show={this.state.showAlert}>
+                                                 Invalid username or password
+                                           </Alert>
+                                           
                                             <div className="login-btn">
-                                                <Button type="submit" className="btn btn-login" onClick={() => this.handleModalShowHide()}>Login</Button>
+                                                <Button type="submit" className="btn btn-login">Login</Button>
                                             </div>
+
                                             <div className="auth-login">
                                                 <span>or Sign in with:</span>
                                                 <br />
-
                                             </div>
+
                                             <div className="facebook-btn">
-                                            <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fa fa-facebook text-center"></i></button>
-
+                                                <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fa fa-facebook text-center"></i></button>
                                             </div>
-
                                         </Form>
-
-
-
-
-
-
                                     </Modal.Body>
                                 </Modal>
 

@@ -20,7 +20,8 @@ class LoginProvider extends React.Component {
     login = async (username, password) => {
         try {
             let obj = { user_name: username, password }
-            const API = 'https://talkitover-staging.herokuapp.com/signin';
+            // const API = 'https://talkitover-staging.herokuapp.com/signin';
+            const API = 'http://localhost:3031/signin';
             let config = {
                 mode: 'cors',
                 cache: 'no-cache',
@@ -55,7 +56,7 @@ class LoginProvider extends React.Component {
 
         } catch (ex) {
             // on err update the login context to loggedout
-            this.logout();
+            this.setLoginState('invalid', null, {});
             console.log("token Validation error")
         }
     }

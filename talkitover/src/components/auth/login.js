@@ -31,24 +31,6 @@ class Login extends React.Component {
                 <Show condition={this.context.loggedIn}>
                     <button onClick={this.context.logout}>Logout</button>
                 </Show>
-                <Show condition={!this.context.loggedIn}>
-                    <form onSubmit={this.handleSubmit} >
-                        <input 
-                            placeholder="userName"
-                            name="username"
-                            onChange={this.handleChange}
-                        />
-                        <input
-                            placeholder="password"
-                            name="password"
-                            onChange={this.handleChange}
-                        />
-                        <button>Login</button>
-                       <div>
-			   
-		   </div>
-                    </form>
-                </Show>
             </>
         )
     }
