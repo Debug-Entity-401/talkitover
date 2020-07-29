@@ -33,7 +33,7 @@ class Header extends React.Component {
         e.preventDefault();
         this.context.login(this.state.username, this.state.password);
     }
-  // facebookicon.appendChild(``)
+    // facebookicon.appendChild(``)
 
 
 
@@ -63,7 +63,7 @@ class Header extends React.Component {
                                 <Show condition={!this.context.loggedIn && this.props.signUp.loggedIn === ''}>
                                     <Button variant="success" onClick={() => this.handleModalShowHide()}>
                                         Sign in
-                </Button>
+                                    </Button>
                                     <li> <Nav.Link href="/signup">Sign up</Nav.Link></li>
                                 </Show>
                                 <Modal show={this.state.showHide} onHide={() => this.handleModalShowHide()}>
@@ -97,7 +97,7 @@ class Header extends React.Component {
                                                 <div className="border">
                                                 </div>
                                             </div>
-				    
+
                                             <div className="login-btn">
                                                 <Button type="submit" className="btn btn-login" onClick={() => this.handleModalShowHide()}>Login</Button>
                                             </div>
@@ -107,17 +107,11 @@ class Header extends React.Component {
 
                                             </div>
                                             <div className="facebook-btn">
-                                            <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fa fa-facebook text-center"></i></button>
+                                                <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fa fa-facebook text-center"></i></button>
 
                                             </div>
 
                                         </Form>
-
-
-
-
-
-
                                     </Modal.Body>
                                 </Modal>
 
