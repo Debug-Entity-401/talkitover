@@ -95,6 +95,12 @@
     text-align: center;
 }
 
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 @keyframes moveInLeft {
     0% {
       opacity: 0;
