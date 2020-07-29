@@ -14,13 +14,7 @@ function Footer() {
                 <Row>
                     <Col xs={6} sm={6} md={8}>
                         <img className="footer-logo" src={logo} alt="logo"/>
-                        <ul>
-                            <li><a href="http://facebookc.com"><FontAwesomeIcon className="social-icon" icon={faFacebookF} /></a></li>
-                            <li><a href="https://twitter.com/login"><FontAwesomeIcon className="social-icon" icon={faTwitter} /></a></li>
-                            <li><a href="https://www.youtube.com/channel/UCcIiwbi-NN3ibQyvuGVWBYA?view_as=subscriber"><FontAwesomeIcon className="social-icon" icon={faYoutube} /></a></li>
-                            <li><a href="https://www.instagram.com/"><FontAwesomeIcon  className="social-icon" icon={faInstagram} /></a></li>
-
-                        </ul>
+                      
                     </Col>
                     <Col xs={12} sm={12} md={4}>
 
@@ -35,6 +29,13 @@ function Footer() {
                                     </Nav>
                                 </Navbar.Collapse>
                         </Navbar>
+                        <ul>
+                            <li><a href="http://facebookc.com"><FontAwesomeIcon className="social-icon" icon={faFacebookF} /></a></li>
+                            <li><a href="https://twitter.com/login"><FontAwesomeIcon className="social-icon" icon={faTwitter} /></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCcIiwbi-NN3ibQyvuGVWBYA?view_as=subscriber"><FontAwesomeIcon className="social-icon" icon={faYoutube} /></a></li>
+                            <li><a href="https://www.instagram.com/"><FontAwesomeIcon  className="social-icon" icon={faInstagram} /></a></li>
+
+                        </ul>
                     </Col>
                 </Row>
             </Container>
