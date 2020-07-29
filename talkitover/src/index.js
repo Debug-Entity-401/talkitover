@@ -3,22 +3,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'font-awesome/css/font-awesome.min.css';
 import App from './App';
-
-import { Provider } from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
-
-import store from './store/';
+import  {Provider}  from 'react-redux';
+import store from './store/index';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter} from 'react-router-dom';
 
 //import BrowserRouter and wrap the whole app with it (instead of React.StrictMode) -> set up the app in a way that we have the ability to do routing
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
     <Provider store={store}>
       <App />
     </Provider>
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
   document.getElementById('root')
 );
 
