@@ -17,7 +17,7 @@ function Chat(props) {
   const handleShow = () => setShow(modalpayload === 'Room is full.');
   const handleClose = () => setShow(false);
 
-  const room = query.get('room');
+  const room = query.get('room');//will get the id of post
   const ENDPOINT = 'https://talkitover-staging.herokuapp.com';
   const name = context.user.user_name;
   const role = context.user.role;
