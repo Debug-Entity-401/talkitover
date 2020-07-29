@@ -33,7 +33,7 @@ function Register(props) {
                     </div>
                     </Col>
                     <Col xs={6} sm={6} md={6}>
-
+       
                     <div className="signup-form-elements">
                     <h1>Sign Up</h1>
 
@@ -58,7 +58,7 @@ function Register(props) {
         <Oauth />
 
             </div>
-                        </div>
+                    </div>
                         
                     </div>
                 </Col>
@@ -76,6 +76,6 @@ const mapStateToProps = state => ({
     signUp: state.signUp
 });
 
-const mapDispatchToProps = { add, post };
+const mapDispatchToProps = { add, post  };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

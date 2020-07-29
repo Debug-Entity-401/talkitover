@@ -16,9 +16,7 @@ class LoginProvider extends React.Component {
                 user: {}
             }
         }
-
-
-
+        
     login = async (username, password) => {
         try {
             let obj = { user_name: username, password }
@@ -57,7 +55,7 @@ class LoginProvider extends React.Component {
 
         } catch (ex) {
             // on err update the login context to loggedout
-            this.logout();
+            this.setLoginState('invalid', null, {});
             console.log("token Validation error")
         }
     }
