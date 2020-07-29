@@ -58,7 +58,7 @@ function Register(props) {
         <Oauth />
 
             </div>
-                        </div>
+                    </div>
                         
                     </div>
                 </Col>
@@ -76,6 +76,6 @@ const mapStateToProps = state => ({
     signUp: state.signUp
 });
 
-const mapDispatchToProps = { add, post };
+const mapDispatchToProps = { add, post  };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

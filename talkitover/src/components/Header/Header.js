@@ -7,8 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../assets/images/logo.png';
 import { LoginContext } from '../auth/context';
 import Show from '../auth/show';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
 class Header extends React.Component {
     static contextType = LoginContext;
@@ -33,7 +33,7 @@ class Header extends React.Component {
         e.preventDefault();
         this.context.login(this.state.username, this.state.password);
     }
-    // facebookicon.appendChild(``)
+  // facebookicon.appendChild(``)
 
 
 
@@ -97,7 +97,7 @@ class Header extends React.Component {
                                                 <div className="border">
                                                 </div>
                                             </div>
-
+				    
                                             <div className="login-btn">
                                                 <Button type="submit" className="btn btn-login" onClick={() => this.handleModalShowHide()}>Login</Button>
                                             </div>
@@ -108,8 +108,7 @@ class Header extends React.Component {
                                             </div>
                                             <div className="facebook-btn">
                                             <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fa fa-facebook text-center"></i></button>
-                                                <Oauth>
-                                                </Oauth>
+
                                             </div>
 
                                         </Form>

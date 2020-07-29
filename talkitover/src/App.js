@@ -1,6 +1,7 @@
 import React from 'react';
+import Home from './components/Home/Homepage.js';
 import { Route, Link } from 'react-router-dom';
-import Chat from './components/chat/chat.js';
+import Chat from './components/chat/chat';
 import Register from './components/Register/Register';
 import LoginAccess from './components/login-access';
 import UserExist from './components/user-exist';
@@ -11,34 +12,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert } from 'react-bootstrap';
 import Footer from './components/Footer/Footer';
 import Main from './components/Main/Main';
+import Profile from './components/Profile/Profile';
+import OtherProfile from './components/Profile/other-profile';
 import Testmonial from './components/Testominal/testomnial';
 import Header from './components/Header/Header';
 // import Auth from './components/auth/auth';
 import LoginContext from './components/auth/context.js';
 function App() {
-
-
-{/* // const ReadLink = props => {
-  //   return (
-  //     <Auth capability="READ">
-  //       <span>Fake update link</span>
-  //     </Auth>
-  //   )
-  // }
-  // const EditLink = props => {
-  //   return (
-  //     <Auth capability="update">
-  //       <span>Fake update link</span>
-  //     </Auth>
-  //   )
-  // }
-  // const DeleteLink = props => {
-  //   return (
-  //     <Auth capability="delete">
-  //       <span>Fake update link</span>
-  //     </Auth>
-  //   )
-  // } */}
 
   return (
 
@@ -84,7 +64,17 @@ function App() {
       <Route path='/chat'>
       <Chat />
       </Route>
+      <Route path="/profile">
+        <Profile />
+      </Route>
+      <Route path="/otherProfile">
+        <OtherProfile />
+      </Route>
 
+    <Route path='/home'>
+    <Home />
+    </Route>
+    
       <Footer />
       </LoginContext>
     </React.Fragment>

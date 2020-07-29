@@ -16,9 +16,7 @@ class LoginProvider extends React.Component {
                 user: {}
             }
         }
-
-
-
+        
     login = async (username, password) => {
         try {
             let obj = { user_name: username, password }
