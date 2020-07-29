@@ -33,7 +33,7 @@ function Register(props) {
                     </div>
                     </Col>
                     <Col xs={6} sm={6} md={6}>
-
+       
                     <div className="signup-form-elements">
                     <h1>Sign Up</h1>
 
