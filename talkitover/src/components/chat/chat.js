@@ -15,14 +15,15 @@ function Chat(props) {
   const handleShow = () => setShow(modalpayload==='Room is full.');
   const handleClose = () => setShow(false);
 
-const room='chat';
-const ENDPOINT = 'http://localhost:5000';
-const name=context.user.user_name;
-let modalpayload;
-  useEffect(() => {  
+  const room = query.get('room');//will get the id of post
+  const ENDPOINT = 'https://talkitover-staging.herokuapp.com';
+  const name = context.user.user_name;
+  const role = context.user.role;
+  let modalpayload;
+  useEffect(() => {
     socket = io(ENDPOINT);
-    if(context.user.user_name)
-    socket.emit('new-user', ({room:room , name:name}));
+    if (context.user.user_name)
+      socket.emit('new-user', ({ room: room, name: name, role: role }));
     socket.on('chat-message', (message) => {
       props.add(message)
     })
@@ -44,11 +45,10 @@ let modalpayload;
 
   const onMessageSubmit = e => {
     e.preventDefault()
-    const { message } = state
-    console.log(state);
-    socket.emit('send-chat-message', {room:'chat' , message:state })
-    setState({ message: '' })
-    props.add({name:'You', message : state})
+    const { message } = state;
+    socket.emit('send-chat-message', { room: room, message: state });
+    props.add({ name: 'You', message: state });
+    document.getElementById('chat-form').reset();
   }
 const endChat = e =>{
 	socket.emit('disconnected')
@@ -65,7 +65,7 @@ const renderChat=()=>{
 }
 return (
   <>
-  {/* <div className="card">
+  <div className="card">
     <form onSubmit={onMessageSubmit}>
       <h1>Messanger</h1>
       <div>
@@ -94,7 +94,7 @@ return (
        Save Changes
      </Button>
    </Modal.Footer>
- </Modal> */}
+ </Modal>
  </>
 ) 
 }

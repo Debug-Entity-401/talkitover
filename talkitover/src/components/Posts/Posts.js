@@ -5,14 +5,22 @@ import { LoginContext } from '../auth/context';
 import { getPost, addPost, deletepost, updatepost } from '../../store/posts';
 import { Form, Button, Card, Accordion, Container } from 'react-bootstrap';
 import './posts.scss';
-import DateAndTimePickers from './datetime-picker.js'
+import DateTimePicker from 'react-datetime-picker';
 import { Checkbox } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Link } from 'react-router-dom';
-function Post(props) {
 
-    const [value, onChange] = useState([new Date(), new Date()]);
+
+
+  
+
+
+    
+
+function Post(props) {
+   
+    const [value, onChange] = useState(new Date());
     const context = useContext(LoginContext);
     useEffect(() => {
         props.getPost();
@@ -27,12 +35,15 @@ function Post(props) {
         e.preventDefault();
         let user;
         e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
-        console.log('selector ===> ', e.target.user.checked);
-        let description = document.getElementById('mains').value;
-        let availableTime = document.getElementById("datetime-local").value;
-        console.log('availableTime>>>>>>>>>', availableTime);
-        let obj = { availability: availableTime, description, view_as: user, user_name: context.user.user_name }
-        console.log('obj in post ===> ', obj);
+        let description = document.getElementById('mains').value;   
+        let date = value;
+        let day = date.getDate()
+        let hours = date.getHours()
+        let years = date.getFullYear()
+        let month = date.getMonth()+1;
+        console.log(years , month , day , hours ) 
+        
+        let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name }
         props.addPost(obj);
         props.getPost();
     }
@@ -42,13 +53,9 @@ function Post(props) {
         e.preventDefault();
         let user;
         e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
-        console.log('selector ===> ', e.target.user.checked);
-        let description = document.getElementById('main').value;
+        let description = e.target.description.value;
         let id = e.target.id.value;
-        let availableTime = document.getElementById("datetime-local").value;
-        console.log('availableTime>>>>>>>>>', availableTime);
-        let obj = { availability: availableTime, description, view_as: user, user_name: context.user.user_name }
-        console.log('obj in post ===> ', obj);
+        let obj = { availability: value[1].toString(), description, view_as: user, user_name: context.user.user_name };
         await props.updatepost(obj, id);
         await props.getPost();
     }
@@ -80,8 +87,13 @@ function Post(props) {
                                             <input type='hidden' value={id} name='id' />
 
                                         </div>
-                                        <DateAndTimePickers />
-                                        <textarea name="description" rows="3" id="mains" defaultValue={description} />
+                                        <div>
+      <DateTimePicker
+        onChange={onChange}
+        value={value}
+      />
+    </div>
+                                        <textarea name="description" rows="3"  defaultValue={description} />
                                         <Button type="submit">Save Change</Button>
                                     </Form.Group>
                                 </Form>
@@ -93,14 +105,30 @@ function Post(props) {
         }
 
     }
-    function renderChatLink(user, id) {
+    function renderChatLink(user, id,availability) {
+        let date = new Date();
+        let day = date.getDate();
+        let hours = date.getHours();
+        let years = date.getFullYear();
+        let month = date.getMonth()+1;
+        let timeSplit = availability.split('-')[0].split('/');
+        timeSplit.push(availability.split('-')[1])
+        //30<=29
+        console.log('time ====> ',timeSplit[0]>=years ,timeSplit[1]>=month , timeSplit[2]>=day , timeSplit[3]>=hours);
+        if(timeSplit[0]>=years && timeSplit[1]>=month && timeSplit[2]>day ){
+            if (context.user.role === 'Listener' || context.user.user_name === user) {
+                return <Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link>
+            }
+        }else if(timeSplit[2] == day && timeSplit[3]>=hours)
         if (context.user.role === 'Listener' || context.user.user_name === user) {
             return <Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link>
         }
+
+        
     }
     function renderPost() {
+       
         return props.posts.posts.map((val, i) => {
-            console.log(props.posts.posts);
             return <div className="user-post" key={i}>
                 <h1>{val.view_as}</h1>
                 <p>{val.description}</p>
@@ -108,7 +136,7 @@ function Post(props) {
                 <span>{val.date}</span>
                 {show(val.user_name, val._id, val.description)}
                 <div>
-                    {renderChatLink(val.user_name, val._id)}
+                    {renderChatLink(val.user_name, val._id,val.availability)}
                 </div>
             </div>
         })
@@ -128,9 +156,14 @@ function Post(props) {
                                 />
                             </FormGroup>
                             <div>
-                                <DateAndTimePickers />
-                            </div>
-                            <Form.Control as="textarea" rows="3" id="main" />
+      <DateTimePicker
+        onChange={onChange}
+        value={value}
+      />
+    </div>
+                            <textarea name="description" rows="3" id="mains"/>
+
+                            {/* <Form.Control as="textarea" id="main" rows="3" id="main" /> */}
                             <Button type="submit">Post</Button>
                         </Form.Group>
                     </Form>
