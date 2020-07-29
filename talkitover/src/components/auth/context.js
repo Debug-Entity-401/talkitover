@@ -55,7 +55,7 @@ class LoginProvider extends React.Component {
 
         } catch (ex) {
             // on err update the login context to loggedout
-            this.logout();
+            this.setLoginState('invalid', null, {});
             console.log("token Validation error")
         }
     }

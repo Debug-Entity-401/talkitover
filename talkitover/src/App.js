@@ -49,7 +49,7 @@ function App() {
         </LoginAccess>
         
         <UserExist>
-          <Alert variant="warning" className="user-msg">
+          <Alert variant="warning" className="register-user-msg">
             the user already exist
   </Alert>
         </UserExist>
