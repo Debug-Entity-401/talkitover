@@ -11,15 +11,15 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Link } from 'react-router-dom';
 
+// import heroImage from '../../assets/images/Untitled-1.svg';
 
 
-  
 
 
-    
+
 
 function Post(props) {
-   
+
     const [value, onChange] = useState(new Date());
     const context = useContext(LoginContext);
     useEffect(() => {
@@ -35,14 +35,14 @@ function Post(props) {
         e.preventDefault();
         let user;
         e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
-        let description = document.getElementById('mains').value;   
+        let description = document.getElementById('mains').value;
         let date = value;
         let day = date.getDate()
         let hours = date.getHours()
         let years = date.getFullYear()
-        let month = date.getMonth()+1;
-        console.log(years , month , day , hours ) 
-        
+        let month = date.getMonth() + 1;
+        console.log(years, month, day, hours)
+
         let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name }
         props.addPost(obj);
         props.getPost();
@@ -55,16 +55,51 @@ function Post(props) {
         e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
         let description = e.target.description.value;
         let id = e.target.id.value;
-        let obj = { availability: value[1].toString(), description, view_as: user, user_name: context.user.user_name };
+        let date = value;
+        let day = date.getDate()
+        let hours = date.getHours()
+        let years = date.getFullYear()
+        let month = date.getMonth() + 1;
+        console.log(years, month, day, hours)
+        let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
         await props.updatepost(obj, id);
         await props.getPost();
+    }
+
+    function renderForm() {
+        if (context.user.role === 'ventor') {
+            return <div id='post-form'>
+                <Container>
+                    <Form onSubmit={handelSubmit}>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Label className="user-post-title">Talk Free</Form.Label>
+                            <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control" />
+                            <FormGroup row>
+                                <div id='form-footer'>
+                                    <FormControlLabel
+                                        control={<Checkbox name="user" />}
+                                        label="Post Anonymously"
+                                    />
+                                    <span>I am avaliable until</span>
+                                    <DateTimePicker
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </div>
+                                <Button id="post-btn" type="submit">Post</Button>
+                            </FormGroup>
+                        </Form.Group>
+                    </Form>
+                </Container>
+            </div>
+        }
     }
 
     function show(user, id, description) {
 
         if (user === context.user.user_name) {
             return <div>
-                <div onClick={() => deletes(id)}>Delete</div>
+                <div id="delete-btn" onClick={() => deletes(id)}>Delete</div>
                 <Accordion>
                     <Card>
                         <Card.Header>
@@ -76,25 +111,22 @@ function Post(props) {
                             <Card.Body>
                                 <Form id={id} onSubmit={handelSubmited}>
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label>User POST</Form.Label>
+                                        <input hidden={true} id="id" value={id} />
+                                        <textarea name="description" rows="3" id="mains" placeholder="Talk Free" defaultValue={description} className="form-control" />
                                         <FormGroup row>
-                                            <FormControlLabel
-                                                control={<Checkbox name="user" />}
-                                                label="Post Anonymously"
-                                            />
+                                            <div id='form-footer'>
+                                                <FormControlLabel
+                                                    control={<Checkbox name="user" />}
+                                                    label="Post Anonymously"
+                                                />
+                                                <span>I am avaliable until</span>
+                                                <DateTimePicker
+                                                    onChange={onChange}
+                                                    value={value}
+                                                />
+                                            </div>
+                                            <Button type="submit">Save Change</Button>
                                         </FormGroup>
-                                        <div>
-                                            <input type='hidden' value={id} name='id' />
-
-                                        </div>
-                                        <div>
-      <DateTimePicker
-        onChange={onChange}
-        value={value}
-      />
-    </div>
-                                        <textarea name="description" rows="3"  defaultValue={description} />
-                                        <Button type="submit">Save Change</Button>
                                     </Form.Group>
                                 </Form>
                             </Card.Body>
@@ -105,38 +137,38 @@ function Post(props) {
         }
 
     }
-    function renderChatLink(user, id,availability) {
+    function renderChatLink(user, id, availability) {
         let date = new Date();
         let day = date.getDate();
         let hours = date.getHours();
         let years = date.getFullYear();
-        let month = date.getMonth()+1;
+        let month = date.getMonth() + 1;
         let timeSplit = availability.split('-')[0].split('/');
         timeSplit.push(availability.split('-')[1])
         //30<=29
-        console.log('time ====> ',timeSplit[0]>=years ,timeSplit[1]>=month , timeSplit[2]>=day , timeSplit[3]>=hours);
-        if(timeSplit[0]>=years && timeSplit[1]>=month && timeSplit[2]>day ){
+        console.log('time ====> ', timeSplit[0] >= years, timeSplit[1] >= month, timeSplit[2] >= day, timeSplit[3] >= hours);
+        if (timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day) {
             if (context.user.role === 'Listener' || context.user.user_name === user) {
-                return <Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link>
+                return <div class="chat-btn"><Link  onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div> 
             }
-        }else if(timeSplit[2] == day && timeSplit[3]>=hours)
-        if (context.user.role === 'Listener' || context.user.user_name === user) {
-            return <Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link>
-        }
+        } else if (timeSplit[2] == day && timeSplit[3] >= hours)
+            if (context.user.role === 'Listener' || context.user.user_name === user) {
+                return <div class="chat-btn"><Link  onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div> 
+            }
 
-        
+
     }
     function renderPost() {
-       
+
         return props.posts.posts.map((val, i) => {
             return <div className="user-post" key={i}>
-                <h1>{val.view_as}</h1>
-                <p>{val.description}</p>
-                <p>{val.availability}</p>
-                <span>{val.date}</span>
+                <h1 className='head-post'>{val.view_as}</h1>
+                <small>{val.date}</small>
+                <p className='description'>{val.description}</p>
+                <p hidden={true} >{val.availability}</p>
                 {show(val.user_name, val._id, val.description)}
                 <div>
-                    {renderChatLink(val.user_name, val._id,val.availability)}
+                    {renderChatLink(val.user_name, val._id, val.availability)}
                 </div>
             </div>
         })
@@ -144,34 +176,15 @@ function Post(props) {
 
     return (
         <>
-            <div>
-                <Container>
-                    <Form onSubmit={handelSubmit}>
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Label className="user-post-title">User POST</Form.Label>
-                            <FormGroup row>
-                                <FormControlLabel
-                                    control={<Checkbox name="user" />}
-                                    label="Post Anonymously"
-                                />
-                            </FormGroup>
-                            <div>
-      <DateTimePicker
-        onChange={onChange}
-        value={value}
-      />
-    </div>
-                            <textarea name="description" rows="3" id="mains"/>
+            <div id='contain'>
+                {renderForm()}
+                <div className="user-posts">
 
-                            {/* <Form.Control as="textarea" id="main" rows="3" id="main" /> */}
-                            <Button type="submit">Post</Button>
-                        </Form.Group>
-                    </Form>
-                </Container>
+
+                    {renderPost()}
+                </div>
             </div>
-            <div className="user-posts">
-                {renderPost()}
-            </div>
+
 
         </>
     )
