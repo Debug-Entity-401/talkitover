@@ -5,7 +5,8 @@ const chatSlice = createSlice({
     initialState: {
         messages: [],
         room: '',
-        isFull: false
+        isFull: false,
+        image:'',
     },
     reducers: {
         add(state, action) {

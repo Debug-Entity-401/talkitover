@@ -1,0 +1,116 @@
+#card {
+    position: relative;
+    display: flex;
+    margin: 4% 1%;
+    flex-direction: column;
+    height: 400px;
+    padding: 2%;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: .25rem;
+}
+html body{
+    overflow: hidden;
+    overflow-y: scroll;
+}
+#outlined-multiline-static
+{
+    width: 82%;
+}
+.render-chat {
+    height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    float: left;
+    position: relative;
+    margin-left: -5px;
+}
+.chat-input-box
+{
+    position: relative;
+    top: 35px;
+}
+#outlined-multiline-static {
+    width: 74%;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    top: 4px;
+    margin: 0;
+}
+
+.chat-btns
+{
+    display: inline-block;
+    
+        
+}
+.containers {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  .chat-input-box {
+    position: relative;
+    /* top: 35px; */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+  
+  .darker {
+    border-color: #ccc;
+    background-color: #ddd;
+  }
+  
+  .containers::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+  
+  
+  
+  .containers img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+  
+  .time-right {
+    float: right;
+    color: #aaa;
+  }
+  
+  .time-left {
+    float: left;
+    color: #999;
+  }
+.chat-btns 
+{
+    ul
+    {
+        padding: 0;
+        list-style: none;
+    }
+    ul li
+    {
+        padding: 15px;
+        display: inline-block;
+    }
+
+}
+

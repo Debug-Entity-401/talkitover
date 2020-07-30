@@ -1,31 +1,64 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { fetchData } from '../../store/profile-store';
 import { connect } from 'react-redux'
 import io from 'socket.io-client';
 import { LoginContext } from '../auth/context';
 import { add, fullRoom } from '../../store/chat-store';
 import { Link, useLocation } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
+import { Image, Modal, Button, Form } from 'react-bootstrap';
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import '../chat/chat.scss';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 let socket;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  small: {
+    width: theme.spacing(10),
+    height: theme.spacing(10),
+  },
+  large: {
+    width: theme.spacing(15),
+    height: theme.spacing(15),
+  },
+}));
+var d = new Date();
+var UTCHour = d.getHours()+':'+d.getMinutes();
+
 function useQuery() {
+
   return new URLSearchParams(useLocation().search);
 }
 function Chat(props) {
+  const classes = useStyles();
+  useEffect(() => {
+    console.log('asdasdasd', props.fetchData());
+  }, [])
+  useEffect(() => {
+    Aos.init({ duration: 1500 })
+  }, [])
   let query = useQuery();
   const context = useContext(LoginContext);
-  const [state, setState] = useState({ message: '' })
+  const [state, setState] = useState({ message: '', image: '' })
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(modalpayload === 'Room is full.');
   const handleClose = () => setShow(false);
 
   const room = query.get('room');//will get the id of post
-  const ENDPOINT = 'https://talkitover-staging.herokuapp.com';
+  const ENDPOINT = 'http://localhost:5000';
   const name = context.user.user_name;
   const role = context.user.role;
   let modalpayload;
   useEffect(() => {
     socket = io(ENDPOINT);
     if (context.user.user_name)
-      socket.emit('new-user', ({ room: room, name: name, role: role }));
+      socket.emit('new-user', ({ room: room, name: name, role: role, image: props.profile.results.photo }));
     socket.on('chat-message', (message) => {
       props.add(message)
     })
@@ -40,7 +73,8 @@ function Chat(props) {
   }, [room, name, show])
 
   const onTextChange = e => {
-    setState({ ...state, [e.target.name]: e.target.value })
+    setState({ ...state, [e.target.name]: e.target.value, image: props.profile.results.photo });
+
   }
 
   const onMessageSubmit = e => {
@@ -48,42 +82,60 @@ function Chat(props) {
     const { message } = state;
     socket.emit('send-chat-message', { room: room, message: state });
     props.add({ name: 'You', message: state });
-    document.getElementById('chat-form').reset();
+    console.log('heyyyyyyyyyyy', state)
+    e.target.message.value = '';
+
+
   }
   const endChat = e => {
     socket.emit('disconnected')
   }
   const renderChat = () => {
     return props.chat.messages.map((message, index) => (
-      <div key={index}>
+      <div data-aos="fade-down" className='containers' key={index}>
+        {console.log('asdasdsssssssssssssssss', message)}
+        <Avatar src={message.message.image} className={classes.small} />
+        <p> {message.name}</p>
+        
+        <span class="time-right">{UTCHour}</span>
         <h3>
-          {message.name}:<span>{message.message.message}</span>
+          <span>{message.message.message}</span>
         </h3>
       </div>
+
     ))
   }
   return (
     <>
       <div id="card" className="card">
+
+        <div className="render-chat">
+          {renderChat()}
+        </div>
         <form id="chat-form" onSubmit={onMessageSubmit}>
-          <h1>Messanger</h1>
-          <div>
-            <input
+
+
+          <div className="chat-input-box">
+
+            <Form.Control
               name="message"
               onChange={e => onTextChange(e)}
-              value={state.message}
               id="outlined-multiline-static"
               variant="outlined"
               label="Message"
             />
+            <div className="chat-btns">
+              <ul>
+                <li>            <Button type="submit" id="send" variant="success">Send Message</Button></li>
+                <li>         <Link to="/posts"><Button variant="danger" onClick={endChat}>End Chat</Button></Link></li>
+
+              </ul>
+
+            </div>
+
           </div>
-          <button type="submit">Send Message</button>
+
         </form>
-        <div className="render-chat">
-          <h1>Chat Log</h1>
-          {renderChat()}
-        </div>
-        <Link to="/posts"><button onClick={endChat}>End Chat</button></Link>
       </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Body>Room is full</Modal.Body>
@@ -96,8 +148,10 @@ function Chat(props) {
 }
 
 const mapStateToProps = state => ({
-  chat: state.chatSlice
+  chat: state.chatSlice,
+  profile: state.createSlice
+
 })
-const mapDispatchAction = { add, fullRoom };
+const mapDispatchAction = { add, fullRoom, fetchData };
 
 export default connect(mapStateToProps, mapDispatchAction)(Chat);
