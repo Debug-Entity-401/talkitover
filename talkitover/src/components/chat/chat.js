@@ -3,9 +3,14 @@ import { connect} from 'react-redux'
 import io from 'socket.io-client';
 import { LoginContext } from '../auth/context';
 import { add, fullRoom } from '../../store/chat-store';
-import {Link} from'react-router-dom';
+
+import {Link, useLocation } from'react-router-dom';
 import {Modal,Button} from 'react-bootstrap';
 let socket;
+function useQuery() {
+
+  return new URLSearchParams(useLocation().search);
+}
 
 function Chat(props) {
 
@@ -14,7 +19,7 @@ function Chat(props) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(modalpayload==='Room is full.');
   const handleClose = () => setShow(false);
-
+  let query = useQuery();
   const room = query.get('room');//will get the id of post
   const ENDPOINT = 'https://talkitover-staging.herokuapp.com';
   const name = context.user.user_name;
