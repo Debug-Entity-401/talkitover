@@ -21,12 +21,8 @@ html body{
     width: 82%;
 }
 .render-chat {
-    height: 300px;
-    overflow-y: auto;
-    width: 100%;
-    float: left;
-    position: relative;
-    margin-left: -5px;
+   height: 300px;
+   overflow-y: auto;
 }
 .chat-input-box
 {
@@ -41,20 +37,50 @@ html body{
     top: 4px;
     margin: 0;
 }
+.makeStyles-small-2 {
+  width: 80px;
+  height: 80px;
+  float: left;
+}
+.username {
+  display: block;
+  font-size: 11px;
+  text-align: center;
+}
+.chat-message h3 span {
+  font-size: 20px;
+}
+.chat-message {
+  margin-left: 1%;
+  width: 90%;
+}
+.containerw
+{
+  display: flex;
+    flex-direction: row;
+    width: 100%;
+}
 
 .chat-btns
 {
     display: inline-block;
-    
-        
+}
+.chat-box
+{
+  height: 100px;
+ 
+  width: 100%;
+  float: left;
+  position: relative;
+  margin-left: -5px;
 }
 .containers {
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-  }
+  border-radius: 14px 55px 55px 14px !important;
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 10px 0;
+  width: 50%;
+}
   .chat-input-box {
     position: relative;
     /* top: 35px; */
@@ -74,15 +100,7 @@ html body{
     display: table;
   }
   
-  .container img {
-    float: left;
-    max-width: 60px;
-    width: 100%;
-    margin-right: 20px;
-    border-radius: 50%;
-  }
-  
-  
+
   
   .containers img.right {
     float: right;
@@ -93,7 +111,10 @@ html body{
   .time-right {
     float: right;
     color: #aaa;
-  }
+    position: relative;
+    bottom: 16px;
+    right: 18px;
+}
   
   .time-left {
     float: left;

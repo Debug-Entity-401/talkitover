@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import { LoginContext } from '../auth/context';
 import { add, fullRoom } from '../../store/chat-store';
 import { Link, useLocation } from 'react-router-dom';
-import { Image, Modal, Button, Form } from 'react-bootstrap';
+import { Image, Modal, Button, Form,Container } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import '../chat/chat.scss';
@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   small: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
+    width: theme.spacing(5),
+    height: theme.spacing(5),
   },
   large: {
     width: theme.spacing(15),
@@ -51,7 +51,7 @@ function Chat(props) {
   const handleClose = () => setShow(false);
 
   const room = query.get('room');//will get the id of post
-  const ENDPOINT = 'http://localhost:5000';
+  const ENDPOINT = 'https://talkitover-staging.herokuapp.com';
   const name = context.user.user_name;
   const role = context.user.role;
   let modalpayload;
@@ -92,15 +92,27 @@ function Chat(props) {
   }
   const renderChat = () => {
     return props.chat.messages.map((message, index) => (
+
       <div data-aos="fade-down" className='containers' key={index}>
-        {console.log('asdasdsssssssssssssssss', message)}
+
+        <div className="containerw">
+        <div className="chat-boxx">
         <Avatar src={message.message.image} className={classes.small} />
-        <p> {message.name}</p>
-        
-        <span class="time-right">{UTCHour}</span>
+        <span className="username"> {message.name}</span>
+        </div>
+        <div className="chat-message">
+        <Container>   
         <h3>
           <span>{message.message.message}</span>
         </h3>
+        </Container>
+        </div>
+     </div>
+
+
+     <div className="message-time-box">
+        <span class="time-right">{UTCHour}</span>
+     </div>
       </div>
 
     ))
