@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 
 
 function Post(props) {
-
+    const [toggle, setToggle] = useState('All');
     const [value, onChange] = useState(new Date());
     const context = useContext(LoginContext);
     useEffect(() => {
@@ -42,7 +42,6 @@ function Post(props) {
         let years = date.getFullYear()
         let month = date.getMonth() + 1;
         console.log(years, month, day, hours)
-
         let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name }
         props.addPost(obj);
         props.getPost();
@@ -73,7 +72,7 @@ function Post(props) {
                     <Form onSubmit={handelSubmit}>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                             <Form.Label className="user-post-title">Talk Free</Form.Label>
-                            <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control" />
+                            <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control textarea-post" />
                             <FormGroup row>
                                 <div id='form-footer'>
                                     <FormControlLabel
@@ -112,7 +111,7 @@ function Post(props) {
                                 <Form id={id} onSubmit={handelSubmited}>
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
                                         <input hidden={true} id="id" value={id} />
-                                        <textarea name="description" rows="3" id="mains" placeholder="Talk Free" defaultValue={description} className="form-control" />
+                                        <textarea name="description" rows="3" id="mains" placeholder="Talk Free" defaultValue={description} className="form-control textarea-post" />
                                         <FormGroup row>
                                             <div id='form-footer'>
                                                 <FormControlLabel
@@ -125,7 +124,10 @@ function Post(props) {
                                                     value={value}
                                                 />
                                             </div>
-                                            <Button type="submit">Save Change</Button>
+                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                                <Button data-toggle="collapse" type="submit">Save Change</Button>
+                                            </Accordion.Toggle>
+
                                         </FormGroup>
                                     </Form.Group>
                                 </Form>
@@ -149,43 +151,82 @@ function Post(props) {
         console.log('time ====> ', timeSplit[0] >= years, timeSplit[1] >= month, timeSplit[2] >= day, timeSplit[3] >= hours);
         if (timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day) {
             if (context.user.role === 'Listener' || context.user.user_name === user) {
-                return <div class="chat-btn"><Link  onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div> 
+                return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
             }
         } else if (timeSplit[2] == day && timeSplit[3] >= hours)
             if (context.user.role === 'Listener' || context.user.user_name === user) {
-                return <div class="chat-btn"><Link  onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div> 
+                return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
             }
 
 
     }
     function renderPost() {
-
-        return props.posts.posts.map((val, i) => {
-            return <div className="user-post" key={i}>
-                <h1 className='head-post'>{val.view_as}</h1>
-                <small>{val.date}</small>
-                <p className='description'>{val.description}</p>
-                <p hidden={true} >{val.availability}</p>
-                {show(val.user_name, val._id, val.description)}
-                <div>
-                    {renderChatLink(val.user_name, val._id, val.availability)}
+        let date = new Date();
+        let day = date.getDate();
+        let hours = date.getHours();
+        let years = date.getFullYear();
+        let month = date.getMonth() + 1;
+        if (toggle === 'All') {
+            return props.posts.posts.map((val, i) => {
+                return <div className="user-post" key={i}>
+                    <h1 className='head-post'>{val.view_as}</h1>
+                    <small>{val.date}</small>
+                    <p className='description'>{val.description}</p>
+                    <p hidden={true} >{val.availability}</p>
+                    {show(val.user_name, val._id, val.description)}
+                    <div>
+                        {renderChatLink(val.user_name, val._id, val.availability)}
+                    </div>
                 </div>
-            </div>
-        })
+            })
+        }
+        else {
+            return props.posts.posts.map((val, i) => {
+                let timeSplit = val.availability.split('-')[0].split('/');
+                timeSplit.push(val.availability.split('-')[1])
+                if (timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day) {
+                    return <div className="user-post" key={i}>
+                        <h1 className='head-post'>{val.view_as}</h1>
+                        <small>{val.date}</small>
+                        <p className='description'>{val.description}</p>
+                        <p hidden={true} >{val.availability}</p>
+                        {show(val.user_name, val._id, val.description)}
+                        <div>
+                            {renderChatLink(val.user_name, val._id, val.availability)}
+                        </div>
+                    </div>
+
+                } else if (timeSplit[2] == day && timeSplit[3] >= hours){
+                    return <div className="user-post" key={i}>
+                    <h1 className='head-post'>{val.view_as}</h1>
+                    <small>{val.date}</small>
+                    <p className='description'>{val.description}</p>
+                    <p hidden={true} >{val.availability}</p>
+                    {show(val.user_name, val._id, val.description)}
+                    <div>
+                        {renderChatLink(val.user_name, val._id, val.availability)}
+                    </div>
+                </div>
+                }
+                    
+            })
+
+        }
+
     }
 
     return (
         <>
             <div id='contain'>
                 {renderForm()}
+                <div id="toggel-btns">
+                    <Button className='toggles' onClick={()=>setToggle('All')} >All Post</Button>
+                    <Button className='toggles' onClick={()=> setToggle('Avaliable')} >Avaliable Post</Button>
+                </div>
                 <div className="user-posts">
-
-
                     {renderPost()}
                 </div>
             </div>
-
-
         </>
     )
 }

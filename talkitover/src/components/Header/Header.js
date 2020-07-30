@@ -65,7 +65,7 @@ class Header extends React.Component {
                             <Nav className="justify-content-end  " style={{ width: "50%" }}>
 
                                 <Show condition={this.context.loggedIn === true || this.props.signUp.loggedIn}>
-                                    <Button variant="primary" onClick={this.context.logout}><Link to='/'>Logout</Link> </Button>
+                                    <Button variant="primary" onClick={this.context.logout}><Link id='logout-link' to='/'>Logout</Link> </Button>
                                 </Show>
                                 <Show condition={(this.context.loggedIn === false || this.context.loggedIn === 'invalid') && this.props.signUp.loggedIn === ''}>
                                     <Button variant="success" onClick={() => this.handleModalShowHide()}>

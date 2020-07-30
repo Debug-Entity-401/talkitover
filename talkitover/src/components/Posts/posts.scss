@@ -48,7 +48,7 @@
     padding: 0;
 }
 
-.form-control {
+.textarea-post{
     
     margin: 0;
     min-height: 150px;
@@ -60,7 +60,7 @@
     box-shadow: none;
     margin-top: 0;
 }
-textarea.form-control{
+textarea.textarea-post{
     margin-top: 0;
 }
 #delete-btn{
@@ -125,4 +125,11 @@ div.chat-btn {
     border-radius: 4px;
     margin-top: 7px;
     padding: 1% 0;
+}
+#toggel-btns{
+    display: flex;
+    justify-content: center;
+}
+.toggles{
+    margin-right: 10px;
 }
