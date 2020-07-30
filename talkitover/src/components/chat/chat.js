@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 var d = new Date();
-var UTCHour = d.getHours()+':'+d.getMinutes();
+var UTCHour = d.getHours() + ':' + d.getMinutes();
 
 function useQuery() {
 
@@ -40,18 +40,22 @@ function Chat(props) {
   useEffect(() => {
     console.log('asdasdasd', props.fetchData());
   }, [])
+
   useEffect(() => {
     Aos.init({ duration: 1500 })
   }, [])
+
+
   let query = useQuery();
   const context = useContext(LoginContext);
   const [state, setState] = useState({ message: '', image: '' })
+
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(modalpayload === 'Room is full.');
   const handleClose = () => setShow(false);
 
   const room = query.get('room');//will get the id of post
-  const ENDPOINT = 'http://localhost:5000';
+  const ENDPOINT = 'https://talkitover-staging.herokuapp.com';
   const name = context.user.user_name;
   const role = context.user.role;
   let modalpayload;
@@ -96,7 +100,7 @@ function Chat(props) {
         {console.log('asdasdsssssssssssssssss', message)}
         <Avatar src={message.message.image} className={classes.small} />
         <p> {message.name}</p>
-        
+
         <span class="time-right">{UTCHour}</span>
         <h3>
           <span>{message.message.message}</span>
