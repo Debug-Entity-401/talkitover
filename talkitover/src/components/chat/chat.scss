@@ -1,0 +1,137 @@
+#card {
+    position: relative;
+    display: flex;
+    margin: 4% 1%;
+    flex-direction: column;
+    height: 400px;
+    padding: 2%;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: .25rem;
+}
+html body{
+    overflow: hidden;
+    overflow-y: scroll;
+}
+#outlined-multiline-static
+{
+    width: 82%;
+}
+.render-chat {
+   height: 300px;
+   overflow-y: auto;
+}
+.chat-input-box
+{
+    position: relative;
+    top: 35px;
+}
+#outlined-multiline-static {
+    width: 74%;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    top: 4px;
+    margin: 0;
+}
+.makeStyles-small-2 {
+  width: 80px;
+  height: 80px;
+  float: left;
+}
+.username {
+  display: block;
+  font-size: 11px;
+  text-align: center;
+}
+.chat-message h3 span {
+  font-size: 20px;
+}
+.chat-message {
+  margin-left: 1%;
+  width: 90%;
+}
+.containerw
+{
+  display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.chat-btns
+{
+    display: inline-block;
+}
+.chat-box
+{
+  height: 100px;
+ 
+  width: 100%;
+  float: left;
+  position: relative;
+  margin-left: -5px;
+}
+.containers {
+  border-radius: 14px 55px 55px 14px !important;
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 10px 0;
+  width: 50%;
+}
+  .chat-input-box {
+    position: relative;
+    /* top: 35px; */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+  
+  .darker {
+    border-color: #ccc;
+    background-color: #ddd;
+  }
+  
+  .containers::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+
+  
+  .containers img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+  
+  .time-right {
+    float: right;
+    color: #aaa;
+    position: relative;
+    bottom: 16px;
+    right: 18px;
+}
+  
+  .time-left {
+    float: left;
+    color: #999;
+  }
+.chat-btns 
+{
+    ul
+    {
+        padding: 0;
+        list-style: none;
+    }
+    ul li
+    {
+        padding: 15px;
+        display: inline-block;
+    }
+
+}
+
