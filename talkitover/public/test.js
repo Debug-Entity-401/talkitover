@@ -6,8 +6,5 @@ $(document).ready(function(){
            scrollTop:$(this.hash).offset().top
        },1000)
    })
-$('#send').on('click',()=>{
-    console.log('hello');
-    $('#containers2').fadeOut(3000);
-})
+
 });

@@ -1,3 +1,4 @@
+@import '../../main-css//variables.scss';
 #card {
     position: relative;
     display: flex;
@@ -12,17 +13,28 @@
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: .25rem;
 }
-html body{
-    overflow: hidden;
-    overflow-y: scroll;
+body::-webkit-scrollbar { 
+  display: none; 
+  overflow:none;
 }
 #outlined-multiline-static
 {
     width: 82%;
 }
+.clearboth
+{
+  clear: both;
+}
 .render-chat {
-   height: 300px;
-   overflow-y: auto;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 400px;
+  bottom: 0;
+}
+.user-chat-box
+{
+bottom: 0px;  //if required overflow to scroll add below css
+ max-height:500px //whatever is required
 }
 .chat-input-box
 {
@@ -57,9 +69,10 @@ html body{
 .containerw
 {
   display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     width: 100%;
 }
+
 
 .chat-btns
 {
@@ -81,12 +94,27 @@ html body{
   margin: 10px 0;
   width: 50%;
 }
+.containers-right {
+  float: right;
+  border-radius: 55px 14px 14px 55px !important;
+  background-color: #5ba497;
+  padding: 17px;
+  height: 100px;
+  margin: 10px 3%;
+  width: 50%;
+}
   .chat-input-box {
     position: relative;
     /* top: 35px; */
     left: 0;
     right: 0;
     bottom: 0;
+}
+#You
+{
+  display: flex;
+    flex-direction: row;
+    width: 100%;
 }
   
   .darker {
@@ -107,18 +135,26 @@ html body{
     margin-left: 20px;
     margin-right:0;
   }
-  
+  .containers-right img
+  {
+    float: right;
+    margin-right:0;
+  }
   .time-right {
+    float: right;
+    color: #aaa;
+    position: relative;
+    top: 58px;
+    left: 35px;
+}
+
+  
+  .time-left {
     float: right;
     color: #aaa;
     position: relative;
     bottom: 16px;
     right: 18px;
-}
-  
-  .time-left {
-    float: left;
-    color: #999;
   }
 .chat-btns 
 {

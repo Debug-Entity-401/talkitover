@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext,useRef } from 'react';
 import { fetchData } from '../../store/profile-store';
 import { connect } from 'react-redux'
 import io from 'socket.io-client';
 import { LoginContext } from '../auth/context';
 import { add, fullRoom } from '../../store/chat-store';
 import { Link, useLocation } from 'react-router-dom';
-import { Image, Modal, Button, Form,Container } from 'react-bootstrap';
+import {Modal, Button, Form, Container } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import { animateScroll } from "react-scroll";
 import '../chat/chat.scss';
-import Aos from 'aos';
-import "aos/dist/aos.css";
+import Fade from 'react-reveal/Fade';
 let socket;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,20 +29,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 var d = new Date();
-var UTCHour = d.getHours()+':'+d.getMinutes();
+var UTCHour = d.getHours() + ':' + d.getMinutes();
 
 function useQuery() {
 
   return new URLSearchParams(useLocation().search);
 }
 function Chat(props) {
+  
+ 
+ 
   const classes = useStyles();
   useEffect(() => {
-    console.log('asdasdasd', props.fetchData());
+    props.fetchData()
   }, [])
   useEffect(() => {
-    Aos.init({ duration: 1500 })
-  }, [])
+    if(document.querySelector('.chat-div'))
+  {
+    document.querySelector('.render-chat').scrollTo({
+      top: document.querySelector('.render-chat').scrollHeight,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+  })
+
   let query = useQuery();
   const context = useContext(LoginContext);
   const [state, setState] = useState({ message: '', image: '' })
@@ -93,30 +104,66 @@ function Chat(props) {
   const renderChat = () => {
     return props.chat.messages.map((message, index) => (
 
-      <div data-aos="fade-down" className='containers' key={index}>
+      <div>
+        <div className="clearboth"></div>
+        {message.name === "You" ?
+          <Fade duration={500} top>
 
-        <div className="containerw">
-        <div className="chat-boxx">
-        <Avatar src={message.message.image} className={classes.small} />
-        <span className="username"> {message.name}</span>
-        </div>
-        <div className="chat-message">
-        <Container>   
-        <h3>
-          <span>{message.message.message}</span>
-        </h3>
-        </Container>
-        </div>
-     </div>
+            <div className='containers user-chat-box ' key={index}>
 
+              <div className='chat-div' id='You'>
+                <div className="chat-boxx">
+                  <Avatar src={message.message.image} className={classes.small} />
+                  <span className="username"> {message.name}</span>
+                </div>
+                <div className="chat-message">
+                  <Container>
+                    <h3>
+                      <span>{message.message.message}</span>
+                    </h3>
+                  </Container>
+                </div>
+              </div>
+              <div className="message-time-box">
+                <span class="time-left">{UTCHour}</span>
+              </div>
+            </div>
 
-     <div className="message-time-box">
-        <span class="time-right">{UTCHour}</span>
-     </div>
+          </Fade>
+
+          :
+          <Fade duration={500} top>
+
+            <div className='containers-right  chat-div' key={index}>
+              <div className="containerw">
+           
+                <div className="chat-boxx">
+                  <Avatar src={message.message.image} className={classes.small} />
+                  <span className="username"> {message.name}</span>
+                </div>
+                <div className="message-time-box">
+                <span class="time-right">{UTCHour}</span>
+              </div>
+                <div className="chat-message">
+                  <Container>
+                    <h3>
+                      <span>{message.message.message}</span>
+                    </h3>
+                  </Container>
+                </div>
+              
+              </div>
+             
+            </div>
+          
+          </Fade>
+
+        }
       </div>
 
     ))
   }
+
   return (
     <>
       <div id="card" className="card">
