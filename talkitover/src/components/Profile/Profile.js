@@ -14,7 +14,7 @@ const Profile = props => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        props.fetchData()
+       console.log( props.fetchData())
     }, []);
 
     const onChangeHandler = async event => {

@@ -18,6 +18,7 @@ const Main = () => {
     }, [])
     return (
         <main>
+
             <div className="hero-main-section">
                 <Container>
                     <Row>
