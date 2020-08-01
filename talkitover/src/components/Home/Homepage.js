@@ -1,94 +1,76 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import cookie from 'react-cookies';
+import axiosConfig from '../axios-config';
+import { LoginContext } from '../auth/context';
 import Article from '../Articles/Articles.js';
 import Sidebar from '../Sidebar/Sidebar';
+import {Row,Col,Container} from 'react-bootstrap';
 import './styles/home.scss';
 
-let once = 0;
 
-function Homepage(props) {
-  const [articles, setArticles] = useState([]);
-  const [username, setUsername] = useState("");  //NOTE: take the username from the global state
+//Homepage functional component:
+/**
+ ** renders the articles and the sidebar
+ * -> fetch the articles and store them in a state
+ * -> pass the fetched articles to the Articles component and render it in a list
+ * -> render the Sidebar component
+ */
+function Homepage() {
+
+  const [articles, setArticles] = useState([]);  //store the fetched articles
+  const contextValue = useContext(LoginContext);  // use the context api to get the username of the signed-in user
+  const username = contextValue.user.user_name;
   let url = "https://talkitover-staging.herokuapp.com/";
-
-  
-  //add a useEffect hook
-  //use an async function to hit the articles route and get the articles
-  //use useEffect to render the Articles component on every refresh/reload 
-  //render the Articles component after passing down the props
-
-  const axiosConfig = {
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      'cookies': `${cookie.load('remember token')}`,
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-  };
   
   const fetchArticles = async () => {
     const getArticles = await axios.get(url + "articles", axiosConfig);
     const articlesArr = await getArticles.data;
     setArticles(articlesArr);
-    console.log('_FETCH_ :', articles);
   };
 
   const getAllArticles = () => {
     fetchArticles();
   }
+  //fetch the articles on every re-render
   useEffect(() => {
     getAllArticles();
-    console.log('_useEffect_ :', articles);
   }, [])
 
-  async function fetchHome() {
-    const getUsername = await axios.get(url + "home", axiosConfig);
-    // const user_name = await getUsername.data;
-    setUsername(getUsername.data);
-    console.log(username);
-
-  };
-  if (once <= 1){
-    fetchHome();
-    once++;
-  }
-  // console.log('>>>>>>>>>', username);
-
-
-  // async function fetchArticles() {
-  //   let url = "https://talkitover-staging.herokuapp.com/"
-  //   const getArticles = await axios.get(url + "articles", axiosConfig);
-  //   const articles = getArticles.data;
-  //   // setArticles(getArticles.data);
-  //   console.log(articles);
-
-  // };
-  // fetchArticles();
-  
-
-if (articles.length > 0) {  
+//control rendering according to whether the user is signed-in or not
+////for signed-in users
+if (username && articles.length > 0) {  
   return (
-    <React.Fragment>
+    <>
+
+    <div id="home">
+    <Row>
+    <Col xs={6} sm={6} md={1}>
+
+    <aside id="sidebar">
+    <Sidebar />
+  </aside>
+  </Col>
+  <Col xs={6} sm={6} md={11}>
     <main id="home-body">
-      <h1 id="home-welcome">Welcome To Homepage, {username}</h1>
+      <h1 id="home-welcome">Welcome To Homepage, {username}.</h1>
       <h2 id="articles-heading">Selected Articles:</h2>
       <hr id="gradiant-trans-hr"/>
       <div className="articles">
-        <Article articles={articles} />
+        <ul>
+          <Article articles={articles} add={true} delete={false} />
+        </ul>
       </div>
     </main>
-      <Sidebar />
-    </React.Fragment>
+    </Col>
+    </Row>
+    </div>
+    </>
   )
 } 
+////for unsigned-in users
 return (
   <React.Fragment>
-  <h1>Welcome To Homepage, {username}</h1>
-  <Sidebar />
+  
   </React.Fragment>
 )
   

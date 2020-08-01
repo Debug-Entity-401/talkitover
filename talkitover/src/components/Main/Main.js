@@ -12,11 +12,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import Aos from 'aos';
 import "aos/dist/aos.css";
+import Header from '../Header/Header';
 const Main = () => {
     useEffect(() => {
         Aos.init({ duration: 1500 })
     }, [])
     return (
+        <>
+        <Header />
         <main>
             <div className="hero-main-section">
                 <Container>
@@ -297,6 +300,9 @@ const Main = () => {
             </div>
            
         </main>
+        </>
+
     )
+    
 };
 export default Main;

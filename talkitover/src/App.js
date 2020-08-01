@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './components/Home/Homepage.js';
+import UserArticles from './components/Articles/user-articles'
 import { Route, Link } from 'react-router-dom';
 import Chat from './components/chat/chat';
 import Register from './components/Register/Register';
@@ -25,7 +26,6 @@ function App() {
     <React.Fragment>
 
       <LoginContext>
-          <Header />
           
       <Route path='/' exact>
          
@@ -51,9 +51,10 @@ function App() {
         <UserExist>
           <Alert variant="warning" className="user-msg">
             the user already exist
-  </Alert>
+        </Alert>
         </UserExist>
       </Route>
+      
       <Route path='/assess'>
         <Assessment />
       </Route>
@@ -73,6 +74,10 @@ function App() {
 
     <Route path='/home'>
     <Home />
+    </Route>
+
+    <Route path='/myarticles'>
+    <UserArticles />
     </Route>
     
       <Footer />

@@ -1,8 +1,6 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { fa } from '@fortawesome/free-brands-svg-icons';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import { Link } from 'react-router-dom';
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './styles/sidebar.scss';
 
@@ -32,6 +30,24 @@ function Sidebar() {
                             </div>
                         </NavText>
                     </NavItem>
+                    
+                    <NavItem eventKey="posts">
+                    <NavIcon>
+                        <div className="icon">
+                            <Link to='/posts'>
+                            <i class="fa fa-comment" aria-hidden="true"></i>
+                            </Link>
+                        </div>
+                    </NavIcon>
+                    <NavText>
+                        <div className="label">
+                            <Link to='/posts'>
+                                <span>Posts</span>
+                            </Link>
+                        </div>
+                    </NavText>
+                </NavItem>
+
                     <NavItem eventKey="articles">
                         <NavIcon>
                             <div className="icon">
@@ -48,29 +64,13 @@ function Sidebar() {
                             </div>
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="reviews">
-                        <NavIcon>
-                            <div className="icon">
-                                <Link to='/profile'>
-                                    <i className="fa fa-star" aria-hidden="true"></i>
-                                </Link>
-                            </div>
-                        </NavIcon>
-                        <NavText>
-                            <div className="label">
-                                <Link to='/profile'>
-                                    <span>Reviews</span>
-                                </Link>
-                            </div>
-                        </NavText>
-                    </NavItem>
+                   
 
                 </SideNav.Nav>
             </SideNav>
 
         </React.Fragment>
-    )
+    )            
 }
-
 
 export default Sidebar;

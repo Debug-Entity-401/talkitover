@@ -12,7 +12,7 @@ function Chat(props) {
   const [state, setState] = useState({ message: ''})
 
 const room='chat';
-const ENDPOINT = 'http://localhost:5000';
+const ENDPOINT = 'https://talkitover-staging.herokuapp.com';
 const name=context.user.user_name;
 
   useEffect(() => {  

@@ -1,32 +1,43 @@
 import React from 'react';
+import SavedArticle from './add-delete-article';
 import './styles/articles.scss';
-//a general functional component that returns an article as a list element 
 
-function Article(props) {
-  // /user-articles/:idarticle  
-    const saveArticle = e => {
-      
+//a general class component that returns articles as list elements 
+
+class Article extends React.Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        articles: this.props.articles,
+        add: this.props.add,
+        delete: this.props.delete,
+      }
     }
-    return (
-        <>
-        <ul>
-        {
-          props.articles.map((article, idx) => {
-            return (
-                <>
-                <li key={idx}>
-                    <a href={article.url}> {article.title} </a>
-                    <p> {article.text} </p>  
-                    <span onClick={saveArticle}><i className="fa fa-bookmark" aria-hidden="true"></i></span>
-                </li>
-                <hr className="drop-shadow-hr"/>
-                </>
-            )
-          })
+
+    render() {
+      if(this.state.articles) {
+          return (
+            this.state.articles.map((article, idx) => {
+                return (
+                  <>
+                    <li key={idx} id={article._id} className="article-li">
+                        <a href={article.url}> {article.title} </a>
+                        <p> {article.text} </p>  
+                        <SavedArticle id={article._id} add={this.state.add} delete={this.state.delete} />
+                        <hr className="drop-shadow-hr"/>
+                    </li>
+                    </>
+                )
+              })
+            ) 
         }
-      </ul>
-      </>
-    )
-}
+        return(
+          <>
+          </>
+        )
+    } 
+  }
+
 
 export default Article;
