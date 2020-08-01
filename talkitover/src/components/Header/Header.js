@@ -57,14 +57,13 @@ class Header extends React.Component {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="justify-content-end main-div" style={{ width: "50%" }} >
+                            <ul>
                                 <li><Nav.Link href="/">Main</Nav.Link></li>
                                 <li><Nav.Link className="scroll" href="#misson">Misson</Nav.Link></li>
                                 <li><Nav.Link className="scroll" href="#services">Services</Nav.Link></li>
                                 <li><Nav.Link className="scroll" href="#overcome">Overcome</Nav.Link></li>
-                                <li> <Nav.Link className="scroll" href="#testominals">testmonials</Nav.Link></li>
-                                <li> <Nav.Link href="/profile">profile</Nav.Link></li>
-                                <li> <Nav.Link href="/otherProfile">otherProfile</Nav.Link></li>
-                                <li> <Nav.Link href="/posts">Post</Nav.Link></li>
+                                <li> <Nav.Link className="scroll" href="#testominals">Testmonials</Nav.Link></li>
+                            </ul>
                             </Nav>
                             <Nav className="justify-content-end  " style={{ width: "50%" }}>
 
@@ -72,7 +71,7 @@ class Header extends React.Component {
                                     <Button variant="primary" onClick={this.context.logout}><Link id='logout-link' to='/'>Logout</Link> </Button>
                                 </Show>
                                 <Show condition={(this.context.loggedIn === false || this.context.loggedIn === 'invalid') && this.props.signUp.loggedIn === ''}>
-                                    <Button variant="success" onClick={() => this.handleModalShowHide()}>
+                                    <Button className="primary-btn" variant="success" onClick={() => this.handleModalShowHide()}>
                                         Sign in
                                     </Button>
                                     <li> <Nav.Link href="/signup">Sign up</Nav.Link></li>

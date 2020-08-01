@@ -1,4 +1,5 @@
 @import '../../main-css//variables.scss';
+
 .logo 
 {
     width: 50%;
@@ -10,7 +11,7 @@
 }
 
 .main-div {
-    width: 68% !important;
+    width: 50% !important;
 }
 header
 {
@@ -22,21 +23,36 @@ header
     
     ul {
         text-align: center;
-       
+        padding: 0;
         margin: 0;
     }
     ul li
     {
         display: inline-block;
-        padding-left: 20px;
-        text-align: center;
+    
     }  
     ul li a
     {
         font-family: $nav-font;
     }  
-    
+    ul li a::after
+    {
+        font-family: $nav-font;
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #6fc5ba;
+        transition: width .3s;
+    }  
 }
+
+.navbar-nav ul li a:hover::after
+{
+    width: 100%;
+    transition: width .3s; 
+}
+
 .modal-title {
     width: 100%;
 }
@@ -121,6 +137,32 @@ header
 #logout-link{
     color: white;
 }
+
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.primary-btn{
+    color: #fff;
+    background-color: #105f9c;
+    border-color: #105f9c;
+    transition: 0.8s ease;
+}
+
+.primary-btn:hover {
+    background-color: #3c83bbb5;
+    border-color: #3c83bbb5;
+}
+.btn-success:focus
+{
+    background-color: #105f9c;
+    border-color: #105f9c;
+    box-shadow: 0 0 0 0.2rem #105f9c81;
+
+}
+
 
 @keyframes moveInLeft {
     0% {

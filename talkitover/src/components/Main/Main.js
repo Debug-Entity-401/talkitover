@@ -13,6 +13,7 @@ import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import Aos from 'aos';
 import "aos/dist/aos.css";
 
+import Header from '../Header/Header';
 const Main = () => {
 
     useEffect(() => {
@@ -20,6 +21,8 @@ const Main = () => {
     }, [])
 
     return (
+        <>
+        <Header />
         <main>
 
             <div className="hero-main-section">
@@ -301,6 +304,9 @@ const Main = () => {
             </div>
            
         </main>
+        </>
+
     )
+    
 };
 export default Main;
