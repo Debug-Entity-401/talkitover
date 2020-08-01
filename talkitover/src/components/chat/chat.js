@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useContext,useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { fetchData } from '../../store/profile-store';
 import { connect } from 'react-redux'
 import io from 'socket.io-client';
 import { LoginContext } from '../auth/context';
 import { add, fullRoom } from '../../store/chat-store';
 import { Link, useLocation } from 'react-router-dom';
-import {Modal, Button, Form, Container } from 'react-bootstrap';
+import { Modal, Button, Form, Container } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import { animateScroll } from "react-scroll";
 import '../chat/chat.scss';
 import Fade from 'react-reveal/Fade';
 let socket;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(15),
   },
 }));
+
 var d = new Date();
 var UTCHour = d.getHours() + ':' + d.getMinutes();
 
@@ -36,22 +37,21 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 function Chat(props) {
-  
- 
- 
+
   const classes = useStyles();
+
   useEffect(() => {
     props.fetchData()
   }, [])
+
   useEffect(() => {
-    if(document.querySelector('.chat-div'))
-  {
-    document.querySelector('.render-chat').scrollTo({
-      top: document.querySelector('.render-chat').scrollHeight,
-      left: 0,
-      behavior: 'smooth'
-    });
-  }
+    if (document.querySelector('.chat-div')) {
+      document.querySelector('.render-chat').scrollTo({
+        top: document.querySelector('.render-chat').scrollHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
   })
 
   let query = useQuery();
@@ -136,14 +136,14 @@ function Chat(props) {
 
             <div className='containers-right  chat-div' key={index}>
               <div className="containerw">
-           
+
                 <div className="chat-boxx">
                   <Avatar src={message.message.image} className={classes.small} />
                   <span className="username"> {message.name}</span>
                 </div>
                 <div className="message-time-box">
-                <span class="time-right">{UTCHour}</span>
-              </div>
+                  <span class="time-right">{UTCHour}</span>
+                </div>
                 <div className="chat-message">
                   <Container>
                     <h3>
@@ -151,11 +151,11 @@ function Chat(props) {
                     </h3>
                   </Container>
                 </div>
-              
+
               </div>
-             
+
             </div>
-          
+
           </Fade>
 
         }
@@ -183,10 +183,11 @@ function Chat(props) {
               variant="outlined"
               label="Message"
             />
+
             <div className="chat-btns">
               <ul>
-                <li>            <Button type="submit" id="send" variant="success">Send Message</Button></li>
-                <li>         <Link to="/posts"><Button variant="danger" onClick={endChat}>End Chat</Button></Link></li>
+              <li><Button type="submit" id="send" variant="success">Send Message</Button></li>
+                <li><Link to="/posts"><Button variant="danger" onClick={endChat}>End Chat</Button></Link></li>
 
               </ul>
 
@@ -196,6 +197,7 @@ function Chat(props) {
 
         </form>
       </div>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Body>Room is full</Modal.Body>
         <Modal.Footer>

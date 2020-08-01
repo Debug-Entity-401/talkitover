@@ -12,10 +12,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import Aos from 'aos';
 import "aos/dist/aos.css";
+
 const Main = () => {
+
     useEffect(() => {
         Aos.init({ duration: 1500 })
     }, [])
+
     return (
         <main>
 
@@ -205,7 +208,7 @@ const Main = () => {
                                             <Card.Text>
                                                 Some quick example text to build on the card title and make up the bulk of
                                                 the card's content.
-    </Card.Text>
+                                            </Card.Text>
                                         </Card.Body>
                                     </Card>
                                 </div>
@@ -221,7 +224,7 @@ const Main = () => {
                                             <Card.Text>
                                                 Some quick example text to build on the card title and make up the bulk of
                                                 the card's content.
-    </Card.Text>
+                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
                                 </div>
@@ -238,7 +241,7 @@ const Main = () => {
                                             <Card.Text>
                                                 Some quick example text to build on the card title and make up the bulk of
                                                 the card's content.
-    </Card.Text>
+                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
                                 </div>
@@ -255,7 +258,7 @@ const Main = () => {
                                             <Card.Text>
                                                 Some quick example text to build on the card title and make up the bulk of
                                                 the card's content.
-    </Card.Text>
+                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
                                 </div>
@@ -271,7 +274,7 @@ const Main = () => {
                                             <Card.Text>
                                                 Some quick example text to build on the card title and make up the bulk of
                                                 the card's content.
-    </Card.Text>
+                                            </Card.Text>
                                         </Card.Body>
                                     </Card>
                                 </div>
@@ -287,7 +290,7 @@ const Main = () => {
                                             <Card.Text>
                                                 Some quick example text to build on the card title and make up the bulk of
                                                 the card's content.
-    </Card.Text>
+                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
                                 </div>
