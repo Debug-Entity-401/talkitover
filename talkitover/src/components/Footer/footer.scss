@@ -3,15 +3,15 @@ footer {
     background-color: #5ba497;
     margin-top: 5%;
 }
+
 footer img {
     margin: 0 3%;
     width: 30%;
 }
+
 footer ul {
     padding-top: 7%;
-    li
-
-    {
+    li {
         display: inline-block;
         margin-left: 2%;
         width: 40px;
@@ -24,25 +24,21 @@ footer ul {
     }
 }
 
-
-.footer-nav
-{
+.footer-nav {
     margin-top: 10%;
     width: 100% !important;
     text-align: right;
 }
 
-
-.full-footer
-{
+.full-footer {
     display: flex;
     justify-content: flex-end;
 }
-#basic-navbar-nav
-{
+
+#basic-navbar-nav {
     margin-left: 2%;
 }
-.social-icon
-{
+
+.social-icon {
     color: #000000;
 }

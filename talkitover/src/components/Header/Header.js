@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Form, Nav, Navbar, Button, Modal } from 'react-bootstrap';
-import Oauth from '../Oauth/Oauth';
 import './header.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../assets/images/logo.png';
@@ -52,18 +51,16 @@ class Header extends React.Component {
                                 <li><Nav.Link className="scroll" href="#overcome">Overcome</Nav.Link></li>
                                 <li> <Nav.Link className="scroll" href="#testominals">testmonials</Nav.Link></li>
                                 <li> <Nav.Link href="/profile">profile</Nav.Link></li>
-                                <li> <Nav.Link href="/otherProfile">otherProfile</Nav.Link></li>
                                 <li> <Nav.Link href="/posts">Post</Nav.Link></li>
                             </Nav>
                             <Nav className="justify-content-end  " style={{ width: "50%" }}>
-
                                 <Show condition={this.context.loggedIn || this.props.signUp.loggedIn}>
                                     <Button variant="primary" onClick={this.context.logout}>Logout</Button>
                                 </Show>
                                 <Show condition={!this.context.loggedIn && this.props.signUp.loggedIn === ''}>
                                     <Button variant="success" onClick={() => this.handleModalShowHide()}>
                                         Sign in
-                </Button>
+                		      </Button>
                                     <li> <Nav.Link href="/signup">Sign up</Nav.Link></li>
                                 </Show>
                                 <Modal show={this.state.showHide} onHide={() => this.handleModalShowHide()}>
@@ -83,7 +80,6 @@ class Header extends React.Component {
                                                     placeholder="Username"
                                                     name="username"
                                                     onChange={this.handleChange}
-
                                                 />
                                                 <div className="border">
                                                 </div>
@@ -112,11 +108,6 @@ class Header extends React.Component {
                                             </div>
 
                                         </Form>
-
-
-
-
-
 
                                     </Modal.Body>
                                 </Modal>

@@ -25,6 +25,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.2.2",
     "react-cookies": "^0.1.1",
+    "react-country-region-selector": "^2.1.0",
     "react-datetime-picker": "^3.0.2",
     "react-dom": "^16.13.1",
     "react-facebook-login": "^4.1.1",

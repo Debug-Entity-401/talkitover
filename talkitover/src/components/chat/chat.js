@@ -42,7 +42,7 @@ const name=context.user.user_name;
     props.add({name:'You', message : state})
   }
 const endChat = e =>{
-	socket.emit('disconnect')
+	socket.emit('disconnected')
 }
   const renderChat = () => {
     console.log('chat messages',props.chat.messages)
