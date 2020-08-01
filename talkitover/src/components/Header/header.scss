@@ -12,6 +12,10 @@
 .main-div {
     width: 68% !important;
 }
+header
+{
+    background-color: #ecf0f3;
+}
 .navbar-nav
 {
   
@@ -71,18 +75,39 @@
     width: 100%;
     margin: 5% auto;
     padding-left: 7%;
+    background-color: #fff !important;
+    border-radius: none !important;
 }
 
-
+  .form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+.facebook-btn i
+{
+    font-size: 43px;
+}
+.facebook-btn
+{
+    text-align: center;
+}
+.sign-in-header {
+    text-align: right;
+    width: 75%;
+}
+.modal-header .close {
+    margin: -3px -1rem -1rem auto;
+}
 .auth-login
 {
     text-align: center;
     margin-top: 8%;
     color:#4f4f4f;
 }
-.btn-login
-{
+.btn-login {
     width: 75%;
+    margin-top: 5%;
     border-radius: 30px;
 }
 .signin-logo

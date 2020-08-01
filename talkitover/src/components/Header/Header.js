@@ -23,7 +23,11 @@ class Header extends React.Component {
         };
     }
     handleModalShowHide() {
-        this.setState({ showHide: !this.state.showHide })
+        this.setState({ showHide: !this.state.showHide });
+        if(this.state.showHide===true)
+        {
+            this.setState({ showAlert:false });
+        }
     }
 
 
