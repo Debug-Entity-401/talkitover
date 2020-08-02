@@ -14,17 +14,14 @@ import { Alert } from 'react-bootstrap';
 import Footer from './components/Footer/Footer';
 import Main from './components/Main/Main';
 import Profile from './components/Profile/Profile';
-import OtherProfile from './components/Profile/other-profile';
+import OtherProfile from './components/otherProfile/other-profile';
 import Testmonial from './components/Testominal/testomnial';
-import Header from './components/Header/Header';
 // import Auth from './components/auth/auth';
-import LoginContext from './components/auth/context.js';
+import LoginContext from "./components/auth/context.js";
+
 function App() {
-
   return (
-
     <React.Fragment>
-
       <LoginContext>
           
       <Route path='/' exact>
@@ -39,7 +36,6 @@ function App() {
       </Route>
       <Route path='/signup'>
         <Register />
-        <Oauth />
         <LoginAccess>
           <Alert variant="success" className="user-msg">
             <Link to="/assess">

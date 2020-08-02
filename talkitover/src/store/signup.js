@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
+
+
 const signUp = createSlice({
 
     name: 'signup',
@@ -107,7 +109,7 @@ export const post2 = (obj) => async dispatch => {
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
         }
-        const response = await axios.post(`http://localhost:3031/signup`, obj, config);
+        const response = await axios.post(`https://talkitover-staging.herokuapp.com/signup`, obj, config);
         let token = await response.data;
         dispatch(validateToken(token));
     } catch (err) {

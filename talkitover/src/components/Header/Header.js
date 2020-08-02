@@ -93,7 +93,6 @@ class Header extends React.Component {
                                                     placeholder="Username"
                                                     name="username"
                                                     onChange={this.handleChange}
-
                                                 />
                                                 <div className="border">
                                                 </div>

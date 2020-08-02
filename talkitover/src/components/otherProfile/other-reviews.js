@@ -1,22 +1,29 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { get, fetchData } from "../../store/profile-store";
+import {
+  get,
+  fetchOtherProfile,
+  adding,
+  addNewReview,
+} from "../../store/other-profile-srore";
 import { Accordion, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Reviews = (props) => {
+const OtherReviews = (props) => {
+
   useEffect(() => {
-    props.fetchData();
-  }, []);
-  const ratingAvvg = () => {
+    props.fetchOtherProfile();
+  });
+
+  const ratingAvvg2 = () => {
     let sum = 0;
     let count = 0;
-    props.profile.results.reviews.map((rev, idx) => {
+    props.other.results.reviews.map((rev, idx) => {
       sum = sum + parseInt(rev.rating);
       count++;
     });
-    let avg =  Math.ceil( sum / count) ; 
+    let avg =  Math.ceil( sum / count);
     if( avg > 0 ){
 	return avg;
     }else{
@@ -24,31 +31,32 @@ const Reviews = (props) => {
     }
   };
 
-  if (props.profile.results.reviews) {
+
+  if (props.other.results.reviews) {
     return (
       <>
         <Accordion>
           <Card>
             <Card.Header>
-		<div className="review-btn">
-              <Accordion.Toggle as={Button} variant="link" eventKey="0" >
+	  <div className="review-btn2">
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Reviews
               </Accordion.Toggle>
 	    </div>
             </Card.Header>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                {props.profile.results.reviews.map((rev, idx) => {
+                {props.other.results.reviews.map((rev, idx) => {
                   return (
-		  <ul key={idx}>
-		   <h3 key={idx + "name"}> {rev.reviewer_name}</h3>
-                      <h6 key={idx + "rat"}>user rate: {rev.rating}</h6>
+		<ul key={idx}>
+		<h3 key={idx + "name"}>{rev.reviewer_name}</h3>
+                      <li key={idx + "rat"}>user rate: {rev.rating}</li>
                       <li key={idx + "des"}>{rev.review_description}</li>
                       <li key={idx + "dat"}>{rev.date}</li>
                     </ul>
                   );
                 })}
-	      <h2>{ratingAvvg()}</h2>
+                <h2> Rating: {ratingAvvg2()}</h2>
               </Card.Body>
             </Accordion.Collapse>
           </Card>
@@ -61,14 +69,12 @@ const Reviews = (props) => {
       <Accordion>
         <Card>
           <Card.Header>
-	<div className="review-btn">
-              <Accordion.Toggle as={Button} variant="link" eventKey="0" >
-                Reviews
-              </Accordion.Toggle>
-	    </div>
+            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+              Reviews
+            </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
-            <Card.Body>There is no Reviews to show !!</Card.Body>
+            <Card.Body>rev</Card.Body>
           </Accordion.Collapse>
         </Card>
       </Accordion>
@@ -77,9 +83,9 @@ const Reviews = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.createSlice,
+  other: state.otherProfile,
 });
 
-const mapDispatchToProps = { get, fetchData };
+const mapDispatchToProps = { get, fetchOtherProfile, adding, addNewReview };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Reviews);
+export default connect(mapStateToProps, mapDispatchToProps)(OtherReviews);

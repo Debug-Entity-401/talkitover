@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import cookie from 'react-cookies';
+
 const posts = createSlice({
     name: 'posts',
     initialState: {posts:[],

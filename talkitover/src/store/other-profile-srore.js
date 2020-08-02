@@ -1,71 +1,72 @@
-import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const otherProfile = createSlice({
-    name: 'other_profile',
+    name: "other_profile",
     initialState: {
         results: {},
         review: {
-            reviewer_name: '',
-            date: '',
-            rating: '',
-            review_description: '',
-        }
+            reviewer_name: "",
+            date: "",
+            rating: "",
+            review_description: "",
+        },
     },
     reducers: {
         get(state, action) {
-            console.log('action', action.payload);
+            console.log("action", action.payload);
             state.results = action.payload;
         },
         add(state, action) {
-            Object.keys(action.payload).forEach(key => {
+            Object.keys(action.payload).forEach((key) => {
                 state.review[key] = action.payload[key];
-            })
-        }
-    }
+            });
+        },
+    },
 });
+
+let url = "https://talkitover-staging.herokuapp.com";
 
 export const {get, add: adding } = otherProfile.actions;
 
-export const fetchOtherProfile = () => async dispatch => {
+export const fetchOtherProfile = (name) => async(dispatch) => {
     const axiosConfig = {
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-            'Content-Type': 'application/json',
-            'cookies': `${document.cookie.split('=')[1]}`,
+            "Content-Type": "application/json",
+            cookies: `${document.cookie.split("=")[1]}`,
         },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
     };
     return axios
-        .get(
-            'http://localhost:3031/otherprofile/zain', axiosConfig
-        )
-        .then(data => {
-            dispatch(get(data.data))
+        .get(`${url}/otherprofile/${name}`, axiosConfig)
+        .then((data) => {
+            dispatch(get(data.data));
         })
-        .catch(err => { /* not hit since no 401 */ })
-}
+        .catch((err) => {
+            /* not hit since no 401 */
+        });
+};
 
-export const addNewReview = (body) => async dispatch => {
+export const addNewReview = (body, name) => async(dispatch) => {
     const axiosConfig = {
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-            'Content-Type': 'application/json',
-            'cookies': `${document.cookie.split('=')[1]}`,
+            "Content-Type": "application/json",
+            cookies: `${document.cookie.split("=")[1]}`,
         },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
     };
-    return axios.post('http://localhost:3031/addreview/zain', body, axiosConfig)
-        .then(data => {
-            console.log(data);
-        })
-
-}
+    //     console.log('===============>', body, name);
+    return axios.post(`${url}/addreview/${name}`, body, axiosConfig).then((data) => {
+        console.log(data);
+    });
+};
 
 export default otherProfile.reducer;
