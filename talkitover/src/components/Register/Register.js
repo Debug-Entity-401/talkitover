@@ -3,25 +3,24 @@ import { connect } from "react-redux";
 import { add, post } from "../../store/signup";
 import Oauth from "../Oauth/Oauth";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Button, Container, Col, Row , Card } from "react-bootstrap";
+import { Form, Button, Container, Col, Row, Card } from "react-bootstrap";
 import { CountryDropdown } from "react-country-region-selector";
 import "./Register.scss";
 
 var country1 = "Select Country";
 function Register(props) {
-
   function handelChange(event) {
     if (event.target) {
-	props.add({
-	  [event.target.name]: event.target.value,
-	});
-        } else {
-	    country1= event;
-	    props.add({
-	    country: event,
-       });
+      props.add({
+        [event.target.name]: event.target.value,
+      });
+    } else {
+      country1 = event;
+      props.add({
+        country: event,
+      });
+    }
   }
-}
   const handelSubmit = (e) => {
     e.preventDefault();
 
@@ -64,22 +63,29 @@ function Register(props) {
                     autoComplete="current-password"
                     placeholder="password"
                   />
-	        	<Form.Label>Country</Form.Label>
-		<br/>
-		<Form.Group controlId="formBasicEmail">
-                  <CountryDropdown
-		name="rcrs-country"
-		defaultOptionLabel={country1}
+                  <Form.Label> Photo </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="photo"
                     onChange={handelChange}
+                    placeholder="photo"
                   />
-	        </Form.Group>
-		<br/>
                   <Form.Label> Role: </Form.Label>
                   <Form.Control as="select" name="role" onChange={handelChange}>
                     <option> Select Role </option>
                     <option value="ventor"> ventor </option>
                     <option value="Listener"> Listener </option>
                   </Form.Control>
+                  <Form.Label>Country</Form.Label>
+                  <br />
+                  <Form.Group controlId="formBasicEmail">
+                    <CountryDropdown
+                      name="rcrs-country"
+                      defaultOptionLabel={country1}
+                      onChange={handelChange}
+                    />
+                  </Form.Group>
+                  <br />
                   <div className="sign-section">
                     <Button
                       type="submit"
@@ -96,9 +102,9 @@ function Register(props) {
           </Form>
         </div>
       </Container>
-        <div className="facebook">
-          <Oauth />
-        </div>
+      <div className="facebook">
+        <Oauth />
+      </div>
     </>
   );
 }

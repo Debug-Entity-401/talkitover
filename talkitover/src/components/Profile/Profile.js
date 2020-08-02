@@ -12,17 +12,16 @@ import Reviews from "./reviews";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./profile.scss";
 
-var country1 = "Select Country";
 
+var country1 = "Select Country";
 const Profile = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  let profile = props.profile.results;
 
   useEffect(() => {
     props.fetchData();
-  }, [profile]);
+  }, []);
 
   const onChangeHandler = async (event) => {
     if (event.target) {
