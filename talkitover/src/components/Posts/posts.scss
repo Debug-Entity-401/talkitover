@@ -1,19 +1,21 @@
 .user-posts
 {
-    border:1px solid #e3e3e3;
     margin:0 auto;
 }
-.user-post
-{
+.user-post {
     border: 1px solid #e3e3e3;
-    padding: 5% 1%;
+    padding: 1% 0% 2% 0%;
     margin-bottom: 3%;
+    background: linear-gradient(90deg, #50a3b9 33%, #ffff 30%);
 }
 
 #datetime-local-label{
     display: none;
 }
-
+.post-user
+{
+    background-color: #50a3b9;
+}
 #post-form{
     border: gray 1px solid;
     border-bottom: none;
@@ -26,6 +28,7 @@
     margin: 0;
     font-size: 5rem;
 }
+
 .form-group {
     /* margin-bottom: 1rem; */
     text-align: center;
@@ -63,14 +66,14 @@
 textarea.textarea-post{
     margin-top: 0;
 }
-#delete-btn{
-    color: white;
-    background-color: #417bff;
-    border-radius: 5px;
-    text-align: center;
-    padding: 1% 0;
-    width: 10%;
-}
+// #delete-btn{
+//     color: white;
+//     background-color: #417bff;
+//     border-radius: 5px;
+//     text-align: center;
+//     padding: 1% 0;
+//     width: 10%;
+// }
 #delete-btn:hover{
     cursor: pointer;
 }
@@ -107,7 +110,9 @@ textarea.textarea-post{
     margin-bottom: -1px;
     
 }
-.head-post{
+.head-post {
+    text-align: center;
+    color: #ffff;
     margin-bottom: 0;
 }
 small {
@@ -126,8 +131,9 @@ div.chat-btn {
     margin-top: 7px;
     padding: 1% 0;
 }
-#toggel-btns{
+#toggel-btns {
     display: flex;
+    margin-bottom: 3%;
     justify-content: center;
 }
 .toggles{

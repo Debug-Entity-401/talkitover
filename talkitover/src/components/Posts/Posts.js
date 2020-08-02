@@ -3,8 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
 import { LoginContext } from '../auth/context';
 import { getPost, addPost, deletepost, updatepost } from '../../store/posts';
-import { Form, Button, Card, Accordion, Container } from 'react-bootstrap';
+import { Form, Button, Row, Col, Card, Accordion, Container } from 'react-bootstrap';
 import './posts.scss';
+import Sidebar from '../Sidebar/Sidebar';
 import DateTimePicker from 'react-datetime-picker';
 import { Checkbox } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -66,6 +67,7 @@ function Post(props) {
     }
 
     function renderForm() {
+
         if (context.user.role === 'ventor') {
             return <div id='post-form'>
                 <Container>
@@ -98,7 +100,7 @@ function Post(props) {
 
         if (user === context.user.user_name) {
             return <div>
-                <div id="delete-btn" onClick={() => deletes(id)}>Delete</div>
+                <Button id="delete-btn" variant="danger" onClick={() => deletes(id)}>Delete</Button>
                 <Accordion>
                     <Card>
                         <Card.Header>
@@ -169,14 +171,21 @@ function Post(props) {
         if (toggle === 'All') {
             return props.posts.posts.map((val, i) => {
                 return <div className="user-post" key={i}>
-                    <h1 className='head-post'>{val.view_as}</h1>
-                    <small>{val.date}</small>
-                    <p className='description'>{val.description}</p>
-                    <p hidden={true} >{val.availability}</p>
-                    {show(val.user_name, val._id, val.description)}
-                    <div>
-                        {renderChatLink(val.user_name, val._id, val.availability)}
-                    </div>
+                    <Row>
+                        <Col xs={6} sm={6} md={4} className="user-section">
+                            <h1 className='head-post'>{val.view_as}</h1>
+                        </Col>
+                        <Col xs={6} sm={6} md={8}>
+
+                            <small>{val.date}</small>
+                            <p className='description'>{val.description}</p>
+                            <p hidden={true} >{val.availability}</p>
+                            {show(val.user_name, val._id, val.description)}
+                            <div>
+                                {renderChatLink(val.user_name, val._id, val.availability)}
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
             })
         }
@@ -196,19 +205,27 @@ function Post(props) {
                         </div>
                     </div>
 
-                } else if (timeSplit[2] == day && timeSplit[3] >= hours){
+                } else if (timeSplit[2] == day && timeSplit[3] >= hours) {
                     return <div className="user-post" key={i}>
-                    <h1 className='head-post'>{val.view_as}</h1>
-                    <small>{val.date}</small>
-                    <p className='description'>{val.description}</p>
-                    <p hidden={true} >{val.availability}</p>
-                    {show(val.user_name, val._id, val.description)}
-                    <div>
-                        {renderChatLink(val.user_name, val._id, val.availability)}
+                        <Row>
+                            <Col xs={6} sm={6} md={4}>
+
+                                <h1 className='head-post'>{val.view_as}</h1>
+                                <small>{val.date}</small>
+                            </Col>
+                            <Col xs={6} sm={6} md={8}>
+
+                                <p className='description'>{val.description}</p>
+                                <p hidden={true} >{val.availability}</p>
+                                {show(val.user_name, val._id, val.description)}
+                                <div>
+                                    {renderChatLink(val.user_name, val._id, val.availability)}
+                                </div>
+                            </Col>
+                        </Row>
                     </div>
-                </div>
                 }
-                    
+
             })
 
         }
@@ -217,16 +234,26 @@ function Post(props) {
 
     return (
         <>
-            <div id='contain'>
-                {renderForm()}
-                <div id="toggel-btns">
-                    <Button className='toggles' onClick={()=>setToggle('All')} >All Post</Button>
-                    <Button className='toggles' onClick={()=> setToggle('Avaliable')} >Avaliable Post</Button>
-                </div>
-                <div className="user-posts">
-                    {renderPost()}
-                </div>
-            </div>
+            <Row>
+                <Col xs={6} sm={6} md={1}>
+                    <aside id="sidebar">
+                        <Sidebar />
+                    </aside>
+                </Col>
+                <Col xs={6} sm={6} md={11}>
+
+                    <div id='contain'>
+                        {renderForm()}
+                        <div id="toggel-btns">
+                            <Button className='toggles' onClick={() => setToggle('All')} >All Post</Button>
+                            <Button className='toggles' onClick={() => setToggle('Avaliable')} >Avaliable Post</Button>
+                        </div>
+                        <div className="user-posts">
+                            {renderPost()}
+                        </div>
+                    </div>
+                </Col>
+            </Row>
         </>
     )
 }
