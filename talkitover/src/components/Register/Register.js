@@ -11,9 +11,25 @@ var country1 = "Select Country";
 function Register(props) {
   function handelChange(event) {
     if (event.target) {
-      props.add({
-        [event.target.name]: event.target.value,
-      });
+      
+      if (event.target.files && event.target.files[0]) {
+        //////////////////////////////
+
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          // this.setState({image: e.target.result});
+          props.add({photo: e.target.result});
+        };
+        reader.readAsDataURL(event.target.files[0]);
+
+        // ////////////////////////////////
+        // console.log('///////////////',typeof URL.createObjectURL(event.target.files[0]));
+        // props.add({[event.target.name]: URL.createObjectURL(event.target.files[0])});
+
+    }else {
+      
+      props.add({[event.target.name]: event.target.value});}
+
     } else {
       country1 = event;
       props.add({
@@ -65,12 +81,13 @@ function Register(props) {
                     placeholder="password"
                   />
                   <Form.Label> Photo </Form.Label>
-                  <Form.Control
+                  <input type="file" name="photo" onChange={handelChange} id='uploadImage' placeholder="photo" />
+                  {/* <Form.Control
                     type="text"
                     name="photo"
                     onChange={handelChange}
                     placeholder="photo"
-                  />
+                  /> */}
                   <Form.Label> Role: </Form.Label>
                   <Form.Control as="select" name="role" onChange={handelChange}>
                     <option> Select Role </option>
@@ -103,9 +120,9 @@ function Register(props) {
           </Form>
         </div>
       </Container>
-      <div className="facebook">
+      {/* <div className="facebook"> */}
         <Oauth />
-      </div>
+      {/* </div> */}
     </>
   );
 }
