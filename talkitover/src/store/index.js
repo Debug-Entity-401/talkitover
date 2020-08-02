@@ -5,8 +5,9 @@ import otherProfile from './other-profile-srore';
 import assessment from './assessment';
 import posts from "./posts";
 import chatSlice from './chat-store';
+import loader from './loader';
 
-const reducers = combineReducers({ signUp, createSlice, otherProfile, assessment, posts, chatSlice });
+const reducers = combineReducers({ signUp, createSlice, otherProfile, assessment, posts, chatSlice,loader });
 
 const store = configureStore({ reducer: reducers });
 
