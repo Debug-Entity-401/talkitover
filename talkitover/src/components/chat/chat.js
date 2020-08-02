@@ -85,6 +85,7 @@ function Chat(props) {
 
   const onTextChange = e => {
     setState({ ...state, [e.target.name]: e.target.value, image: props.profile.results.photo });
+    console.log('state',state);
 
   }
 

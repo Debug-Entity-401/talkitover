@@ -61,14 +61,12 @@ header
     border:none;
 }
 
-.border
-{
+.border {
     width: 94%;
-    bottom: 18px;
+    bottom: 13px;
     position: relative;
     margin: 0 auto;
 }
-
 .modal-header
 {
     border-bottom: none !important;
@@ -87,19 +85,53 @@ header
     margin: 0 38%;
 }
 
-.form-control {
+.user-inputs {
     width: 100%;
-    margin: 5% auto;
-    padding-left: 7%;
+    letter-spacing: 1px;
+    font-size: 13px;
+    margin: 3% auto;
+    padding-left: 4%;
     background-color: #fff !important;
-    border-radius: none !important;
+    border: none;
 }
 
-  .form-control:focus {
-    border-color: inherit;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
+.floating-label-group {
+	position: relative;
+	margin-top: 15px;
+	margin-bottom: 25px;
+
+	.floating-label {
+		font-size: 13px;
+		color: #cccccc;
+		position: absolute;
+		pointer-events: none;
+		top: 9px;
+		left: 12px;
+		transition: all 0.1s ease;
+	}
+
+	input:focus ~ .floating-label,
+	input:not(:focus):valid ~ .floating-label {
+	    top: -15px;
+    bottom: 0px;
+    left: 15px;
+    border-color: #fff;
+    font-size: 11px;
+    opacity: 1;
+    color: gray;
+	}
+}
+.sidenav---sidenav-toggle---1KRjR
+{
+    padding-left: 5%;
+}
+.fa-eye {
+    position: relative;
+    bottom: 37px;
+    cursor: pointer;
+    left: 88%;
+}
+  
 .facebook-btn i
 {
     font-size: 43px;
@@ -110,7 +142,10 @@ header
 }
 .sign-in-header {
     text-align: right;
-    width: 75%;
+    width: 69%;
+}
+.sign-in-header h1 {
+    font-size: 1.3em;
 }
 .modal-header .close {
     margin: -3px -1rem -1rem auto;
@@ -121,11 +156,6 @@ header
     margin-top: 8%;
     color:#4f4f4f;
 }
-.btn-login {
-    width: 75%;
-    margin-top: 5%;
-    border-radius: 30px;
-}
 .signin-logo
 {
     text-align: center;
@@ -134,6 +164,7 @@ header
 {
     text-align: center;
 }
+
 #logout-link{
     color: white;
 }
@@ -148,22 +179,51 @@ header
     color: #fff;
     background-color: #105f9c;
     border-color: #105f9c;
-    transition: 0.8s ease;
 }
 
 .primary-btn:hover {
     background-color: #3c83bbb5;
     border-color: #3c83bbb5;
 }
+.btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {
+    color: #fff;
+    background-color:none !important;
+    border-color: none!important;
+}
 .btn-success:focus
 {
     background-color: #105f9c;
     border-color: #105f9c;
     box-shadow: 0 0 0 0.2rem #105f9c81;
-
 }
+.btn-login {
+    width: 75%;
+    margin-top: 5%;
+    border-radius: 30px;  
+    padding-top: 10px;
+    border-color: #fff;
+    cursor: pointer;
 
-
+    transition: background-color 3s;
+}
+.btn-login:hover
+{
+    background: -webkit-linear-gradient(right, #21d4fd, #5ba497, #21d4fd, #5ba497);
+    border-color: #fff;
+}
+.faild-user-msg {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    /* margin: 0 auto; */
+    bottom: 1px;
+}
+.modal-header .close:hover
+{
+    
+    animation:spin 4s ease;
+}
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 @keyframes moveInLeft {
     0% {
       opacity: 0;

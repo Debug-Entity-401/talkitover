@@ -21,8 +21,27 @@
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     margin-bottom: 4%;
 }
+.wave
+{
+    position: relative;
+}
+#home-welcome {
+    margin-bottom: 2%;
+    font-size: xx-large;
+    position: absolute;
+    top: 0;
+    margin: 5% auto;
+    /* left: 26%; */
+    font-weight: bold;
+    width: 94%;
+    text-align: center;
+}
 
 #articles-heading {
     margin: 0 auto;
     text-align: center;
+}
+.col-md-11 
+{
+    padding: 0 !important;
 }
