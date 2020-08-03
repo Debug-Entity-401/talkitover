@@ -30,6 +30,10 @@ const Reviews = (props) => {
       <>
         <Accordion>
           <Card>
+          <Box component="fieldset" mb={3} borderColor="transparent">
+                        <Typography component="legend">Average Rating: </Typography>
+                        <Rating name="read-only" value={ratingAvvg()} readOnly />
+                      </Box>
             <Card.Header>
               <div className="review-btn">
                 <Accordion.Toggle as={Button} variant="link" eventKey="0" >
@@ -56,7 +60,7 @@ const Reviews = (props) => {
 
                   );
                 })}
-                <h2>Rating Average:  {ratingAvvg()}</h2>
+             
               </Card.Body>
             </Accordion.Collapse>
           </Card>

@@ -9,10 +9,10 @@ const profileSlice = createSlice({
     initialState: {
         results: {},
         profile: {
-            username: "",
-            email: "",
-            photo: "",
-            country: "",
+          user_name:'',
+          photo:'',
+          email:'',
+          country:'' 
         },
     },
     reducers: {

@@ -100,10 +100,12 @@ function Post(props) {
             </div>
         }
     }
+   
 
     function show(user, id, description) {
 
         if (user === context.user.user_name) {
+            
             return <div>
                 <div id="delete-btn" onClick={() => deletes(id)}>Delete</div>
                 <Accordion>
