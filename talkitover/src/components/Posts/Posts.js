@@ -112,10 +112,12 @@ function Post(props) {
 
         }
     }
+   
 
     function show(user, id, description) {
 
         if (user === context.user.user_name) {
+            
             return <div>
                 <Accordion>
                     <Card>
