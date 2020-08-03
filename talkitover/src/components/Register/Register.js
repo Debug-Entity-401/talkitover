@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { add, post } from "../../store/signup";
 import Oauth from "../Oauth/Oauth";
 import "bootstrap/dist/css/bootstrap.min.css";
+import UserExist from '../user-exist';
 import { Route, Link, Redirect } from 'react-router-dom';
-import { Form, Container, Col, Row, Card } from "react-bootstrap";
+import { Form, Container, Col, Row, Card,Alert } from "react-bootstrap";
 import Button from '@material-ui/core/Button';
 import { CountryDropdown } from "react-country-region-selector";
 import "./Register.scss";
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   textField: {
-    width: '100%',
+    width: '95%',
   },
   input: {
     display: 'none',
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    width:'100%'
+    width:'98%'
   },
 }));
 
@@ -115,23 +116,19 @@ function Register(props) {
       });
     }
   }
+ 
   const handelSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(props.signup);
     await props.post(props.signUp);
+    console.log('asdasdasd',props.signUp);
     console.log('asdasdasdasdasdsad', props.signUp.loggedIn);
-    if (props.signUp.loggedIn) {
-
-      setRedircit('/assess');
-    }
-
   };
 
   /////////////////////////////////////////
 
-  if (redirict) {
-    return <Redirect to={redirict} />
+  if (props.signUp.loggedIn) {
+    return <Redirect to='/assess' />
   }
   return (
     <>
@@ -222,6 +219,11 @@ function Register(props) {
                     />
                   </Form.Group>
                   <br />
+                  <UserExist>
+          <Alert variant="danger" className="register-user-msg">
+            the user already exist
+        </Alert>
+        </UserExist>
                   <div className="sign-section">
                     <Button
                       type="submit"

@@ -5,7 +5,6 @@ import { Route, Link,Redirect } from 'react-router-dom';
 import Chat from './components/chat/chat';
 import Register from './components/Register/Register';
 import LoginAccess from './components/login-access';
-import UserExist from './components/user-exist';
 import Assessment from './components/assessment/assessment';
 import Posts from './components/Posts/Posts';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -48,11 +47,7 @@ function App() {
           </Alert>
         </LoginAccess>
         
-        <UserExist>
-          <Alert variant="warning" className="register-user-msg">
-            the user already exist
-        </Alert>
-        </UserExist>
+       
       </Route>
       
       <Route path='/assess'>

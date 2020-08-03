@@ -21,9 +21,9 @@
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     margin-bottom: 4%;
 }
-.wave
+.waves
 {
-    position: relative;
+    filter: drop-shadow(7px 17px 2px #a2d3cd);
 }
 #home-welcome {
     margin-bottom: 2%;

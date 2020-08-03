@@ -11,6 +11,8 @@ import { CountryDropdown } from "react-country-region-selector";
 import Reviews from "./reviews";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./profile.scss";
+import {Row,Col} from 'react-bootstrap';
+import Sidebar from '../Sidebar/Sidebar';
 
 
 var country1 = "Select Country";
@@ -57,6 +59,11 @@ const Profile = (props) => {
   };
   return (
     <>
+    <Row>
+    <Col xs={6} sm={6} md={1}>
+      <Sidebar />
+</Col>
+<Col xs={6} sm={6} md={11}>
       <Container className="profile-container">
         <Navbar className="profile-nav">
           <Navbar.Brand>
@@ -152,6 +159,8 @@ const Profile = (props) => {
         </section>
         <Reviews />
       </Container>
+      </Col>
+      </Row>
     </>
   );
 };
