@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
 import { LoginContext } from '../auth/context';
 import { getPost, addPost, deletepost, updatepost } from '../../store/posts';
-import { Form, Button, Row, Col, Card, Accordion, Container } from 'react-bootstrap';
+import { Form, Button, Row, Col, Card, Accordion, Container, Toast } from 'react-bootstrap';
 import './posts.scss';
 import Sidebar from '../Sidebar/Sidebar';
 import DateTimePicker from 'react-datetime-picker';
@@ -12,23 +12,27 @@ import { Checkbox } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Link } from 'react-router-dom';
-import {IfRenderer,Then,Else} from '../Home/If/index';
-import {toggleLoader } from '../../store/loader';
+import { IfRenderer, Then, Else } from '../Home/If/index';
+import { toggleLoader } from '../../store/loader';
 import Loader from 'react-loader-spinner';
+import Show from '../auth/show';
 
 function Post(props) {
     const [toggle, setToggle] = useState('All');
     const [value, onChange] = useState(new Date());
+
     const context = useContext(LoginContext);
     useEffect(() => {
         props.getPost();
     }, []);
     const deletes = async (id) => {
         toggleLoader();
+
         await props.deletepost(id);
         await props.getPost();
         // toggleLoader();
     }
+
 
     //for posting posts
     const handelSubmit = async e => {
@@ -47,7 +51,7 @@ function Post(props) {
         document.getElementById('post-form-main').reset();
         await props.addPost(obj);
         await props.getPost();
-        
+
         toggleLoader();
     }
 
@@ -73,31 +77,39 @@ function Post(props) {
 
     function renderForm() {
         if (context.user.role === 'ventor') {
-            return <div id='post-form'>
-                <Container>
-                    <Form id='post-form-main' onSubmit={handelSubmit}>
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Label className="user-post-title">Talk Free</Form.Label>
-                            <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control textarea-post" />
-                            <FormGroup row>
-                                <div id='form-footer'>
-                                    <FormControlLabel
-                                        control={<Checkbox name="user" />}
-                                        label="Post Anonymously"
-                                    />
-                                    <span>I am avaliable until</span>
-                                    <DateTimePicker
-                                        onChange={onChange}
-                                        value={value}
-                                    />
+            return <div>
+                <div id='post-form'>
+                    <Container>
+
+                        <Form id='post-form-main' onSubmit={handelSubmit}>
+                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                                <div className="Messge-title">
+                                    <Form.Label className="user-post-title">Talk Free</Form.Label>
                                 </div>
-                                <Button id="post-btn" type="submit">Post</Button>
-                            </FormGroup>
-                            
-                        </Form.Group>
-                    </Form>
-                </Container>
+                                <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control textarea-post" />
+                                <FormGroup row>
+                                    <div id='form-footer'>
+                                        <FormControlLabel
+                                            control={<Checkbox name="user" />}
+                                            label="Post Anonymously"
+                                        />
+                                        <span>I am avaliable until</span>
+                                        <DateTimePicker
+                                            onChange={onChange}
+                                            value={value}
+                                        />
+                                    </div>
+                                    <div className="Post-button">
+                                        <Button id="post-btn" type="submit">Post</Button>
+                                    </div>
+                                </FormGroup>
+
+                            </Form.Group>
+                        </Form>
+                    </Container>
+                </div>
             </div>
+
         }
     }
 
@@ -105,7 +117,6 @@ function Post(props) {
 
         if (user === context.user.user_name) {
             return <div>
-                <div id="delete-btn" onClick={() => deletes(id)}>Delete</div>
                 <Accordion>
                     <Card>
                         <Card.Header>
@@ -134,7 +145,6 @@ function Post(props) {
                                             <Accordion.Toggle as={Button} variant="link" eventKey="0">
                                                 <Button data-toggle="collapse" type="submit">Save Change</Button>
                                             </Accordion.Toggle>
-
                                         </FormGroup>
                                     </Form.Group>
                                 </Form>
@@ -164,7 +174,14 @@ function Post(props) {
                 return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
             }
     }
-
+    function renderUserName(user) {
+        console.log(user);
+        if (user === "Anonymous") {
+            return <h1>{user}</h1>;
+        } else {
+            return <Link to={`/otherProfile?name=${user}`}>{user}</Link>;
+        }
+    }
     function renderPost() {
         let date = new Date();
         let day = date.getDate();
@@ -174,23 +191,41 @@ function Post(props) {
         let array = props.posts.posts.slice().reverse();
         if (toggle === 'All') {
             return array.map((val, i) => {
-                return <div className="user-post" key={i}>
-                    <Row>
-                        <Col xs={6} sm={6} md={4} className="user-section">
-                            <h1 className='head-post'>{val.view_as}</h1>
-                        </Col>
-                        <Col xs={6} sm={6} md={8}>
 
+                return <Toast key={i} className="post-box">
+                    <Toast.Header closeButton={false}>
+
+                        <div className="username-time">
+                            <h1 className='head-post'>{renderUserName(val.view_as)}</h1>
                             <small>{val.date}</small>
-                            <p className='description'>{val.description}</p>
-                            <p hidden={true} >{val.availability}</p>
-                            {show(val.user_name, val._id, val.description)}
-                            <div>
-                                {renderChatLink(val.user_name, val._id, val.availability)}
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
+                        </div>
+                        <div className='delete-btn'>
+                            <Show condition={val.user_name === context.user.user_name}>
+                                <Button variant="danger" id="delete-btn" onClick={() => deletes(val._id)}><i class="fa fa-trash" aria-hidden="true"></i></Button>
+                            </Show>
+                        </div>
+                    </Toast.Header>
+
+                    <Toast.Body>
+                        <p className='description'>{val.description}</p>
+                        {show(val.user_name, val._id, val.description)}
+                        <div>
+                            {renderChatLink(val.user_name, val._id, val.availability)}
+                        </div>
+                        <div className="time">
+                        </div>
+                    </Toast.Body>
+                </Toast>
+                // <div className="user-post" key={i}>
+
+                //     <small>{val.date}</small>
+                //     <p className='description'>{val.description}</p>
+                //     <p hidden={true} >{val.availability}</p>
+                //     {show(val.user_name, val._id, val.description)}
+                //     <div>
+                //         {renderChatLink(val.user_name, val._id, val.availability)}
+                //     </div>
+                // </div>
             })
         }
         else {
@@ -198,27 +233,55 @@ function Post(props) {
                 let timeSplit = val.availability.split('-')[0].split('/');
                 timeSplit.push(val.availability.split('-')[1])
                 if (timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day) {
-                    return <div className="user-post" key={i}>
-                        <h1 className='head-post'>{val.view_as}</h1>
-                        <small>{val.date}</small>
-                        <p className='description'>{val.description}</p>
-                        <p hidden={true} >{val.availability}</p>
-                        {show(val.user_name, val._id, val.description)}
-                        <div>
-                            {renderChatLink(val.user_name, val._id, val.availability)}
-                        </div>
-                    </div>
+                    return <Toast key={i} className="post-box">
+                        <Toast.Header closeButton={false}>
+
+                            <div className="username-time">
+                                <h1 className='head-post'>{renderUserName(val.view_as)}</h1>
+                                <small>{val.date}</small>
+                            </div>
+                            <div className='delete-btn'>
+                                <Show condition={val.user_name === context.user.user_name}>
+                                    <Button variant="danger" id="delete-btn" onClick={() => deletes(val._id)}><i class="fa fa-trash" aria-hidden="true"></i></Button>
+                                </Show>
+                            </div>
+                        </Toast.Header>
+
+                        <Toast.Body>
+                            <p className='description'>{val.description}</p>
+                            {show(val.user_name, val._id, val.description)}
+                            <div>
+                                {renderChatLink(val.user_name, val._id, val.availability)}
+                            </div>
+                            <div className="time">
+                            </div>
+                        </Toast.Body>
+                    </Toast>
                 } else if (timeSplit[2] == day && timeSplit[3] >= hours) {
-                    return <div className="user-post" key={i}>
-                        <h1 className='head-post'>{val.view_as}</h1>
-                        <small>{val.date}</small>
-                        <p className='description'>{val.description}</p>
-                        <p hidden={true} >{val.availability}</p>
-                        {show(val.user_name, val._id, val.description)}
-                        <div>
-                            {renderChatLink(val.user_name, val._id, val.availability)}
-                        </div>
-                    </div>
+                    return <Toast key={i} className="post-box">
+                        <Toast.Header closeButton={false}>
+
+                            <div className="username-time">
+                                <h1 className='head-post'>{renderUserName(val.view_as)}</h1>
+                                <small>{val.date}</small>
+                            </div>
+                            <div className='delete-btn'>
+                                <Show condition={val.user_name === context.user.user_name}>
+                                    <Button variant="danger" id="delete-btn" onClick={() => deletes(val._id)}><i class="fa fa-trash" aria-hidden="true"></i></Button>
+                                </Show>
+                            </div>
+                        </Toast.Header>
+
+                        <Toast.Body>
+                            <p className='description'>{val.description}</p>
+                            {show(val.user_name, val._id, val.description)}
+                            <div>
+                                {renderChatLink(val.user_name, val._id, val.availability)}
+                            </div>
+                            <div className="time">
+                            </div>
+                        </Toast.Body>
+                    </Toast>
                 }
             })
         }
@@ -227,31 +290,27 @@ function Post(props) {
 
     return (
         <>
-        <IfRenderer condition={!props.loader.loader}>
-            <Then>
-            <div id='contain'>
-                {renderForm()}
-                <div id="toggel-btns">
-                    <Button className='toggles' onClick={() => setToggle('All')} >All Post</Button>
-                    <Button className='toggles' onClick={() => setToggle('Avaliable')} >Avaliable Post</Button>
-                </div>
-                <div className="user-posts">
-                    {renderPost()}
-               </div>
-               </div>
-            </Then>
-            <Else>
-            <Loader
-         type="Puff"
-         color="#00BFFF"
-         height={100}
-         width={100}
-         timeout={3000} //3 secs
- 
-      />
-            </Else>
-        </IfRenderer>
-            
+            <Row>
+                <Col xs={6} sm={6} md={1}>
+
+                    <Sidebar />
+                </Col>
+                <Col xs={6} sm={6} md={11}>
+
+                    <div id='contain'>
+                        {renderForm()}
+
+                        <div className="user-posts">
+                            <div id="toggel-btns">
+                                <Button className='toggles' onClick={() => setToggle('All')} >All Post</Button>
+                                <Button className='toggles' onClick={() => setToggle('Avaliable')} >Avaliable Post</Button>
+                            </div>
+                            {renderPost()}
+                        </div>
+                    </div>
+                </Col>
+
+            </Row>
         </>
     )
 }
@@ -261,5 +320,5 @@ const mapStateToProps = state => ({
     fullRoom: state.chatSlice,
     loader: state.loader
 });
-const mapDispatchToProps = { getPost, addPost, deletepost, updatepost ,toggleLoader};
+const mapDispatchToProps = { getPost, addPost, deletepost, updatepost, toggleLoader };
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

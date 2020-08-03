@@ -44,8 +44,10 @@ function UserArticles() {
     }
     return (
         <>
+        <div className="saved-articles">
         <h2 id="user-articles-heading">Favourite Articles:</h2>
         <h3>No Articles Saved Yet..</h3>
+        </div>
         </>
     )
     
