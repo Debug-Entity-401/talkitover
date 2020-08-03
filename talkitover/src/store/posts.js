@@ -9,11 +9,13 @@ const posts = createSlice({
         description:'',
         availability:'',
         user_name:'',
-        view_as:''
-    }
+        view_as:'',
+    },
+    counter:0
     },
     reducers: {
         renderpost(state, action) {
+            state.counter=action.payload.length;
         state.posts = action.payload;
         }
         
@@ -35,6 +37,7 @@ let config = {
 export const getPost = ( ) => async dispatch =>{
    let response = axios.get(`${API}/talkitoverposts`,config);
     let posts = await response;
+    console.log('aaaaaaaaaaaaaaaa',posts.data.length);
     dispatch(renderpost(posts.data));
 }
 export const addPost = (obj ) => async dispatch =>{

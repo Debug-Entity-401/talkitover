@@ -30,9 +30,9 @@ nav.sidenav---sidenav---_2tBP.sidenav---collapsed---LQDEv {
     bottom: 0;
     left: 0;
     z-index: 1006;
-    min-width: 106px;
+    min-width: 116px;
     background-color: #343a40;
-    transition: min-width 0.2s;
+    transition: min-width .2s;
 }
 
 .sidenav---sidenav-nav---3tvij {
@@ -49,6 +49,15 @@ nav.sidenav---sidenav---_2tBP.sidenav---collapsed---LQDEv {
 
 .icon > a:hover {
     color: whitesmoke;
+}
+
+a.sidebar-link {
+    color: aqua;
+}
+
+.MuiBadge-colorPrimary {
+    color: #fff;
+    background-color: cadetblue;
 }
 
 span {

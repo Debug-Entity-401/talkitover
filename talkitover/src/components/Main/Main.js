@@ -5,6 +5,7 @@ import '../../main-css/media.scss';
 import "../../main-css/base.scss";
 import talkitoverintroImage from '../../assets/images/intro-img.webp';
 import {Container,Col,Row,Carousel,Card} from 'react-bootstrap';
+import { getPost, addPost, deletepost, updatepost } from '../../store/posts';
 import heroimg from '../../assets/images/hero-slier-img.webp';
 import heroimg2 from '../../assets/images/hero-slider-img-2.webp';
 import heroimg3 from '../../assets/images/hero-slier-img-3.webp';
@@ -19,6 +20,8 @@ const Main = () => {
     useEffect(() => {
         Aos.init({ duration: 1500 })
     }, [])
+ 
+
 
     return (
         <>

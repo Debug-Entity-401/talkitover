@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import { Row, Col } from 'react-bootstrap';
  
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +40,7 @@ function Article(props) {
       articles.map((article, idx) => {
           return (
             <>
+              <Col xs={6} sm={6} md={6}>
               <li key={idx} id={article._id} className="article-li">
                   {/*<a href={article.url}> {article.title} </a>
           <p> {article.text} </p>  */}
@@ -70,6 +72,7 @@ function Article(props) {
                   {/*<SavedArticle id={article._id} add={this.state.add} delete={this.state.delete} />
         <hr className="drop-shadow-hr"/>*/}
               </li>
+              </Col>
               </>
           )
         })

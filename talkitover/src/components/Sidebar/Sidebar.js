@@ -1,13 +1,42 @@
-import React, { useContext } from 'react';
+import React,{useEffect, useState,useContext} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import Tooltip from '@material-ui/core/Tooltip';
-import { LoginContext } from '../auth/context';
+import Badge from '@material-ui/core/Badge';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './styles/sidebar.scss';
+import { getPost} from '../../store/posts';
+import axios from 'axios';
+import axiosConfig from '../axios-config';
+import { LoginContext } from '../auth/context';
+import Article from '../Articles/Articles.js';
 
-function Sidebar() {
+function Sidebar(props) {
+    
     const context = useContext(LoginContext);
+    useEffect(() => {
+        props.getPost();
+    }, [props.posts.counter]);
+    const [userArticles, setUserArticles] = useState([]);
+    let url = "https://talkitover-staging.herokuapp.com/";
+
+    const fetchUserArticles = async () => {
+        const getUserArticles = await axios.get(url + "user-articles", axiosConfig);
+        const articlesArr = await getUserArticles.data;
+        setUserArticles(articlesArr.articles);
+      };
+    
+      const getAllUserArticles = () => {
+        fetchUserArticles();
+      }
+
+      useEffect(() => {
+        getAllUserArticles();
+      }, [userArticles])
+
+
+   
     return (
         <React.Fragment>
             <SideNav
@@ -38,6 +67,7 @@ function Sidebar() {
             </NavItem>
 
                     <NavItem eventKey="profile">
+
                         <NavIcon>
                         <Tooltip title="Profile">
                             <div className="icon">
@@ -57,12 +87,15 @@ function Sidebar() {
                     </NavItem>
                     
                     <NavItem eventKey="posts">
+
                     <NavIcon>
                     <Tooltip title="Chat">
                         <div className="icon">
-                            <Link to='/posts'>
+                        <Badge badgeContent={props.posts.counter} color="primary">
+                            <Link className="sidebar-link" to='/posts'>
                                 <i class="fa fa-comments" aria-hidden="true"></i>
                             </Link>
+                            </Badge>
                         </div>
                         </Tooltip>
                     </NavIcon>
@@ -79,9 +112,12 @@ function Sidebar() {
                         <NavIcon>
                         <Tooltip title="Saved Articles">
                             <div className="icon">
-                                <Link to='/myarticles'>
+                            <Badge badgeContent={userArticles.length} color="primary">
+
+                                <Link className="sidebar-link" to='/myarticles'>
                                     <i className="fa fa-bookmark" aria-hidden="true"></i>
                                 </Link>
+                                </Badge>
                             </div>
                             </Tooltip>
                         </NavIcon>
@@ -120,4 +156,8 @@ function Sidebar() {
     )            
 }
 
-export default Sidebar;
+const mapStateToProps = state => ({
+    posts: state.posts,
+});
+const mapDispatchToProps = { getPost};
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

@@ -155,8 +155,14 @@ class Header extends React.Component {
                                                 <br />
                                             </div>
 
-                                            <div className="facebook-btn">
+                                            <div className="facebook-btns">
+                                                <div className="facebook-login">
                                                 <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><img src="https://img.icons8.com/color/48/000000/facebook-new.png"/></button>
+                                                </div>
+                                                <div className="fa-auth">
+                                                <Oauth />
+                                                </div>
+                                                
                                             </div>
                                         </Form>
                                     </Modal.Body>

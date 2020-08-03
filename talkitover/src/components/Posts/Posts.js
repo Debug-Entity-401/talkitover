@@ -72,7 +72,6 @@ function Post(props) {
     }
 
     function renderForm() {
-
         if (context.user.role === 'ventor') {
             return <div id='post-form'>
                 <Container>
