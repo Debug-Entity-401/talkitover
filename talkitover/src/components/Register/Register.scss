@@ -24,7 +24,13 @@
     height: 517px;
     border-radius: 2px 0px 0px 6px;
 }
-
+.MuiButton-containedPrimary{
+    margin-top: 15% !important;
+}
+.MuiButton-label
+{
+    color: #ffffff;
+}
 .signup-form-elements {
     padding: 2%;
 }

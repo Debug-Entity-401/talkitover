@@ -12,6 +12,7 @@ class Article extends React.Component {
         articles: this.props.articles,
         add: this.props.add,
         delete: this.props.delete,
+        counter:0
       }
     }
 

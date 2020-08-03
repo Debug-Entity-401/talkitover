@@ -187,7 +187,7 @@ function Chat(props) {
 
             <div className="chat-btns">
               <ul>
-              <li><Button type="submit" id="send" variant="success">Send Message</Button></li>
+              <li><Button type="submit" id="send" variant="success"><i class="fa fa-paper-plane" aria-hidden="true"></i></Button></li>
                 <li><Link to="/posts"><Button variant="danger" onClick={endChat}>End Chat</Button></Link></li>
 
               </ul>

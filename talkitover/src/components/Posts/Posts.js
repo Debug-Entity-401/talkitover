@@ -12,13 +12,9 @@ import { Checkbox } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Link } from 'react-router-dom';
-
-// import heroImage from '../../assets/images/Untitled-1.svg';
-
-
-
-
-
+import {IfRenderer,Then,Else} from '../Home/If/index';
+import {toggleLoader } from '../../store/loader';
+import Loader from 'react-loader-spinner';
 
 function Post(props) {
     const [toggle, setToggle] = useState('All');
@@ -28,13 +24,16 @@ function Post(props) {
         props.getPost();
     }, []);
     const deletes = async (id) => {
+        toggleLoader();
         await props.deletepost(id);
         await props.getPost();
-
+        // toggleLoader();
     }
+
     //for posting posts
-    const handelSubmit = (e) => {
+    const handelSubmit = async e => {
         e.preventDefault();
+        toggleLoader();
         let user;
         e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
         let description = document.getElementById('mains').value;
@@ -44,14 +43,18 @@ function Post(props) {
         let years = date.getFullYear()
         let month = date.getMonth() + 1;
         console.log(years, month, day, hours)
-        let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name }
-        props.addPost(obj);
-        props.getPost();
+        let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
+        document.getElementById('post-form-main').reset();
+        await props.addPost(obj);
+        await props.getPost();
+        
+        toggleLoader();
     }
 
     //for post update
     const handelSubmited = async (e) => {
         e.preventDefault();
+        toggleLoader();
         let user;
         e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
         let description = e.target.description.value;
@@ -65,14 +68,14 @@ function Post(props) {
         let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
         await props.updatepost(obj, id);
         await props.getPost();
+        toggleLoader();
     }
 
     function renderForm() {
-
         if (context.user.role === 'ventor') {
             return <div id='post-form'>
                 <Container>
-                    <Form onSubmit={handelSubmit}>
+                    <Form id='post-form-main' onSubmit={handelSubmit}>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                             <Form.Label className="user-post-title">Talk Free</Form.Label>
                             <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control textarea-post" />
@@ -90,6 +93,7 @@ function Post(props) {
                                 </div>
                                 <Button id="post-btn" type="submit">Post</Button>
                             </FormGroup>
+                            
                         </Form.Group>
                     </Form>
                 </Container>
@@ -101,7 +105,7 @@ function Post(props) {
 
         if (user === context.user.user_name) {
             return <div>
-                <Button id="delete-btn" variant="danger" onClick={() => deletes(id)}>Delete</Button>
+                <div id="delete-btn" onClick={() => deletes(id)}>Delete</div>
                 <Accordion>
                     <Card>
                         <Card.Header>
@@ -140,8 +144,8 @@ function Post(props) {
                 </Accordion>
             </div>
         }
-
     }
+
     function renderChatLink(user, id, availability) {
         let date = new Date();
         let day = date.getDate();
@@ -149,8 +153,7 @@ function Post(props) {
         let years = date.getFullYear();
         let month = date.getMonth() + 1;
         let timeSplit = availability.split('-')[0].split('/');
-        timeSplit.push(availability.split('-')[1])
-        //30<=29
+        timeSplit.push(availability.split('-')[1]);
         console.log('time ====> ', timeSplit[0] >= years, timeSplit[1] >= month, timeSplit[2] >= day, timeSplit[3] >= hours);
         if (timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day) {
             if (context.user.role === 'Listener' || context.user.user_name === user) {
@@ -160,17 +163,17 @@ function Post(props) {
             if (context.user.role === 'Listener' || context.user.user_name === user) {
                 return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
             }
-
-
     }
+
     function renderPost() {
         let date = new Date();
         let day = date.getDate();
         let hours = date.getHours();
         let years = date.getFullYear();
         let month = date.getMonth() + 1;
+        let array = props.posts.posts.slice().reverse();
         if (toggle === 'All') {
-            return props.posts.posts.map((val, i) => {
+            return array.map((val, i) => {
                 return <div className="user-post" key={i}>
                     <Row>
                         <Col xs={6} sm={6} md={4} className="user-section">
@@ -191,7 +194,7 @@ function Post(props) {
             })
         }
         else {
-            return props.posts.posts.map((val, i) => {
+            return array.map((val, i) => {
                 let timeSplit = val.availability.split('-')[0].split('/');
                 timeSplit.push(val.availability.split('-')[1])
                 if (timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day) {
@@ -205,62 +208,58 @@ function Post(props) {
                             {renderChatLink(val.user_name, val._id, val.availability)}
                         </div>
                     </div>
-
                 } else if (timeSplit[2] == day && timeSplit[3] >= hours) {
                     return <div className="user-post" key={i}>
-                        <Row>
-                            <Col xs={6} sm={6} md={4}>
-
-                                <h1 className='head-post'>{val.view_as}</h1>
-                                <small>{val.date}</small>
-                            </Col>
-                            <Col xs={6} sm={6} md={8}>
-
-                                <p className='description'>{val.description}</p>
-                                <p hidden={true} >{val.availability}</p>
-                                {show(val.user_name, val._id, val.description)}
-                                <div>
-                                    {renderChatLink(val.user_name, val._id, val.availability)}
-                                </div>
-                            </Col>
-                        </Row>
+                        <h1 className='head-post'>{val.view_as}</h1>
+                        <small>{val.date}</small>
+                        <p className='description'>{val.description}</p>
+                        <p hidden={true} >{val.availability}</p>
+                        {show(val.user_name, val._id, val.description)}
+                        <div>
+                            {renderChatLink(val.user_name, val._id, val.availability)}
+                        </div>
                     </div>
                 }
-
             })
-
         }
-
     }
+
 
     return (
         <>
-            <Row>
-                <Col xs={6} sm={6} md={1}>
-                    <aside id="sidebar">
-                        <Sidebar />
-                    </aside>
-                </Col>
-                <Col xs={6} sm={6} md={11}>
-
-                    <div id='contain'>
-                        {renderForm()}
-                        <div id="toggel-btns">
-                            <Button className='toggles' onClick={() => setToggle('All')} >All Post</Button>
-                            <Button className='toggles' onClick={() => setToggle('Avaliable')} >Avaliable Post</Button>
-                        </div>
-                        <div className="user-posts">
-                            {renderPost()}
-                        </div>
-                    </div>
-                </Col>
-            </Row>
+        <IfRenderer condition={!props.loader.loader}>
+            <Then>
+            <div id='contain'>
+                {renderForm()}
+                <div id="toggel-btns">
+                    <Button className='toggles' onClick={() => setToggle('All')} >All Post</Button>
+                    <Button className='toggles' onClick={() => setToggle('Avaliable')} >Avaliable Post</Button>
+                </div>
+                <div className="user-posts">
+                    {renderPost()}
+               </div>
+               </div>
+            </Then>
+            <Else>
+            <Loader
+         type="Puff"
+         color="#00BFFF"
+         height={100}
+         width={100}
+         timeout={3000} //3 secs
+ 
+      />
+            </Else>
+        </IfRenderer>
+            
         </>
     )
 }
+
 const mapStateToProps = state => ({
     posts: state.posts,
-    fullRoom: state.chatSlice
+    fullRoom: state.chatSlice,
+    loader: state.loader
 });
-const mapDispatchToProps = { getPost, addPost, deletepost, updatepost };
+const mapDispatchToProps = { getPost, addPost, deletepost, updatepost ,toggleLoader};
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

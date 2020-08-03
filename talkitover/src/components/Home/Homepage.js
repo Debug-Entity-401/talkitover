@@ -25,6 +25,7 @@ function Homepage() {
   const fetchArticles = async () => {
     const getArticles = await axios.get(url + "articles", axiosConfig);
     const articlesArr = await getArticles.data;
+    console.log(articlesArr);
     setArticles(articlesArr);
   };
 
