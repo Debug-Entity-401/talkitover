@@ -19,9 +19,7 @@ class SavedArticle extends React.Component {
         let url = `https://talkitover-staging.herokuapp.com/user-articles/${this.props.id}`;
         axiosConfig['method'] = 'POST';
         const response = await fetch(url, axiosConfig);
-        let color = document.querySelector('.bookmark-icon').style.color;
-        color = 'rgb(111, 197, 186)';
-        console.log(color);
+        // document.querySelector('.bookmark-icon').style.color='rgb(111, 197, 186)';
         }
 
     deleteArticle = async (e) => {
@@ -46,7 +44,7 @@ class SavedArticle extends React.Component {
             return (
                 <Tooltip title="Remove Article">
                    <IconButton aria-label="add to favorites" >
-                      <BookmarkIcon style={{ color: '#b7b7b7'}} onClick={this.deleteArticle}/>
+                      <BookmarkIcon style={{ color: 'rgb(111, 197, 186)'}} onClick={this.deleteArticle}/>
                    </IconButton>
                </Tooltip>
             )

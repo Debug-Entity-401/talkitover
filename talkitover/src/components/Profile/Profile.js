@@ -100,12 +100,17 @@ const Profile = (props) => {
   };
   const onUpdate = async (event) => {
     event.preventDefault();
+    console.log('profile ===> ',props.profile);
+    if(!props.profile.profile.user_name) props.adding({ user_name: props.profile.results.user_name });
+    if(!props.profile.profile.email) props.adding({ email: props.profile.results.email });
+    if(!props.profile.profile.photo) props.adding({ photo: props.profile.results.photo });
+    // let obj= {};
     props.updateProfile(props.profile.results.id, props.profile.profile);
     props.fetchData();
     setShow(false);
   };
   const photoRender = () => {
-    if (props.profile.results.photo == "") {
+    if (props.profile.results.photo === "") {
       return (
         <Image
           src="https://www.beaconmanagement.com/wp-content/uploads/2018/04/no-person.jpg"
@@ -147,13 +152,16 @@ const Profile = (props) => {
                   <b>Email</b> : {props.profile.results.email}
                 </h5>
               </li>
+
               <Divider variant="middle" component="li" />
+              <br/>
               <li>
                 <h5>
                   <b>Country</b> : {props.profile.results.country}
                 </h5>
               </li>
               <Divider variant="middle" component="li" />
+              <br/>
 
               <li>
                 <h5>
@@ -161,12 +169,14 @@ const Profile = (props) => {
                 </h5>
               </li>
               <Divider variant="middle" component="li" />
+              <br/>
 
               <li>
                 <h5>
                   <b>Status</b> : {props.profile.results.status}
                 </h5>
               </li>
+
             </ul>
           </div>
           <div className="edit-container">
@@ -188,7 +198,7 @@ const Profile = (props) => {
                   <TextField className={clsx(classes.margin, classes.textField)}
                     id="standard-textarea"
                     label="Username"
-                    defaultValue={props.profile.results.username}
+                    value={props.profile.results.username}
                     placeholder="username" name='user_name' onChange={onChangeHandler}
                     multiline
                   />
@@ -223,7 +233,7 @@ const Profile = (props) => {
                     className={`${classes.input} uploadImage`} name="photo"
                     onChange={onChangeHandler}
                     // defaultValue={props.profile.results.photo}
-                    required={true}
+                    
                     multiple
                     type="file"
                   />
