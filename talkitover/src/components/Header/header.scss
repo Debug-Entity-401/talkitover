@@ -131,10 +131,45 @@ header
     cursor: pointer;
     left: 88%;
 }
-  
+.facebook-btns {
+    text-align: center;
+    margin-top: 5%;
+    position: relative;
+    left: 3%;
+}
+.mr-md-3{
+     margin-right:none!important
+}
 .facebook-btn i
 {
     font-size: 43px;
+}
+
+.fa-auth
+{
+     .kep-login-facebook {
+        font-family: Helvetica,sans-serif;
+        font-weight: 700;
+        -webkit-font-smoothing: antialiased;
+        color: #fff;
+        position: relative;
+        left: 0%;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 0px !important;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: background-color .3s,border-color .3s;
+        border: none !important;
+        padding: none !important;
+        height: 40px;
+        bottom: 66px;
+        z-index: 1;
+        margin: 0 auto;
+        background-repeat: no-repeat;
+        opacity: 0;
+    }
+
 }
 .facebook-btn
 {

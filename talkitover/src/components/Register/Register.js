@@ -189,9 +189,11 @@ function Register(props) {
                     multiple
                     type="file"
                   />
-                  <label htmlFor="uploadImage">
+                  <label htmlFor="uploadImage" id="profile-label">
+                  Profile Picture
+                  <br/>
                     <Button variant="contained" style={{ color: '#fff' }} color="primary" component="span">
-                      Upload
+                      Upload 
         </Button>
                   </label>
                   <br />
@@ -223,15 +225,19 @@ function Register(props) {
                   <div className="sign-section">
                     <Button
                       type="submit"
-                      className="signup-btn"
-                      variant="success" style={{backgroundColor:'green'}}
+                      className="btn-primary"
+                      variant="success" style={{backgroundColor:'#0062cc'}}
                     >
                       Sign Up
                     </Button>
                     <div className="log-fb">
-                      or 
+                      <span>or Continue with:</span>
+              
                       <br />
-                    <Oauth />
+                       <div className="facebook-btn">
+                       <Oauth />
+<img src="https://img.icons8.com/color/48/000000/facebook-new.png"/>
+                                            </div>
                        </div>
                   </div>
                 </div>
