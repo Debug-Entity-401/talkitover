@@ -8,9 +8,9 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './styles/sidebar.scss';
 import { getPost} from '../../store/posts';
 import axios from 'axios';
-import axiosConfig from '../axios-config';
+// import axiosConfig from '../axios-config';
 import { LoginContext } from '../auth/context';
-import Article from '../Articles/Articles.js';
+import cookie from 'react-cookies';
 
 function Sidebar(props) {
     
@@ -18,13 +18,26 @@ function Sidebar(props) {
     useEffect(() => {
         props.getPost();
     }, [props.posts.counter]);
+
     const [userArticles, setUserArticles] = useState([]);
+
     let url = "https://talkitover-staging.herokuapp.com/";
+    const axiosConfig = {
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'cookies': `${cookie.load('remember token')}`,
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+      };
 
     const fetchUserArticles = async () => {
         const getUserArticles = await axios.get(url + "user-articles", axiosConfig);
         const articlesArr = await getUserArticles.data;
-        setUserArticles(articlesArr.articles);
+        await setUserArticles(articlesArr.articles);
       };
     
       const getAllUserArticles = () => {
@@ -52,7 +65,7 @@ function Sidebar(props) {
                 <Tooltip title="Homepage">
                     <div className="icon">
                         <Link to='/home'>
-                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <i className="fa fa-home" aria-hidden="true"></i>
                         </Link>
                     </div>
                 </Tooltip>
@@ -93,7 +106,7 @@ function Sidebar(props) {
                         <div className="icon">
                         <Badge badgeContent={props.posts.counter} color="primary">
                             <Link className="sidebar-link" to='/posts'>
-                                <i class="fa fa-comments" aria-hidden="true"></i>
+                                <i className="fa fa-comments" aria-hidden="true"></i>
                             </Link>
                             </Badge>
                         </div>
@@ -135,7 +148,7 @@ function Sidebar(props) {
                         <Tooltip title="Log Out">
                             <div className="icon" onClick={context.logout}>
                                 <Link to='/'>
-                                    <i class="fa fa-power-off" aria-hidden="true"></i>
+                                    <i className="fa fa-power-off" aria-hidden="true"></i>
                                 </Link>
                             </div>
                             </Tooltip>

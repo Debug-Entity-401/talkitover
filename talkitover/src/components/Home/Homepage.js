@@ -24,27 +24,34 @@ function Homepage() {
   const username = contextValue.user.user_name;
   let url = "https://talkitover-staging.herokuapp.com/";
   
-  const fetchArticles = async () => {
-    const getArticles = await axios.get(`${url}articles`, axiosConfig);
-    const articlesArr = await getArticles.data;
-    console.log(articlesArr);
-    setArticles(articlesArr);
-  };
-
+  // if (username) {
+    const fetchArticles = async () => {
+      try{
+        const getArticles = await axios.get(`${url}articles`, axiosConfig);
+        const articlesArr = await getArticles.data;
+        setArticles(articlesArr);
+      }
+      catch(e){
+        console.error();
+      }
+    };
+  // }
   const getAllArticles = () => {
-    fetchArticles();
+    // setTimeout(()=>{
+      if(username) fetchArticles();
+    // }, 1000)
   }
   //fetch the articles on every re-render
   useEffect(() => {
     getAllArticles();
-  }, [])
+  }, [username])
+
 
 //control rendering according to whether the user is signed-in or not
 ////for signed-in users
 if (username && articles.length > 0) {  
   return (
     <>
-
     <div id="home">
     <Row>
     <Col xs={6} sm={6} md={1}>
@@ -60,7 +67,6 @@ if (username && articles.length > 0) {
 </svg>
 </div>
 <main id="home-body">
-      <h1 id="home-welcome">Welcome To Homepage, {username}.</h1>
       <h2 id="articles-heading">Selected Articles:</h2>
       <hr id="gradiant-trans-hr"/>
       <div className="articles">

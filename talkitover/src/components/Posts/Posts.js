@@ -12,9 +12,7 @@ import { Checkbox } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Link } from 'react-router-dom';
-import { IfRenderer, Then, Else } from '../Home/If/index';
 import { toggleLoader } from '../../store/loader';
-import Loader from 'react-loader-spinner';
 import Show from '../auth/show';
 
 function Post(props) {
@@ -24,7 +22,7 @@ function Post(props) {
     const context = useContext(LoginContext);
     useEffect(() => {
         props.getPost();
-    }, []);
+    });
     const deletes = async (id) => {
         toggleLoader();
 
@@ -171,7 +169,7 @@ function Post(props) {
             if (context.user.role === 'Listener' || context.user.user_name === user) {
                 return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
             }
-        } else if (timeSplit[2] == day && timeSplit[3] >= hours)
+        } else if (timeSplit[2] === day && timeSplit[3] >= hours)
             if (context.user.role === 'Listener' || context.user.user_name === user) {
                 return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
             }
@@ -259,7 +257,7 @@ function Post(props) {
                             </div>
                         </Toast.Body>
                     </Toast>
-                } else if (timeSplit[2] == day && timeSplit[3] >= hours) {
+                } else if (timeSplit[2] === day && timeSplit[3] >= hours) {
                     return <Toast key={i} className="post-box">
                         <Toast.Header closeButton={false}>
 
