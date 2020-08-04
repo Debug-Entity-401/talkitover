@@ -85,7 +85,6 @@ function Chat(props) {
 
   const onTextChange = e => {
     setState({ ...state, [e.target.name]: e.target.value, image: props.profile.results.photo });
-    console.log('state',state);
 
   }
 
@@ -94,7 +93,6 @@ function Chat(props) {
     const { message } = state;
     socket.emit('send-chat-message', { room: room, message: state });
     props.add({ name: 'You', message: state });
-    console.log('heyyyyyyyyyyy', state)
     e.target.message.value = '';
 
 

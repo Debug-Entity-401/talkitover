@@ -121,8 +121,6 @@ function Register(props) {
     e.preventDefault();
 
     await props.post(props.signUp);
-    console.log('asdasdasd',props.signUp);
-    console.log('asdasdasdasdasdsad', props.signUp.loggedIn);
   };
 
   /////////////////////////////////////////

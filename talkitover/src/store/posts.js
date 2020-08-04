@@ -37,25 +37,20 @@ let config = {
 export const getPost = ( ) => async dispatch =>{
    let response = axios.get(`${API}/talkitoverposts`,config);
     let posts = await response;
-    console.log('aaaaaaaaaaaaaaaa',posts.data.length);
     dispatch(renderpost(posts.data));
 }
 export const addPost = (obj ) => async dispatch =>{
     let response = axios.post(`${API}/talkitoverposts`,obj,config);
-     let posts = await response;
+     await response;
     //  dispatch(renderpost(posts.data));
  }
  export const deletepost=(id)=>async dispatch=>{
     let response = axios.delete(`${API}/talkitoverposts/${id}`,config);
-    console.log('respnse=>>>>>>.',response);
-    let posts=await response;
-    console.log('response posts ===> ',posts);
+   await response;
  }
 
  export const updatepost=(obj,id)=> async dispatch=>{
 let response=axios.put(`${API}/talkitoverposts/${id}`,obj,config);
-console.log('response=>>>>>>',response);
-let posts=await response;
-console.log('response update posts=>>>>>',posts);
+await response;
  }
 export default posts.reducer;
