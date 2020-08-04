@@ -50,7 +50,6 @@ class Header extends React.Component {
         e.preventDefault();
         document.getElementById("login-form").reset();
         await this.context.login(this.state.username, this.state.password);
-        console.log('>>>>>>>>>>>>>>>>>>>>', this.state.showAlert);
         if (this.context.loggedIn === 'invalid') this.setState({ showAlert: !this.state.showAlert });
         else if (this.context.loggedIn) 
         {

@@ -100,7 +100,6 @@ const Profile = (props) => {
   };
   const onUpdate = async (event) => {
     event.preventDefault();
-    console.log('profile ===> ',props.profile);
     if(!props.profile.profile.user_name) props.adding({ user_name: props.profile.results.user_name });
     if(!props.profile.profile.email) props.adding({ email: props.profile.results.email });
     if(!props.profile.profile.photo) props.adding({ photo: props.profile.results.photo });
