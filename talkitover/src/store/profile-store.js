@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import cookie from 'react-cookies';
 
 let url = "https://talkitover-staging.herokuapp.com/profile";
 
@@ -8,10 +9,10 @@ const profileSlice = createSlice({
     initialState: {
         results: {},
         profile: {
-            username: "",
-            email: "",
-            photo: "",
-            country: "",
+          user_name:'',
+          photo:'',
+          email:'',
+          country:'' 
         },
     },
     reducers: {
@@ -19,6 +20,8 @@ const profileSlice = createSlice({
             state.results = action.payload;
         },
         add(state, action) {
+            console.log('stateeeeeeeeeeeee',state);
+            console.log('action',action.payload);
             Object.keys(action.payload).forEach((key) => {
                 state.profile[key] = action.payload[key];
             });
@@ -29,14 +32,16 @@ const profileSlice = createSlice({
 export const {get, add: adding } = profileSlice.actions;
 
 export const fetchData = () => async(dispatch) => {
+    console.log('alaaaaaaaa');
     const axiosConfig = {
         mode: "cors",
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
             "Content-Type": "application/json",
-            cookies: `${document.cookie.split("=")[1]}`,
-        },
+            'cookies': `${cookie.load('remember token')}`
+
+},
         redirect: "follow",
         referrerPolicy: "no-referrer",
     };
@@ -44,7 +49,7 @@ export const fetchData = () => async(dispatch) => {
         .get(`${url}`, axiosConfig)
         .then((data) => {
             dispatch(get(data.data));
-            console.log(data.data);
+            console.log('asdasdasdsadasdas',data.data);
         })
         .catch((err) => {
             /* not hit since no 401 */

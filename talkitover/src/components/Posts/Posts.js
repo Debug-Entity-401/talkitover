@@ -1,190 +1,326 @@
-import React, { useEffect, useContext, useState } from "react";
-import DateTimeRangePicker from "@wojtekmaj/react-datetimerange-picker";
+
+import React, { useEffect, useContext, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { LoginContext } from "../auth/context";
-import { getPost, addPost, deletepost, updatepost } from "../../store/posts";
-import { Form, Button, Card, Accordion, Container } from "react-bootstrap";
-import "./posts.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { LoginContext } from '../auth/context';
+import { getPost, addPost, deletepost, updatepost } from '../../store/posts';
+import { Form, Button, Row, Col, Card, Accordion, Container, Toast } from 'react-bootstrap';
+import './posts.scss';
+import Sidebar from '../Sidebar/Sidebar';
+import DateTimePicker from 'react-datetime-picker';
+import { Checkbox } from '@material-ui/core';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Link } from 'react-router-dom';
+import { IfRenderer, Then, Else } from '../Home/If/index';
+import { toggleLoader } from '../../store/loader';
+import Loader from 'react-loader-spinner';
+import Show from '../auth/show';
 
 function Post(props) {
-  const [value, onChange] = useState([new Date(), new Date()]);
-  const context = useContext(LoginContext);
-  useEffect(() => {
-    props.getPost();
-  }, []);
-  
-  const deletes = async (id) => {
-    await props.deletepost(id);
-    await props.getPost();
-  };
+    const [toggle, setToggle] = useState('All');
+    const [value, onChange] = useState(new Date());
 
-  const handelSubmit = (e) => {
-    e.preventDefault();
-    let user = e.target.user.value;
-    console.log("selector ===> ", e.target.user.value);
-    let description = document.getElementById("main").value;
-    let obj = {
-      availability: value[1].toString(),
-      description,
-      view_as: user,
-      user_name: context.user.user_name,
-    };
-    console.log("obj in post ===> ", obj);
-    props.addPost(obj);
-    props.getPost();
-  };
+    const context = useContext(LoginContext);
+    useEffect(() => {
+        props.getPost();
+    }, []);
+    const deletes = async (id) => {
+        toggleLoader();
 
-  const handelSubmited = async (e) => {
-    e.preventDefault();
-    let user = e.target.user.value;
-    console.log("selector ===> ", e.target.user.value);
-    let description = document.getElementById("mains").value;
-    let id = e.target.id.value;
-    let obj = {
-      availability: value[1].toString(),
-      description,
-      view_as: user,
-      user_name: context.user.user_name,
-    };
-    console.log("obj in post ===> ", obj);
-    await props.updatepost(obj, id);
-    await props.getPost();
-  };
-  function show(user, id, description) {
-    if (user === context.user.user_name) {
-      return (
-        <div>
-          <div onClick={() => deletes(id)}>Delete</div>
-          <Accordion>
-            <Card>
-              <Card.Header>
-                <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                  Update
-                </Accordion.Toggle>
-              </Card.Header>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body>
-                  <Form id={id} onSubmit={handelSubmited}>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                      <Form.Label>User POST</Form.Label>
-                      <Form.Check
-                        className="user"
-                        // onClick={handelClick}
-                        value={context.user.user_name}
-                        type="radio"
-                        name="user"
-                        label={context.user.user_name}
-                      />
-                      <Form.Check
-                        className="user"
-                        // onClick={handelClick}
-                        value="Anonymous"
-                        type="radio"
-                        name="user"
-                        label="Anonymous"
-                      />
-                      <div>
-                        <Form.Control type="hidden" value={id} name="id" />
-                        <DateTimeRangePicker
-                          onChange={onChange}
-                          value={value}
-                        />
-                      </div>
-                      <textarea
-                        name="description"
-                        rows="3"
-                        id="mains"
-                        defaultValue={description}
-                      />
-                      <Button type="submit">Save Change</Button>
-                    </Form.Group>
-                  </Form>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-          </Accordion>
-        </div>
-      );
+        await props.deletepost(id);
+        await props.getPost();
+        // toggleLoader();
     }
-  }
-  function renderChatLink(user) {
-    if (context.user.role === "Listener" || context.user.user_name === user) {
-      return (
-        <Link
-          onClick={(e) => (!context.user.user_name ? e.preventDefault() : null)}
-          to={`/chat?name=${context.user.user_name}&room=chat`}
-        >
-          chat
-        </Link>
-      );
-    }
-  }
-  function renderUserName(user) {
-    console.log(user);
-    if (user === "Anonymous") {
-      return <h1>{user}</h1>;
-    } else {
-      return <Link to={`/otherProfile?name=${user}`}>{user}</Link>;
-    }
-  }
-  function renderPost() {
-    return props.posts.posts.map((val, i) => {
-      console.log(props.posts.posts);
-      return (
-        <div className="user-post" key={i}>
-          {renderUserName(val.view_as)}
-          <p>{val.description}</p>
-          <p>{val.availability}</p>
-          <span>{val.date}</span>
 
-          {/* to={`/chat?name=${name}&room=${room}`} */}
 
-          {show(val.user_name, val._id, val.description)}
-          <div>{renderChatLink(val.user_name)}</div>
-        </div>
-      );
-    });
-  }
-  return (
-    <>
-      <div>
-        <Container>
-          <Form onSubmit={handelSubmit}>
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label className="user-post-title">User POST</Form.Label>
-              <Form.Check
-                className="user"
-                // onClick={handelClick}
-                value={context.user.user_name}
-                type="radio"
-                name="user"
-                label={context.user.user_name}
-              />
-              <Form.Check
-                className="user"
-                // onClick={handelClick}
-                value="Anonymous"
-                type="radio"
-                name="user"
-                label="Anonymous"
-              />
-              <div>
-                <DateTimeRangePicker onChange={onChange} value={value} />
-              </div>
-              <Form.Control as="textarea" rows="3" id="main" />
-              <Button type="submit">Post</Button>
-            </Form.Group>
-          </Form>
-        </Container>
-      </div>
-      <div className="user-posts">{renderPost()}</div>
-    </>
-  );
+    //for posting posts
+    const handelSubmit = async e => {
+        e.preventDefault();
+        toggleLoader();
+        let user;
+        e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
+        let description = document.getElementById('mains').value;
+        let date = value;
+        let day = date.getDate()
+        let hours = date.getHours()
+        let years = date.getFullYear()
+        let month = date.getMonth() + 1;
+        console.log(years, month, day, hours)
+        let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
+        document.getElementById('post-form-main').reset();
+        await props.addPost(obj);
+        await props.getPost();
+
+        toggleLoader();
+    }
+
+    //for post update
+    const handelSubmited = async (e) => {
+        e.preventDefault();
+        toggleLoader();
+        let user;
+        e.target.user.checked ? user = 'Anonymous' : user = context.user.user_name;
+        let description = e.target.description.value;
+        let id = e.target.id.value;
+        let date = value;
+        let day = date.getDate()
+        let hours = date.getHours()
+        let years = date.getFullYear()
+        let month = date.getMonth() + 1;
+        console.log(years, month, day, hours)
+        let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
+        await props.updatepost(obj, id);
+        await props.getPost();
+        toggleLoader();
+    }
+
+    function renderForm() {
+        if (context.user.role === 'ventor') {
+            return <div>
+                <div id='post-form'>
+                    <Container>
+
+                        <Form id='post-form-main' onSubmit={handelSubmit}>
+                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                                <div className="Messge-title">
+                                    <Form.Label className="user-post-title">Talk Free</Form.Label>
+                                </div>
+                                <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control textarea-post" />
+                                <FormGroup row>
+                                    <div id='form-footer'>
+                                        <FormControlLabel
+                                            control={<Checkbox name="user" />}
+                                            label="Post Anonymously"
+                                        />
+                                        <span>I am avaliable until</span>
+                                        <DateTimePicker
+                                            onChange={onChange}
+                                            value={value}
+                                        />
+                                    </div>
+                                    <div className="Post-button">
+                                        <Button id="post-btn" type="submit">Post</Button>
+                                    </div>
+                                </FormGroup>
+
+                            </Form.Group>
+                        </Form>
+                    </Container>
+                </div>
+            </div>
+
+        }
+    }
+   
+
+    function show(user, id, description) {
+
+        if (user === context.user.user_name) {
+            
+            return <div>
+                <Accordion>
+                    <Card>
+                        <Card.Header>
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                Update
+                                </Accordion.Toggle>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey="0">
+                            <Card.Body>
+                                <Form id={id} onSubmit={handelSubmited}>
+                                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                                        <input hidden={true} id="id" value={id} />
+                                        <textarea name="description" rows="3" id="mains" placeholder="Talk Free" defaultValue={description} className="form-control textarea-post" />
+                                        <FormGroup row>
+                                            <div id='form-footer'>
+                                                <FormControlLabel
+                                                    control={<Checkbox name="user" />}
+                                                    label="Post Anonymously"
+                                                />
+                                                <span>I am avaliable until</span>
+                                                <DateTimePicker
+                                                    onChange={onChange}
+                                                    value={value}
+                                                />
+                                            </div>
+                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                                <Button data-toggle="collapse" type="submit">Save Change</Button>
+                                            </Accordion.Toggle>
+                                        </FormGroup>
+                                    </Form.Group>
+                                </Form>
+                            </Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
+                </Accordion>
+            </div>
+        }
+    }
+
+    function renderChatLink(user, id, availability) {
+        let date = new Date();
+        let day = date.getDate();
+        let hours = date.getHours();
+        let years = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let timeSplit = availability.split('-')[0].split('/');
+        timeSplit.push(availability.split('-')[1]);
+        console.log('time ====> ', timeSplit[0] >= years, timeSplit[1] >= month, timeSplit[2] >= day, timeSplit[3] >= hours);
+        if (timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day) {
+            if (context.user.role === 'Listener' || context.user.user_name === user) {
+                return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
+            }
+        } else if (timeSplit[2] == day && timeSplit[3] >= hours)
+            if (context.user.role === 'Listener' || context.user.user_name === user) {
+                return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
+            }
+    }
+    function renderUserName(user) {
+        console.log(user);
+        if (user === "Anonymous") {
+            return <h1>{user}</h1>;
+        } else {
+            return <Link to={`/otherProfile?name=${user}`}>{user}</Link>;
+        }
+    }
+    function renderPost() {
+        let date = new Date();
+        let day = date.getDate();
+        let hours = date.getHours();
+        let years = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let array = props.posts.posts.slice().reverse();
+        if (toggle === 'All') {
+            return array.map((val, i) => {
+
+                return <Toast key={i} className="post-box">
+                    <Toast.Header closeButton={false}>
+
+                        <div className="username-time">
+                            <h1 className='head-post'>{renderUserName(val.view_as)}</h1>
+                            <small>{val.date}</small>
+                        </div>
+                        <div className='delete-btn'>
+                            <Show condition={val.user_name === context.user.user_name}>
+                                <Button variant="danger" id="delete-btn" onClick={() => deletes(val._id)}><i class="fa fa-trash" aria-hidden="true"></i></Button>
+                            </Show>
+                        </div>
+                    </Toast.Header>
+
+                    <Toast.Body>
+                        <p className='description'>{val.description}</p>
+                        {show(val.user_name, val._id, val.description)}
+                        <div>
+                            {renderChatLink(val.user_name, val._id, val.availability)}
+                        </div>
+                        <div className="time">
+                        </div>
+                    </Toast.Body>
+                </Toast>
+                // <div className="user-post" key={i}>
+
+                //     <small>{val.date}</small>
+                //     <p className='description'>{val.description}</p>
+                //     <p hidden={true} >{val.availability}</p>
+                //     {show(val.user_name, val._id, val.description)}
+                //     <div>
+                //         {renderChatLink(val.user_name, val._id, val.availability)}
+                //     </div>
+                // </div>
+            })
+        }
+        else {
+            return array.map((val, i) => {
+                let timeSplit = val.availability.split('-')[0].split('/');
+                timeSplit.push(val.availability.split('-')[1])
+                if (timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day) {
+                    return <Toast key={i} className="post-box">
+                        <Toast.Header closeButton={false}>
+
+                            <div className="username-time">
+                                <h1 className='head-post'>{renderUserName(val.view_as)}</h1>
+                                <small>{val.date}</small>
+                            </div>
+                            <div className='delete-btn'>
+                                <Show condition={val.user_name === context.user.user_name}>
+                                    <Button variant="danger" id="delete-btn" onClick={() => deletes(val._id)}><i class="fa fa-trash" aria-hidden="true"></i></Button>
+                                </Show>
+                            </div>
+                        </Toast.Header>
+
+                        <Toast.Body>
+                            <p className='description'>{val.description}</p>
+                            {show(val.user_name, val._id, val.description)}
+                            <div>
+                                {renderChatLink(val.user_name, val._id, val.availability)}
+                            </div>
+                            <div className="time">
+                            </div>
+                        </Toast.Body>
+                    </Toast>
+                } else if (timeSplit[2] == day && timeSplit[3] >= hours) {
+                    return <Toast key={i} className="post-box">
+                        <Toast.Header closeButton={false}>
+
+                            <div className="username-time">
+                                <h1 className='head-post'>{renderUserName(val.view_as)}</h1>
+                                <small>{val.date}</small>
+                            </div>
+                            <div className='delete-btn'>
+                                <Show condition={val.user_name === context.user.user_name}>
+                                    <Button variant="danger" id="delete-btn" onClick={() => deletes(val._id)}><i class="fa fa-trash" aria-hidden="true"></i></Button>
+                                </Show>
+                            </div>
+                        </Toast.Header>
+
+                        <Toast.Body>
+                            <p className='description'>{val.description}</p>
+                            {show(val.user_name, val._id, val.description)}
+                            <div>
+                                {renderChatLink(val.user_name, val._id, val.availability)}
+                            </div>
+                            <div className="time">
+                            </div>
+                        </Toast.Body>
+                    </Toast>
+                }
+            })
+        }
+    }
+
+
+    return (
+        <>
+            <Row>
+                <Col xs={6} sm={6} md={1}>
+
+                    <Sidebar />
+                </Col>
+                <Col xs={6} sm={6} md={11}>
+
+                    <div id='contain'>
+                        {renderForm()}
+
+                        <div className="user-posts">
+                            <div id="toggel-btns">
+                                <Button className='toggles' onClick={() => setToggle('All')} >All Post</Button>
+                                <Button className='toggles' onClick={() => setToggle('Avaliable')} >Avaliable Post</Button>
+                            </div>
+                            {renderPost()}
+                        </div>
+                    </div>
+                </Col>
+
+            </Row>
+        </>
+    )
 }
-const mapStateToProps = (state) => ({
-  posts: state.posts,
+
+const mapStateToProps = state => ({
+    posts: state.posts,
+    fullRoom: state.chatSlice,
+    loader: state.loader
 });
-const mapDispatchToProps = { getPost, addPost, deletepost, updatepost };
+const mapDispatchToProps = { getPost, addPost, deletepost, updatepost, toggleLoader };
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

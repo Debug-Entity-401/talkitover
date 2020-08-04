@@ -1,18 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const chatSlice = createSlice({
-
     name: 'chat',
     initialState: {
         messages: [],
-        room: ''
+        room: '',
+        isFull: false,
+        image:'',
     },
     reducers: {
         add(state, action) {
             state.messages.push(action.payload);
+        },
+        fullRoom(state, action) {
+            state.isFull = action.payload;
+            console.log('action ', state.isFull);
         }
     }
 });
 
-export const { add } = chatSlice.actions;
+export const { add, fullRoom } = chatSlice.actions;
 export default chatSlice.reducer;

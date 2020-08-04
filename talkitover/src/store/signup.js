@@ -90,7 +90,7 @@ export const post = (obj) => async dispatch => {
         }
         const response = await axios.post(`${API}/signup`, obj.user, config);
         let token = await response.data;
-        dispatch(validateToken(token));
+         await dispatch(validateToken(token));
     } catch (err) {
         dispatch(userExist(false));
         console.log('error ===>', err);

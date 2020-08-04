@@ -1,0 +1,173 @@
+@import '../../main-css//variables.scss';
+#card {
+    position: relative;
+    display: flex;
+    margin: 4% 1%;
+    flex-direction: column;
+    height: 400px;
+    padding: 2%;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: .25rem;
+}
+body::-webkit-scrollbar { 
+  display: none; 
+  overflow:none;
+}
+#outlined-multiline-static
+{
+    width: 82%;
+}
+.clearboth
+{
+  clear: both;
+}
+.render-chat {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 400px;
+  bottom: 0;
+}
+.user-chat-box
+{
+bottom: 0px;  //if required overflow to scroll add below css
+ max-height:500px //whatever is required
+}
+.chat-input-box
+{
+    position: relative;
+    top: 35px;
+}
+#outlined-multiline-static {
+    width: 74%;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    top: 4px;
+    margin: 0;
+}
+.makeStyles-small-2 {
+  width: 80px;
+  height: 80px;
+  float: left;
+}
+.username {
+  display: block;
+  font-size: 11px;
+  text-align: center;
+}
+.chat-message h3 span {
+  font-size: 20px;
+}
+.chat-message {
+  margin-left: 1%;
+  width: 90%;
+}
+.containerw
+{
+  display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+}
+
+
+.chat-btns
+{
+    display: inline-block;
+}
+.chat-box
+{
+  height: 100px;
+ 
+  width: 100%;
+  float: left;
+  position: relative;
+  margin-left: -5px;
+}
+.containers {
+  border-radius: 14px 55px 55px 14px !important;
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 10px 0;
+  width: 50%;
+}
+.containers-right {
+  float: right;
+  border-radius: 55px 14px 14px 55px !important;
+  background-color: #5ba497;
+  padding: 17px;
+  height: 100px;
+  margin: 10px 3%;
+  width: 50%;
+}
+  .chat-input-box {
+    position: relative;
+    /* top: 35px; */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+#You
+{
+  display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+  
+  .darker {
+    border-color: #ccc;
+    background-color: #ddd;
+  }
+  
+  .containers::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+
+  
+  .containers img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+  .containers-right img
+  {
+    float: right;
+    margin-right:0;
+  }
+  .time-right {
+    float: right;
+    color: #aaa;
+    position: relative;
+    top: 58px;
+    left: 35px;
+}
+
+  
+  .time-left {
+    float: right;
+    color: #aaa;
+    position: relative;
+    bottom: 16px;
+    right: 18px;
+  }
+.chat-btns 
+{
+    ul
+    {
+        padding: 0;
+        list-style: none;
+    }
+    ul li
+    {
+        padding: 15px;
+        display: inline-block;
+    }
+
+}
+

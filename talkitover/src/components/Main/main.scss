@@ -1,13 +1,14 @@
 @import "../../main-css/variables.scss";
 
 .website-introduction h1 {
-    width: 70%;
+    width: 65%;
     font-size: 60px;
     text-transform: capitalize;
     font-weight: 700;
     margin-bottom: 27px;
     line-height: 75px;
-    font-family: 'Bebas Neue', cursive;}
+    font-family: 'Bebas Neue', cursive;
+}
 .website-introduction span {
   color: $color2;
 }
@@ -70,6 +71,7 @@
     box-shadow: 0 0 0 12px #91b6d2;
     margin-bottom: 50px;
     margin: 0 auto;
+    box-shadow: -1px 21px 17px -6px rgba(0,0,0,0.75);
 }
 .service-item {
     width: 6.4em;
@@ -78,6 +80,7 @@
     right: 2px;
     bottom: 0.3px;
     border-radius: 50%;
+
     border: 10px solid #005495;
 }
 .service-text

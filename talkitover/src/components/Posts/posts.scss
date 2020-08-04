@@ -1,11 +1,239 @@
 .user-posts
 {
-    border:1px solid #e3e3e3;
-    margin:0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: 100px;
+    align-items: center;
 }
-.user-post
+.toast
 {
-    border: 1px solid #e3e3e3;
-    padding: 5% 1%;
-    margin-bottom: 3%;
+    max-width: none !important;
 }
+.post-box
+{
+    width: 80% !important;
+}
+.head-post
+{
+    width: 100%;
+}
+#mains
+{
+        border-radius: 20px;
+      resize: none;
+}
+#post-form
+{
+    margin: 5%;
+    background-color: #6fc5ba;
+    border: 1px solid #6fc5ba;
+    height: 550px;
+    border-radius: 30px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 59%, 36% 59%, 21% 76%, 20% 58%, 0 57%);
+}
+.Post-button {
+    float: right;
+    width: 25%;
+    text-align: right;
+}
+
+
+.MuiTypography-root 
+{
+    color: black;
+}
+.react-datetime-picker__wrapper {
+   
+    border: thin solid #000 !important;
+    border-radius: 12px;
+    padding: 3px;
+}
+#form-footer 
+{
+span
+{
+    color: black;
+    padding-right:20px;
+}
+}
+.Messge-title label
+{
+    font-size: 40px;
+    line-height: 70px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+#post-form label
+{
+    text-align: center;
+}
+.Messge-title
+{
+    text-align: center;
+}
+#toggel-btns
+{
+    text-align: center;
+    margin-bottom: 5%;
+}
+.toggles 
+{
+    margin: 5px;
+}
+.post-form
+{
+    border: 1px solid;
+    margin: 6%;
+}
+.toast-header
+{
+    justify-content: space-between;
+}
+.delete-btn
+{
+    margin-top: 2%;
+}
+// .user-posts
+// {
+//     margin:0 auto;
+// }
+// .user-post {
+//     border: 1px solid #e3e3e3;
+//     padding: 1% 0% 2% 0%;
+//     margin-bottom: 3%;
+//     background: linear-gradient(90deg, #50a3b9 33%, #ffff 30%);
+// }
+
+// #datetime-local-label{
+//     display: none;
+// }
+// .post-user
+// {
+//     background-color: #50a3b9;
+// }
+// #post-form{
+//     border: gray 1px solid;
+//     border-bottom: none;
+// }
+// // .form-label {
+// //     color: #000000;
+// //     background-color: gray;
+// //     width: 100%;
+// //     padding: 0;
+// //     margin: 0;
+// //     font-size: 5rem;
+// // }
+
+// .form-group {
+//     /* margin-bottom: 1rem; */
+//     text-align: center;
+//     display: flex;
+//     flex-direction: column;
+//     padding-bottom: 3%;
+//     margin: 0;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// #contain{
+//    width: 80%;
+//    width: 80%;
+//    padding: 0;
+//    margin: 0 auto;
+//    margin-top: 2%;
+// }
+// .container{
+//     padding: 0;
+// }
+
+// .textarea-post{
+    
+//     margin: 0;
+//     min-height: 150px;
+//     border-radius: 0;
+//     border: none;
+//     width: 100%;
+//     margin: 0 auto;
+//     padding-left: 1%;
+//     box-shadow: none;
+//     margin-top: 0;
+// }
+// textarea.textarea-post{
+//     margin-top: 0;
+// }
+// // #delete-btn{
+// //     color: white;
+// //     background-color: #417bff;
+// //     border-radius: 5px;
+// //     text-align: center;
+// //     padding: 1% 0;
+// //     width: 10%;
+// // }
+// #delete-btn:hover{
+//     cursor: pointer;
+// }
+// .MuiFormGroup-root {
+//     display: flex;
+//     width: 90%;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+//     flex-direction: column;
+// }
+
+// #post-btn{
+//     width: 10%;
+// }
+// .accordion>.card {
+//     overflow: hidden;
+//     width: 100%;
+//     text-align: center;
+// }
+// .btn-link{
+//     width: 100%;
+// }
+// .MuiFormControlLabel-root {
+//     cursor: pointer;
+//     display: inline-flex;
+//     align-items: center;
+//     margin-bottom: 0;
+//     margin-right: 66px;
+//     vertical-align: middle;
+//     -webkit-tap-highlight-color: transparent;
+// }
+// .accordion>.card>.card-header {
+//     border-radius: 0;
+//     margin-bottom: -1px;
+    
+// }
+// .head-post {
+//     text-align: center;
+//     color: #ffff;
+//     margin-bottom: 0;
+// }
+// small {
+    
+//     color: #9c9b9b;
+// }
+// .description{
+//     margin-top: 3%;
+// }
+
+// div.chat-btn {
+//     text-align: center;
+//     background-color: #06c10d;
+//     width: 20%;
+//     border-radius: 4px;
+//     margin-top: 7px;
+//     padding: 1% 0;
+// }
+// #toggel-btns {
+//     display: flex;
+//     margin-bottom: 3%;
+//     justify-content: center;
+// }
+// .toggles{
+//     margin-right: 10px;
+// }
