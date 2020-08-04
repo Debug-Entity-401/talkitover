@@ -52,7 +52,7 @@ function Sidebar(props) {
                 <Tooltip title="Homepage">
                     <div className="icon">
                         <Link to='/home'>
-                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <i className="fa fa-home" aria-hidden="true"></i>
                         </Link>
                     </div>
                 </Tooltip>
@@ -93,7 +93,7 @@ function Sidebar(props) {
                         <div className="icon">
                         <Badge badgeContent={props.posts.counter} color="primary">
                             <Link className="sidebar-link" to='/posts'>
-                                <i class="fa fa-comments" aria-hidden="true"></i>
+                                <i className="fa fa-comments" aria-hidden="true"></i>
                             </Link>
                             </Badge>
                         </div>
@@ -135,7 +135,7 @@ function Sidebar(props) {
                         <Tooltip title="Log Out">
                             <div className="icon" onClick={context.logout}>
                                 <Link to='/'>
-                                    <i class="fa fa-power-off" aria-hidden="true"></i>
+                                    <i className="fa fa-power-off" aria-hidden="true"></i>
                                 </Link>
                             </div>
                             </Tooltip>

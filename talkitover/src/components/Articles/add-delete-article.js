@@ -23,7 +23,7 @@ class SavedArticle extends React.Component {
         }
 
     deleteArticle = async (e) => {
-        let url = `http://localhost:3031/user-articles/${this.props.id}`;
+        let url = `https://talkitover-staging.herokuapp.com/user-articles/${this.props.id}`;
         axiosConfig['method'] = 'DELETE';
         const response = await fetch(url, axiosConfig);
         document.getElementById(this.state.id).remove();

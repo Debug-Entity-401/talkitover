@@ -21,7 +21,7 @@ const Reviews = (props) => {
     if (avg > 0) {
       return avg;
     } else {
-      return 'There is no Reviews to show';
+      return 0;
     }
   };
 
