@@ -44,7 +44,7 @@ const Main = () => {
     <h1 id="heading-4">You Don't Have To Struggle In <span>Silence</span> </h1>*/}
                             <h1 className="home-heading"></h1>
                             {
-                                document.addEventListener('DOMContentLoaded',function(event){
+                                /*document.addEventListener('DOMContentLoaded',function(event){
                                     // array with texts to type in typewriter
                                     var dataText = [ "You Don't Have To Struggle In Silence.", "Don't Hold It Back.", "TalkitOver."];
                                     
@@ -88,7 +88,7 @@ const Main = () => {
                                     // start the text animation
                                     StartTextAnimation(0);
                                   })
-                            }
+                                */ }
 
                             </div>
                         </Col>

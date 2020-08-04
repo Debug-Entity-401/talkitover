@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import axiosConfig from '../axios-config';
 import { LoginContext } from '../auth/context';
 import Article from '../Articles/Articles.js';
 import Sidebar from '../Sidebar/Sidebar';
@@ -8,7 +7,7 @@ import {Row,Col} from 'react-bootstrap';
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './styles/home.scss';
-
+import cookie from 'react-cookies';
 
 //Homepage functional component:
 /**
@@ -27,6 +26,17 @@ function Homepage() {
   // if (username) {
     const fetchArticles = async () => {
       try{
+        const axiosConfig = {
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            'cookies': `${cookie.load('remember token')}`,
+          },
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer',
+        };
         const getArticles = await axios.get(`${url}articles`, axiosConfig);
         const articlesArr = await getArticles.data;
         setArticles(articlesArr);
