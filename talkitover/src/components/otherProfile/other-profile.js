@@ -40,8 +40,9 @@ const OtherProfile = (props) => {
   const onChangeHandler = async (event, newValue) => {
     let user;
     if (event.target.name === 'reviewer_name') {
-      console.log('loook ==>',event.target.value);
       event.target.value ? user = 'Anonymous' : user = context.user.user_name;
+      console.log('loook ==>',user);
+
       props.adding({
         reviewer_name: user,
       });

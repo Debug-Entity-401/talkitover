@@ -41,14 +41,17 @@ export const fetchOtherProfile = (name) => async(dispatch) => {
         redirect: "follow",
         referrerPolicy: "no-referrer",
     };
-    return axios
-        .get(`${url}/otherprofile/${name}`, axiosConfig)
-        .then((data) => {
-            dispatch(get(data.data));
-        })
-        .catch((err) => {
-            /* not hit since no 401 */
-        });
+    console.log('naaaaaaaaaaaaaaaaaame===>',name);
+    if(name !== undefined){
+	return axios
+	.get(`${url}/otherprofile/${name}`, axiosConfig)
+	.then((data) => {
+	    dispatch(get(data.data));
+	})
+	.catch((err) => {
+	    /* not hit since no 401 */
+	});
+    }
 };
 
 export const addNewReview = (body, name) => async(dispatch) => {
