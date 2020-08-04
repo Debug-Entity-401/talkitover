@@ -25,7 +25,6 @@ class Login extends React.Component {
     }
 
     render() {
-        console.log("this.context: ", this.context)
         return (
             <>
                 <Show condition={this.context.loggedIn}>

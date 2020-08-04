@@ -36,7 +36,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-           
             .edit-btn {
                 width: 42%;
                 display: flex;
@@ -97,7 +96,8 @@
     margin-left: 16px;
     margin-right: 80px !important;
 }
-.primary-btn{
+
+.primary-btn {
     color: #fff;
     background-color: #105f9c;
     border-color: #105f9c;
@@ -126,9 +126,14 @@
 }
 .review-container {
     text-align: center;
-    width: 60%;
+    width: 80%;
     margin: 2% auto;
 }
-.MuiRating-iconFilled{
+
+.MuiRating-iconFilled {
     color: #6fc5ba;
+}
+
+.MuiBox-root {
+    text-align: center;
 }

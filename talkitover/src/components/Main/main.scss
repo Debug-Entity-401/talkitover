@@ -156,6 +156,7 @@ font-size: 15px;
 {
     box-shadow:  0 15px 10px $color2;
     transition: 0.8s ease;
+    cursor: default;
 }
 .icon
 {
@@ -170,6 +171,11 @@ font-size: 15px;
 {
     color: $color1;
     transition: 0.3s ease;
+    cursor: default;
+}
+.card-text:last-child {
+    margin-bottom: 0;
+    cursor: default;
 }
 .talkitover-intro-image
 {

@@ -1,7 +1,7 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Home from './components/Home/Homepage.js';
 import UserArticles from './components/Articles/user-articles'
-import { Route, Link,Redirect } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import Chat from './components/chat/chat';
 import Register from './components/Register/Register';
 import LoginAccess from './components/login-access';
@@ -17,9 +17,7 @@ import OtherProfile from './components/otherProfile/other-profile';
 import Testmonial from './components/Testominal/testomnial';
 // import Auth from './components/auth/auth';
 import LoginContext from "./components/auth/context.js";
-import Auth from './components/auth/auth.js';
 import Show from './components/auth/show.js';
-import Sidebar from './components/Sidebar/Sidebar.js';
 
 
 

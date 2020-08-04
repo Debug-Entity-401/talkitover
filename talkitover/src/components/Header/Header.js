@@ -50,7 +50,6 @@ class Header extends React.Component {
         e.preventDefault();
         document.getElementById("login-form").reset();
         await this.context.login(this.state.username, this.state.password);
-        console.log('>>>>>>>>>>>>>>>>>>>>', this.state.showAlert);
         if (this.context.loggedIn === 'invalid') this.setState({ showAlert: !this.state.showAlert });
         else if (this.context.loggedIn) 
         {
@@ -64,7 +63,7 @@ class Header extends React.Component {
 
 
     render() {
-        if (this.state.redirect) {
+        if ((this.state.redirect || this.props.signUp.loggedIn) && this.context.user.user_name) {
             return <Redirect to={this.state.redirect} />
           }
           

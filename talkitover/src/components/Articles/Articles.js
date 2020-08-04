@@ -51,7 +51,7 @@ function Article(props) {
                   {/*<a href={article.url}> {article.title} </a>
           <p> {article.text} </p>  */}
 
-                  <Card className={classes.root}>
+                  <Card className={classes.root} key={idx + 1}>
                   <CardHeader
                     title={article.title}
                   />
@@ -68,7 +68,7 @@ function Article(props) {
                     <SavedArticle id={article._id} add={_add} delete={_delete} />
                     <Tooltip title="Read More">
                      <IconButton aria-label="open in a new tab" >
-                        <a href={article.url}><OpenInNewIcon /></a>
+                        <a href={article.url} target="_blank"><OpenInNewIcon /></a>
                     </IconButton>
                   </Tooltip>
                   </CardActions>
