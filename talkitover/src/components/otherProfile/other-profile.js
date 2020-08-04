@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { Row, Col } from 'react-bootstrap';
 import Sidebar from '../Sidebar/Sidebar';
-import { Image, Container, Modal, Button, Form, Navbar } from "react-bootstrap";
+import { Image, Container, Modal, Button, Form } from "react-bootstrap";
 import OtherReviews from "./other-reviews";
 import { LoginContext } from "../auth/context";
 import Divider from '@material-ui/core/Divider';
@@ -30,12 +30,12 @@ const OtherProfile = (props) => {
   const handleShow = () => setShow(true);
   const context = useContext(LoginContext);
 
-  let query = useQuery(show);
+  let query = useQuery();
   const name = query.get("name");
 
   useEffect(() => {
     props.fetchOtherProfile(name);
-  }, show);
+  }, []);
 
   const onChangeHandler = async (event, newValue) => {
     let user;
@@ -50,7 +50,7 @@ const OtherProfile = (props) => {
     if (event.target.name === 'rating') {
       setValue(newValue);
       props.adding({
-        [event.target.name]: event.target.value,
+        [event.target.name]: parseInt(event.target.value),
       });
     }
 
@@ -62,13 +62,13 @@ const OtherProfile = (props) => {
   const addReview = async (event) => {
     event.preventDefault();
     setShow(false);
-    if(!props.other.review.reviewer_name){
-      props.adding({
-        reviewer_name: context.user.user_name,
-      });
+    let obj = props.other.review;
+    if (props.other.review.reviewer_name === "") {
+      let reviewerUser = context.user.user_name;
+      obj = { reviewer_name: reviewerUser, rating: props.other.review.rating, review_description: props.other.review.review_description };
     }
-    props.addNewReview(props.other.review, name);
-    props.fetchOtherProfile(name);
+    await props.addNewReview(obj, name);
+    await props.fetchOtherProfile(name);
   };
 
   function useQuery() {
@@ -93,12 +93,12 @@ const OtherProfile = (props) => {
           <Sidebar />
         </Col>
         <Col xs={6} sm={6} md={11}>
-          {/* <Container className="profile-2"> */}
+
           <div className="waves">
             <h2 className='user-name'>{props.other.results.username}</h2>
             <div className="img-container">{photoRender()}</div>
             <svg id="parent-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-              <path fill="#6fc5ba" fill-opacity="1" d="M0,288L40,293.3C80,299,160,309,240,288C320,267,400,213,480,186.7C560,160,640,160,720,176C800,192,880,224,960,245.3C1040,267,1120,277,1200,261.3C1280,245,1360,203,1400,181.3L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+              <path fill="#6fc5ba" fillOpacity="1" d="M0,288L40,293.3C80,299,160,309,240,288C320,267,400,213,480,186.7C560,160,640,160,720,176C800,192,880,224,960,245.3C1040,267,1120,277,1200,261.3C1280,245,1360,203,1400,181.3L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
             </svg>
           </div>
           <Container className="profile-container">
@@ -151,29 +151,11 @@ const OtherProfile = (props) => {
                   <Form onSubmit={addReview}>
                     <Form.Group controlId="formBasicEmail">
                       <FormControlLabel
-                        
-                        control={<Checkbox name="reviewer_name" value='Anonymous' onChange={onChangeHandler}/>}
+
+                        control={<Checkbox name="reviewer_name" value='Anonymous' onChange={onChangeHandler} />}
                         label="Review Anonymously"
                       />
-                      {/* <Form.Label>reviewer name</Form.Label>
-                  <Form.Check
-                    className="user"
-                    // onClick={handelClick}
-                    value={context.user.user_name}
-                    type="radio"
-                    name="reviewer_name"
-                    label={context.user.user_name}
-                    onChange={onChangeHandler}
-                  />
-                  <Form.Check
-                    className="user"
-                    // onClick={handelClick}
-                    value="Anonymous"
-                    type="radio"
-                    name="reviewer_name"
-                    label="Anonymous"
-                    onChange={onChangeHandler}
-                  /> */}
+
                       <Box component="fieldset" mb={3} borderColor="transparent">
                         <Typography component="legend">Rate this User</Typography>
                         <Rating
@@ -182,19 +164,7 @@ const OtherProfile = (props) => {
                           onChange={onChangeHandler}
                         />
                       </Box>
-                      {/* <Form.Label>Rate this User</Form.Label>
-                  <Form.Control
-                    size="sm"
-                    as="select"
-                    name="rating"
-                    onChange={onChangeHandler}
-                  >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </Form.Control> */}
+
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                       <Form.Label>Add Discription</Form.Label>
