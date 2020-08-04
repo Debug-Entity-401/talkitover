@@ -44,7 +44,7 @@ const Main = () => {
     <h1 id="heading-4">You Don't Have To Struggle In <span>Silence</span> </h1>*/}
                             <h1 className="home-heading"></h1>
                             {
-                                /*document.addEventListener('DOMContentLoaded',function(event){
+                                document.addEventListener('DOMContentLoaded',function(event){
                                     // array with texts to type in typewriter
                                     var dataText = [ "You Don't Have To Struggle In Silence.", "Don't Hold It Back.", "TalkitOver."];
                                     
@@ -52,7 +52,7 @@ const Main = () => {
                                     // keeps calling itself until the text is finished
                                     function typeWriter(text, i, fnCallback) {
                                       // chekc if text isn't finished yet
-                                      if (i < (text.length)) {
+                                      if (i < (text.length) && document.querySelector("h1")) {
                                         // add next character to h1
                                        document.querySelector("h1").innerHTML = text.substring(0, i+1) +'<span class="animated-heading" aria-hidden="true"></span>';
                                   
@@ -88,7 +88,7 @@ const Main = () => {
                                     // start the text animation
                                     StartTextAnimation(0);
                                   })
-                                */ }
+                                 }
 
                             </div>
                         </Col>
