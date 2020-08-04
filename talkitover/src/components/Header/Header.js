@@ -64,7 +64,7 @@ class Header extends React.Component {
 
 
     render() {
-        if (this.state.redirect) {
+        if (this.state.redirect || this.props.signUp.loggedIn) {
             return <Redirect to={this.state.redirect} />
           }
           

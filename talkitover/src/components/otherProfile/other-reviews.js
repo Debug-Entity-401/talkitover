@@ -7,7 +7,10 @@ import {
   adding,
   addNewReview,
 } from "../../store/other-profile-srore";
-import { Accordion, Card, Button } from "react-bootstrap";
+import { Accordion, Card, Button,Toast } from "react-bootstrap";
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const OtherReviews = (props) => {
@@ -37,6 +40,10 @@ const OtherReviews = (props) => {
       <>
         <Accordion>
           <Card>
+          <Box component="fieldset" mb={3} borderColor="transparent">
+                        <Typography component="legend">Average Rating: </Typography>
+                        <Rating name="read-only" value={ratingAvvg2()} readOnly />
+                      </Box>
             <Card.Header>
 	  <div className="review-btn2">
               <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -48,15 +55,27 @@ const OtherReviews = (props) => {
               <Card.Body>
                 {props.other.results.reviews.map((rev, idx) => {
                   return (
-		<ul key={idx}>
-		<h3 key={idx + "name"}>{rev.reviewer_name}</h3>
-                      <li key={idx + "rat"}>user rate: {rev.rating}</li>
-                      <li key={idx + "des"}>{rev.review_description}</li>
-                      <li key={idx + "dat"}>{rev.date}</li>
-                    </ul>
+                    <Toast className='review-container' key={idx}>
+                    <Toast.Header closeButton={false}>
+                      <strong className="mr-auto">{rev.reviewer_name}</strong>
+                      <small>{`${rev.date.split('T')[0]}`}</small>
+                    </Toast.Header>
+                    <Toast.Body>{rev.review_description}</Toast.Body>
+                    <Box component="fieldset" mb={3} borderColor="transparent">
+                      <Typography component="legend">User rate:</Typography>
+                      <Rating name="read-only" value={rev.rating} readOnly />
+                    </Box>
+
+                  </Toast>
+		// <ul key={idx}>
+		// <h3 key={idx + "name"}>{rev.reviewer_name}</h3>
+    //                   <li key={idx + "rat"}>user rate: {rev.rating}</li>
+    //                   <li key={idx + "des"}>{rev.review_description}</li>
+    //                   <li key={idx + "dat"}>{rev.date}</li>
+    //                 </ul>
                   );
                 })}
-                <h2> Rating: {ratingAvvg2()}</h2>
+                {/* <h2> Rating: {ratingAvvg2()}</h2> */}
               </Card.Body>
             </Accordion.Collapse>
           </Card>

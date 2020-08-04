@@ -8,12 +8,12 @@ import {
 } from "../../store/profile-store";
 import Divider from '@material-ui/core/Divider';
 import clsx from 'clsx';
-import { Image, Container, Modal, Button, Form, Navbar } from "react-bootstrap";
+import { Image, Container, Modal, Button, Form} from "react-bootstrap";
 import { CountryDropdown } from "react-country-region-selector";
 import Reviews from "./reviews";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./profile.scss";
-import { IconButton, InputAdornment, FormControl, Input, TextField, MenuItem } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {Row,Col} from 'react-bootstrap';
 import Sidebar from '../Sidebar/Sidebar';

@@ -72,6 +72,7 @@ class LoginProvider extends React.Component {
 
     componentDidMount() {
         const cookieToken = cookie.load('remember token');
+        console.log('token in context ===> ',cookieToken);
         const token = cookieToken || null;
         this.validateToken(token);
     }
