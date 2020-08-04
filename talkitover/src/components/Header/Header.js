@@ -77,10 +77,10 @@ class Header extends React.Component {
                             <Nav className="justify-content-end main-div" style={{ width: "50%" }} >
                                 <ul>
                                     <li><Nav.Link href="/">Main</Nav.Link></li>
-                                    <li><Nav.Link className="scroll" href="#misson">Our Objective</Nav.Link></li>
+                                    <li><Nav.Link className="scroll" href="#misson">Our Mission</Nav.Link></li>
                                     <li><Nav.Link className="scroll" href="#services">Services</Nav.Link></li>
                                     <li><Nav.Link className="scroll" href="#overcome">Overcome</Nav.Link></li>
-                                    <li> <Nav.Link className="scroll" href="#testominals">Testmonials</Nav.Link></li>
+                                    <li> <Nav.Link className="scroll" href="#about-us">About Us</Nav.Link></li>
                                 </ul>
                             </Nav>
                             <Nav className="justify-content-end  " style={{ width: "50%" }}>
