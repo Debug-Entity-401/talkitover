@@ -3,6 +3,7 @@ import axios from 'axios';
 import axiosConfig from '../axios-config';
 import Article from '../Articles/Articles.js';
 import './styles/articles.scss';
+import { Row } from 'react-bootstrap';
 
 
 //get all user articles
@@ -13,7 +14,7 @@ function UserArticles() {
     let url = "https://talkitover-staging.herokuapp.com/";
 
     const fetchUserArticles = async () => {
-        const getUserArticles = await axios.get(url + "user-articles", axiosConfig);
+      const getUserArticles = await axios.get(url + "user-articles", axiosConfig);
         const articlesArr = await getUserArticles.data;
         setUserArticles(articlesArr.articles);
       };
@@ -35,7 +36,9 @@ function UserArticles() {
             <hr id="gradiant-trans-hr"/>
             <div className="articles">
                 <ul>
+                  <Row>
                 <Article articles={userArticles} add={false} delete={true} />
+                </Row>
                 </ul>
             </div>
             </main>

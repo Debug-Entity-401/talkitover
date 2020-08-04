@@ -80,11 +80,11 @@ const Main = () => {
                     </Row>
                 </Container>
             </div>
-            <div className="our-objective">
+            <div className="our-objective" id="misson">
                 <h2>Our Objective</h2>
 
                 <Container>
-                    <div className="talkitover-intro" id="misson">
+                    <div className="talkitover-intro" >
                         <Row>
                             <Col xs={12} sm={12} md={6}>
                                 <div className="talkitover-intro-title">
@@ -105,9 +105,9 @@ const Main = () => {
                     </div>
                 </Container>
             </div>
-            <div className="feature">
+            <div className="feature" id="services">
                 <h2>Our Services</h2>
-                <div className="features-items" id="services">
+                <div className="features-items" >
                     <Container>
                         <Row>
                             <Col xs={12} sm={6} md={3}>

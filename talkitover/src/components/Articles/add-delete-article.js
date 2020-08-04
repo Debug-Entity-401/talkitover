@@ -19,13 +19,15 @@ class SavedArticle extends React.Component {
         let url = `https://talkitover-staging.herokuapp.com/user-articles/${this.props.id}`;
         axiosConfig['method'] = 'POST';
         const response = await fetch(url, axiosConfig);
-        // document.querySelector('.bookmark-icon').style.color='rgb(111, 197, 186)';
+        console.log(response);
+        document.querySelector('.bookmark-icon').style.color='rgb(111, 197, 186)';
         }
 
     deleteArticle = async (e) => {
-        let url = `http://localhost:3031/user-articles/${this.props.id}`;
+        let url = `https://talkitover-staging.herokuapp.com/user-articles/${this.props.id}`;
         axiosConfig['method'] = 'DELETE';
         const response = await fetch(url, axiosConfig);
+        console.log(response);
         document.getElementById(this.state.id).remove();
     }
     
@@ -35,7 +37,7 @@ class SavedArticle extends React.Component {
             return (
                 <Tooltip title="Save Article">
                     <IconButton aria-label="add to favorites" >
-                      <BookmarkIcon className="bookmark-icon" style={{ color: '#b7b7b7'}} onClick={this.saveArticle}/>
+                      <BookmarkIcon className="bookmark-icon " style={{ color: '#b7b7b7'}} onClick={this.saveArticle}/>
                     </IconButton>
                </Tooltip>
             )

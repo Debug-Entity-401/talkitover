@@ -54,7 +54,7 @@ const Profile = (props) => {
   useEffect(() => {
     props.fetchData();
   }, []);
-
+ 
   const onChangeHandler = async (event) => {
     if (event.target) {
       if (event.target.files && event.target.files[0]) {
@@ -230,20 +230,20 @@ const Profile = (props) => {
                  
                   <input
                     accept="image/*"
-                    className={`${classes.input} uploadImage`} name="photo"
+                    className={classes.input} name="photo"
                     onChange={onChangeHandler}
-                    // defaultValue={props.profile.results.photo}
-                    
+                    id='uploadImage'
                     multiple
                     type="file"
                   />
-                  <label htmlFor="uploadImage" className="profile-label">
-                  Profile Picture
+                 <label htmlFor="uploadImage" id="profile-label2">
+                  upload 
                   <br/>
-                    <Button variant="contained" style={{ color: '#fff' }} color="primary" component="span">
-                      Upload 
-        </Button>
+                
                   </label>
+                  <br />
+                  <br/>
+                  
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Country</Form.Label>
