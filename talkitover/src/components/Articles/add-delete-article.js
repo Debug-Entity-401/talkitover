@@ -1,5 +1,8 @@
 import React from 'react';
 import UserArticles from './user-articles';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import axiosConfig from '../axios-config';
 
 class SavedArticle extends React.Component {
@@ -16,6 +19,7 @@ class SavedArticle extends React.Component {
         let url = `https://talkitover-staging.herokuapp.com/user-articles/${this.props.id}`;
         axiosConfig['method'] = 'POST';
         const response = await fetch(url, axiosConfig);
+        // document.querySelector('.bookmark-icon').style.color='rgb(111, 197, 186)';
         }
 
     deleteArticle = async (e) => {
@@ -27,10 +31,23 @@ class SavedArticle extends React.Component {
     
     render() {
         if (this.state.add === true)
-            return <span onClick={this.saveArticle} ><i className="fa fa-bookmark" aria-hidden="true"></i></span>
+            // return <span onClick={this.saveArticle} ><i className="fa fa-bookmark" aria-hidden="true"></i></span>
+            return (
+                <Tooltip title="Save Article">
+                    <IconButton aria-label="add to favorites" >
+                      <BookmarkIcon className="bookmark-icon" style={{ color: '#b7b7b7'}} onClick={this.saveArticle}/>
+                    </IconButton>
+               </Tooltip>
+            )
         
         if (this.state.delete === true)
-            return <span onClick={this.deleteArticle} ><i className="fa fa-bookmark" aria-hidden="true"></i></span>
+            return (
+                <Tooltip title="Remove Article">
+                   <IconButton aria-label="add to favorites" >
+                      <BookmarkIcon style={{ color: 'rgb(111, 197, 186)'}} onClick={this.deleteArticle}/>
+                   </IconButton>
+               </Tooltip>
+            )
     }
 }
 

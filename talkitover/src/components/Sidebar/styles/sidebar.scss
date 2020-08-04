@@ -1,4 +1,4 @@
-.fa.fa-user-circle-o, .fa.fa-bookmark, .fa.fa-comment {
+.fa.fa-user-circle-o, .fa.fa-bookmark, .fa.fa-comments, .fa.fa-power-off, .fa.fa-home {
     font-size: 1.75em;
 }
 
@@ -49,6 +49,15 @@ nav.sidenav---sidenav---_2tBP.sidenav---collapsed---LQDEv {
 
 .icon > a:hover {
     color: whitesmoke;
+}
+
+a.sidebar-link {
+    color: aqua;
+}
+
+.MuiBadge-colorPrimary {
+    color: #fff;
+    background-color: cadetblue;
 }
 
 span {

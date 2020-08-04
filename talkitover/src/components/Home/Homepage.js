@@ -4,7 +4,9 @@ import axiosConfig from '../axios-config';
 import { LoginContext } from '../auth/context';
 import Article from '../Articles/Articles.js';
 import Sidebar from '../Sidebar/Sidebar';
-import {Row,Col,Container} from 'react-bootstrap';
+import {Row,Col} from 'react-bootstrap';
+import Loader from 'react-loader-spinner';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './styles/home.scss';
 
 
@@ -23,7 +25,7 @@ function Homepage() {
   let url = "https://talkitover-staging.herokuapp.com/";
   
   const fetchArticles = async () => {
-    const getArticles = await axios.get(url + "articles", axiosConfig);
+    const getArticles = await axios.get(`${url}articles`, axiosConfig);
     const articlesArr = await getArticles.data;
     console.log(articlesArr);
     setArticles(articlesArr);
@@ -62,8 +64,10 @@ if (username && articles.length > 0) {
       <h2 id="articles-heading">Selected Articles:</h2>
       <hr id="gradiant-trans-hr"/>
       <div className="articles">
-        <ul>
-          <Article articles={articles} add={true} delete={false} />
+        <ul className="articles-flexbox">
+          <Row>
+           <Article articles={articles} add={true} delete={false} />
+          </Row>
         </ul>
       </div>
     </main>
@@ -73,6 +77,18 @@ if (username && articles.length > 0) {
     </>
   )
 } 
+if(username) {
+  return(
+    <Loader
+         type="Circles"
+         color="#00BFFF"
+         height={100}
+         width={100}
+         timeout={1000} 
+ 
+      />
+  )
+}
 ////for unsigned-in users
 return (
   <React.Fragment>
