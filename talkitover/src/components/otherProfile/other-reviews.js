@@ -65,17 +65,10 @@ const OtherReviews = (props) => {
                       <Typography component="legend">User rate:</Typography>
                       <Rating name="read-only" value={rev.rating} readOnly />
                     </Box>
-
                   </Toast>
-		// <ul key={idx}>
-		// <h3 key={idx + "name"}>{rev.reviewer_name}</h3>
-    //                   <li key={idx + "rat"}>user rate: {rev.rating}</li>
-    //                   <li key={idx + "des"}>{rev.review_description}</li>
-    //                   <li key={idx + "dat"}>{rev.date}</li>
-    //                 </ul>
                   );
                 })}
-                {/* <h2> Rating: {ratingAvvg2()}</h2> */}
+              
               </Card.Body>
             </Accordion.Collapse>
           </Card>
