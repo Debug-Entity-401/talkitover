@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Form, Nav, Navbar, Button, Modal, Row } from 'react-bootstrap';
 import { Route, Link,Redirect } from 'react-router-dom';
-import Oauth from '../Oauth/Oauth';
+import FaceBook from '../Oauth/FaceBook';
 import './header.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../assets/images/logo.png';
@@ -159,7 +159,7 @@ class Header extends React.Component {
                                                 <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><img src="https://img.icons8.com/color/48/000000/facebook-new.png"/></button>
                                                 </div>
                                                 <div className="fa-auth">
-                                                <Oauth />
+                                                <FaceBook />
                                                 </div>
                                                 
                                             </div>

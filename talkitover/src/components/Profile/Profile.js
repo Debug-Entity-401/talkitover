@@ -6,19 +6,17 @@ import {
   fetchData,
   updateProfile,
 } from "../../store/profile-store";
-import Divider from '@material-ui/core/Divider';
-import clsx from 'clsx';
+import Divider from "@material-ui/core/Divider";
+import clsx from "clsx";
 import { Image, Container, Modal, Button, Form } from "react-bootstrap";
 import { CountryDropdown } from "react-country-region-selector";
 import Reviews from "./reviews";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./profile.scss";
-import { TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Row, Col } from 'react-bootstrap';
-import Sidebar from '../Sidebar/Sidebar';
-
-
+import { TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Row, Col } from "react-bootstrap";
+import Sidebar from "../Sidebar/Sidebar";
 
 var country1 = "Select Country";
 
@@ -37,30 +35,31 @@ const useStyles = makeStyles((theme) => ({
     width: "95%",
   },
   input: {
-    display: 'none',
+    display: "none",
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    width: '98%'
+    width: "98%",
   },
 }));
 let count = 0;
+
 const Profile = (props) => {
   const classes = useStyles();
-  const [countryEdite, setCountryEdite] = useState('');
+  const [countryEdite, setCountryEdite] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleCountry = () => setCountryEdite(props.profile.results.country);
   useEffect(() => {
-	  props.fetchData();
+    props.fetchData();
   }, []);
-  if(props.profile.results.country && count === 0 ){
-	handleCountry();
-	count++;  
-}
-// console.log(countryEdite);
+  if (props.profile.results.country && count === 0) {
+    handleCountry();
+    count++;
+  }
+  // console.log(countryEdite);
   const onChangeHandler = async (event) => {
     if (event.target) {
       if (event.target.files && event.target.files[0]) {
@@ -88,8 +87,8 @@ const Profile = (props) => {
         });
       }
     } else {
-//       country1 = event;
-setCountryEdite(event)
+      //       country1 = event;
+      setCountryEdite(event);
       props.adding({
         country: event,
       });
@@ -98,12 +97,18 @@ setCountryEdite(event)
   const onUpdate = async (event) => {
     event.preventDefault();
     let obj = {};
-    if (!props.profile.profile.user_name) obj.user_name = props.profile.results.user_name; else obj.user_name = props.profile.profile.user_name;
-    if (!props.profile.profile.email) obj.email = props.profile.results.email; else obj.email = props.profile.profile.email;
-    if (!props.profile.profile.photo) obj.photo = props.profile.results.photo; else obj.photo = props.profile.profile.photo;
-    if (!props.profile.profile.country) obj.country = props.profile.results.country; else obj.country = props.profile.profile.country;
+    if (!props.profile.profile.user_name)
+      obj.user_name = props.profile.results.user_name;
+    else obj.user_name = props.profile.profile.user_name;
+    if (!props.profile.profile.email) obj.email = props.profile.results.email;
+    else obj.email = props.profile.profile.email;
+    if (!props.profile.profile.photo) obj.photo = props.profile.results.photo;
+    else obj.photo = props.profile.profile.photo;
+    if (!props.profile.profile.country)
+      obj.country = props.profile.results.country;
+    else obj.country = props.profile.profile.country;
     // let obj= {};
-    console.log('obj in profile ===> ',obj);
+    console.log("obj in profile ===> ", obj);
     props.updateProfile(props.profile.results.id, obj);
     props.fetchData();
     setShow(false);
@@ -130,10 +135,18 @@ setCountryEdite(event)
         </Col>
         <Col xs={6} sm={6} md={11}>
           <div className="waves">
-            <h2 className='user-name'>{props.profile.results.username}</h2>
+            <h2 className="user-name">{props.profile.results.username}</h2>
             <div className="img-container">{photoRender()}</div>
-            <svg id="parent-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-              <path fill="#6fc5ba" fill-opacity="1" d="M0,288L40,293.3C80,299,160,309,240,288C320,267,400,213,480,186.7C560,160,640,160,720,176C800,192,880,224,960,245.3C1040,267,1120,277,1200,261.3C1280,245,1360,203,1400,181.3L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+            <svg
+              id="parent-wave"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1440 320"
+            >
+              <path
+                fill="#6fc5ba"
+                fill-opacity="1"
+                d="M0,288L40,293.3C80,299,160,309,240,288C320,267,400,213,480,186.7C560,160,640,160,720,176C800,192,880,224,960,245.3C1040,267,1120,277,1200,261.3C1280,245,1360,203,1400,181.3L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
+              ></path>
             </svg>
           </div>
           <Container className="profile-container">
@@ -155,7 +168,8 @@ setCountryEdite(event)
                   <br />
                   <li>
                     <h5>
-                      <b>Country</b> : {props.profile.results.country}
+                      <b>Country</b> : <br />
+                      {props.profile.results.country}
                     </h5>
                   </li>
                   <Divider variant="middle" component="li" />
@@ -174,15 +188,13 @@ setCountryEdite(event)
                       <b>Status</b> : {props.profile.results.status}
                     </h5>
                   </li>
-
                 </ul>
               </div>
               <div className="edit-container">
-
                 <div className="edit-btn">
                   <Button variant="primary" onClick={handleShow}>
                     Edit Profile
-              </Button>
+                  </Button>
                 </div>
               </div>
               <Modal show={show} onHide={handleClose}>
@@ -193,11 +205,14 @@ setCountryEdite(event)
                   <Form onSubmit={onUpdate}>
                     <Form.Group controlId="formBasicEmail">
                       {/* <Form.Label>user Name</Form.Label> */}
-                      <TextField className={clsx(classes.margin, classes.textField)}
+                      <TextField
+                        className={clsx(classes.margin, classes.textField)}
                         id="standard-textarea"
                         label="Username"
                         value={props.profile.results.username}
-                        placeholder="username" name='user_name' onChange={onChangeHandler}
+                        placeholder="username"
+                        name="user_name"
+                        onChange={onChangeHandler}
                         multiline
                       />
                       <br />
@@ -217,18 +232,22 @@ setCountryEdite(event)
                     defaultValue={props.profile.results.email}
                     onChange={onChangeHandler}
                   ></Form.Control> */}
-                      <TextField className={clsx(classes.margin, classes.textField)}
+                      <TextField
+                        className={clsx(classes.margin, classes.textField)}
                         id="standard-textarea"
                         defaultValue={props.profile.results.email}
                         label="Email"
-                        placeholder="email" name='email' onChange={onChangeHandler}
+                        placeholder="email"
+                        name="email"
+                        onChange={onChangeHandler}
                         multiline
                       />
                       <br />
 
                       <input
                         accept="image/*"
-                        className={`${classes.input} uploadImage`} name="photo"
+                        className={`${classes.input} uploadImage`}
+                        name="photo"
                         onChange={onChangeHandler}
                         // defaultValue={props.profile.results.photo}
 
@@ -237,10 +256,15 @@ setCountryEdite(event)
                       />
                       <label htmlFor="uploadImage" className="profile-label">
                         Profile Picture
-                  <br />
-                        <Button variant="contained" style={{ color: '#fff' }} color="primary" component="span">
+                        <br />
+                        <Button
+                          variant="contained"
+                          style={{ color: "#fff" }}
+                          color="primary"
+                          component="span"
+                        >
                           Upload
-        </Button>
+                        </Button>
                       </label>
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
@@ -264,10 +288,10 @@ setCountryEdite(event)
                     <Modal.Footer>
                       <Button variant="primary" type="submit">
                         Save Changes
-                  </Button>
+                      </Button>
                       <Button variant="secondary" onClick={handleClose}>
                         Close
-                  </Button>
+                      </Button>
                     </Modal.Footer>
                   </Form>
                 </Modal.Body>

@@ -12,6 +12,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -52,34 +53,7 @@ function Assessment(props) {
     // useEffect(()=>{
     //     questions(count);
     // });
-    let answers = [
-        ['Anxity',
-            'Chronic Pain',
-            'Breakups',
-            'Bipolar',
-            'Domestic Violence',
-            'Eating Disorders',
-            'Family Stress',
-            'Loneliness',
-            'Managing Emotions'],
-        [`No Struggle`,
-            `Mild Struggle`,
-            `Moderate Struggle`,
-            `Significant Struggle`],
-        ['Never',
-            'Once in a While',
-            'Some of the Time',
-            'Frequently'],
-        ['Not Really Important',
-            'Somewhat Important',
-            'Important',
-            'Very Important'],
-        ['Id rather not answer at this time',
-            'Ive sought professional help one time in the past.',
-            'Ive sought professional help several times before this.',
-            'Ive sought professional help multiple times in the past.']
-    ];
-
+    
     function handelSubmit(e) {
         e.preventDefault();
         let score = e.target.answer.value.split('-')[0];
@@ -160,27 +134,9 @@ function Assessment(props) {
                 return 'Unknown step';
         }
     }
-    let question =
-        ['Whats on your mind? Select an issue below that best describes the reason you are here:',
-            `Dealing with ${props.assessment.answer} causes me:`,
-            `${props.assessment.answer} impacts my work, school, or relationships:`,
-            `Learning how to better manage ${props.assessment.answer} is:`,
-            `Have you ever sought or received professional help (therapy, counseling, self-help, group support, or medication) for ${props.assessment.answer} is:`
-        ];
-
+    
     function questions() {
-        // let button = 'Next';
-        // if (number === 4) button = 'Finish';
-        // if (number < 5) {
-        //     return <div className="contain"><p>{question[number]}</p>
-        //         <div className="mb-3">
-        //             <Form onSubmit={handelSubmit}>
-        //                 {renderAnswer(answers[number])}
-        //                 <Button id='btn-ass' type="submit">{button}</Button>
-        //             </Form>
-        //         </div>
-        //     </div>
-        // }
+
         return (
             <div className="test">
                 <div className="test-header">
@@ -234,8 +190,6 @@ function Assessment(props) {
         )
 
     }
-
-
 
     return (
         <>
