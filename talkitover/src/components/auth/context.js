@@ -30,9 +30,7 @@ class LoginProvider extends React.Component {
                 },
                 referrerPolicy: 'no-referrer',
             }
-            console.log('obj->>>>>>>>>>>>>>>>>>>.', obj)
             const response = await axios.post(`${API}`, obj, config);
-            console.log('response===> ', response);
             let token = await response.data;
             console.log('__TOKEN__', token);
             if(token) this.validateToken(token);
@@ -48,10 +46,7 @@ class LoginProvider extends React.Component {
     validateToken = token => {
 
         try {
-            console.log({ token });
             let user = jwt.verify(token, 'thisissecret');
-            console.log("user: ", user);
-            // update the login context to loggedin
             this.setLoginState(true, token, user);
 
         } catch (ex) {

@@ -14,13 +14,17 @@ const otherProfile = createSlice({
     },
     reducers: {
         get(state, action) {
-            console.log("action", action.payload);
             state.results = action.payload;
         },
         add(state, action) {
-            Object.keys(action.payload).forEach((key) => {
-                state.review[key] = action.payload[key];
-            });
+            if (action.payload['reviewer_name']) {
+                state.review['reviewer_name'] = action.payload['reviewer_name'];
+            } else {
+                Object.keys(action.payload).forEach((key) => {
+                    state.review[key] = action.payload[key];
+                });
+            }
+
         },
     },
 });
@@ -41,14 +45,16 @@ export const fetchOtherProfile = (name) => async(dispatch) => {
         redirect: "follow",
         referrerPolicy: "no-referrer",
     };
-    return axios
-        .get(`${url}/otherprofile/${name}`, axiosConfig)
-        .then((data) => {
-            dispatch(get(data.data));
-        })
-        .catch((err) => {
-            /* not hit since no 401 */
-        });
+    if (name !== undefined) {
+        return axios
+            .get(`${url}/otherprofile/${name}`, axiosConfig)
+            .then((data) => {
+                dispatch(get(data.data));
+            })
+            .catch((err) => {
+                /* not hit since no 401 */
+            });
+    }
 };
 
 export const addNewReview = (body, name) => async(dispatch) => {
@@ -63,10 +69,7 @@ export const addNewReview = (body, name) => async(dispatch) => {
         redirect: "follow",
         referrerPolicy: "no-referrer",
     };
-    //     console.log('===============>', body, name);
-    return axios.post(`${url}/addreview/${name}`, body, axiosConfig).then((data) => {
-        console.log(data);
-    });
+    return axios.post(`${url}/addreview/${name}`, body, axiosConfig).then((data) => {});
 };
 
 export default otherProfile.reducer;

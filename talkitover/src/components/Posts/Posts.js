@@ -44,7 +44,6 @@ function Post(props) {
         let hours = date.getHours()
         let years = date.getFullYear()
         let month = date.getMonth() + 1;
-        console.log(years, month, day, hours)
         let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
         document.getElementById('post-form-main').reset();
         await props.addPost(obj);
@@ -66,7 +65,6 @@ function Post(props) {
         let hours = date.getHours()
         let years = date.getFullYear()
         let month = date.getMonth() + 1;
-        console.log(years, month, day, hours)
         let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
         await props.updatepost(obj, id);
         await props.getPost();
