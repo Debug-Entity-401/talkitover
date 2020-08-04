@@ -29,7 +29,7 @@ io.on('connection', socket => {
         //     socket.emit('disconnected', 'Sorry. room is full.');
         //     socket.disconnect(true);
         // } else {
-        socket.on('disconnect', function() {
+        socket.on('disconnected', function() {
             //       current_connections--;
             console.log(obj.name, 'disconnected');
             socket.leave(obj.room);
