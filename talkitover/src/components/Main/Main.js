@@ -52,7 +52,7 @@ const Main = () => {
                                     // keeps calling itself until the text is finished
                                     function typeWriter(text, i, fnCallback) {
                                       // chekc if text isn't finished yet
-                                      if (i < (text.length)) {
+                                      if (i < (text.length) && document.querySelector("h1")) {
                                         // add next character to h1
                                        document.querySelector("h1").innerHTML = text.substring(0, i+1) +'<span class="animated-heading" aria-hidden="true"></span>';
                                   
@@ -72,7 +72,7 @@ const Main = () => {
                                        if (typeof dataText[i] == 'undefined'){
                                           setTimeout(function() {
                                             StartTextAnimation(0);
-                                          }, 20000);
+                                          }, 1000);
                                        }
                                        // check if dataText[i] exists
                                        if(dataText[i]) {
@@ -88,7 +88,7 @@ const Main = () => {
                                     // start the text animation
                                     StartTextAnimation(0);
                                   })
-                            }
+                                 }
 
                             </div>
                         </Col>
