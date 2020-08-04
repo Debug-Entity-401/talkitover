@@ -1,6 +1,5 @@
 import React from 'react';
 import cookie from 'react-cookies';
-
 import jwt from 'jsonwebtoken';
 import axios from 'axios'
 
@@ -37,7 +36,6 @@ class LoginProvider extends React.Component {
 
         }
     }
-
     logout = () => {
         this.setLoginState(false, null, {})
     }

@@ -64,6 +64,7 @@ function Assessment(props) {
             />
         })
     }
+
     let question = ['Whats on your mind? Select an issue below that best describes the reason you are here:',
         `Dealing with ${props.assessment.answer} causes me:`,
         `${props.assessment.answer} impacts my work, school, or relationships:`,
@@ -86,11 +87,9 @@ function Assessment(props) {
 
     }
 
-
-
     return (
         <>
-            {questions(count)}
+            {questions( )}
             <Modal show={props.assessment.status !== ''}>
                 <Modal.Header >
                     <Modal.Title>Status</Modal.Title>
