@@ -7,6 +7,7 @@ import Loader from 'react-loader-spinner';
 import './styles/articles.scss';
 import cookie from 'react-cookies';
 
+
 //get all user articles
 //delete selected article
 function UserArticles() {
@@ -26,7 +27,7 @@ function UserArticles() {
       referrerPolicy: 'no-referrer',
     };
     const fetchUserArticles = async () => {
-        const getUserArticles = await axios.get(url + "user-articles", axiosConfig);
+      const getUserArticles = await axios.get(url + "user-articles", axiosConfig);
         const articlesArr = await getUserArticles.data;
         await setUserArticles(articlesArr.articles);
       };

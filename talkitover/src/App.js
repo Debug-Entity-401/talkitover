@@ -8,7 +8,8 @@ import LoginAccess from './components/login-access';
 import Assessment from './components/assessment/assessment';
 import Posts from './components/Posts/Posts';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Alert } from 'react-bootstrap';
+import { Alert,Row } from 'react-bootstrap';
+import Login from '../src/components/auth/login';
 import Footer from './components/Footer/Footer';
 import Main from './components/Main/Main';
 import Profile from './components/Profile/Profile';
@@ -28,7 +29,9 @@ function App() {
           
       <Route path='/' exact>
       <Show capability="CREATE" >
+        <div className="homes">
         <Home />
+        </div>
       </Show>
           <Main />
         <Testmonial />
@@ -70,10 +73,12 @@ function App() {
     </Route>
 
     <Route path='/myarticles'>
+
     <UserArticles />
     </Route>
-    
+    <div className="relative">
       <Footer />
+      </div>
       </LoginContext>
     </React.Fragment>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import SavedArticle from './add-delete-article';
 import './styles/articles.scss';
 ////////////////////////////////
@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
 // const classes = useStyles();
 
 function Article(props) {
+  // useEffect(() => {
+  //   // document.querySelector('footer').setAttribute('class','home-footer');
+  //  document.querySelector('footer').setAttribute('class','footer-home');
+  // }, [])
   const classes = useStyles();
   // const [articles, setArticles] = React.useState([]);
   // setArticles(props.articles);
@@ -38,8 +42,10 @@ function Article(props) {
   if(articles) {
     return (
       articles.map((article, idx) => {
+        
           return (
             <>
+          
               <Col xs={6} sm={6} md={6}>
               <li key={idx} id={article._id} className="article-li">
                   {/*<a href={article.url}> {article.title} </a>
@@ -80,6 +86,7 @@ function Article(props) {
   }
   return(
     <>
+  
     </>
   )
   };

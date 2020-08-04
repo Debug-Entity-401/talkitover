@@ -1,7 +1,8 @@
 @import "../../main-css/variables.scss";
 footer {
     background-color: #ecf0f3; //#d4dade //#53a5eb
-    // margin-top: 5%;
+  
+
 }
 
 footer img {
@@ -9,11 +10,24 @@ footer img {
     width: 30%;
 }
 
+.relatives
+{
+    position: relative;
+}
 
+.footer-home
+{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    width: 100%;
+}
 footer ul {
-    padding-top: 7%;
-    text-align: center;
-    width: 75%;
+        padding-top: 7%;
+        text-align: center;
+        width: 75%;
+        margin-top: 15%;
+    
     li
 
     {

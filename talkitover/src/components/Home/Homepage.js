@@ -43,6 +43,8 @@ function Homepage() {
   }
   //fetch the articles on every re-render
   useEffect(() => {
+    console.log(document.querySelector('footer'));
+    document.querySelector('footer').removeAttribute('class');
     getAllArticles();
   }, [username])
 
@@ -85,14 +87,10 @@ if (username && articles.length > 0) {
 } 
 if(username) {
   return(
-    <Loader
-         type="Circles"
-         color="#00BFFF"
-         height={100}
-         width={100}
-         timeout={1000} 
+    <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
+
  
-      />
+    
   )
 }
 ////for unsigned-in users
