@@ -29,13 +29,13 @@
         ul {
             list-style: none;
         }
+        
         .edit-container {
             width: 30%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-           
             .edit-btn {
                 width: 42%;
                 display: flex;
@@ -96,7 +96,8 @@
     margin-left: 16px;
     margin-right: 80px !important;
 }
-.primary-btn{
+
+.primary-btn {
     color: #fff;
     background-color: #105f9c;
     border-color: #105f9c;
@@ -106,13 +107,33 @@
     background-color: #3c83bbb5;
     border-color: #3c83bbb5;
 }
-
-.review-container{
-    
+.MuiBox-root-11
+{text-align: center;
+}
+.MuiBox-root-7
+{
+    text-align: center;
+}
+#profile-label2
+{
+    background-color: #105f9c;
+    padding: 3%;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 25%;
+    color: #fff;
+    text-align: center;
+}
+.review-container {
+    text-align: center;
     width: 80%;
     margin: 2% auto;
-
 }
-.MuiRating-iconFilled{
+
+.MuiRating-iconFilled {
     color: #6fc5ba;
+}
+
+.MuiBox-root {
+    text-align: center;
 }

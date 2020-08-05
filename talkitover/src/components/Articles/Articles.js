@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import SavedArticle from './add-delete-article';
 import './styles/articles.scss';
 ////////////////////////////////
@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
 // const classes = useStyles();
 
 function Article(props) {
+  // useEffect(() => {
+  //   // document.querySelector('footer').setAttribute('class','home-footer');
+  //  document.querySelector('footer').setAttribute('class','footer-home');
+  // }, [])
   const classes = useStyles();
   // const [articles, setArticles] = React.useState([]);
   // setArticles(props.articles);
@@ -38,14 +42,16 @@ function Article(props) {
   if(articles) {
     return (
       articles.map((article, idx) => {
+        
           return (
             <>
+          
               <Col xs={6} sm={6} md={6}>
               <li key={idx} id={article._id} className="article-li">
                   {/*<a href={article.url}> {article.title} </a>
           <p> {article.text} </p>  */}
 
-                  <Card className={classes.root}>
+                  <Card className={classes.root} key={idx + 1}>
                   <CardHeader
                     title={article.title}
                   />
@@ -62,7 +68,7 @@ function Article(props) {
                     <SavedArticle id={article._id} add={_add} delete={_delete} />
                     <Tooltip title="Read More">
                      <IconButton aria-label="open in a new tab" >
-                        <a href={article.url}><OpenInNewIcon /></a>
+                        <a href={article.url} target="_blank"><OpenInNewIcon /></a>
                     </IconButton>
                   </Tooltip>
                   </CardActions>
@@ -80,6 +86,7 @@ function Article(props) {
   }
   return(
     <>
+  
     </>
   )
   };

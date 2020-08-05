@@ -12,9 +12,7 @@ import { Checkbox } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Link } from 'react-router-dom';
-import { IfRenderer, Then, Else } from '../Home/If/index';
 import { toggleLoader } from '../../store/loader';
-import Loader from 'react-loader-spinner';
 import Show from '../auth/show';
 
 function Post(props) {
@@ -24,7 +22,7 @@ function Post(props) {
     const context = useContext(LoginContext);
     useEffect(() => {
         props.getPost();
-    }, []);
+    },[]);
     const deletes = async (id) => {
         toggleLoader();
 
@@ -72,6 +70,18 @@ function Post(props) {
         await props.getPost();
         toggleLoader();
     }
+    const updateSolved = async (e) => {
+        e.preventDefault();
+        toggleLoader();
+        let user;
+        e.target.solved.value ? user = true : user = false;
+        let id = e.target.id.value;
+        
+        let obj = { solved:user};
+        await props.updatepost(obj, id);
+        await props.getPost();
+        toggleLoader();
+    }
 
     function renderForm() {
         if (context.user.role === 'ventor') {
@@ -83,6 +93,11 @@ function Post(props) {
                             <Form.Group controlId="exampleForm.ControlTextarea1">
                                 <div className="Messge-title">
                                     <Form.Label className="user-post-title">Talk Free</Form.Label>
+                                </div>
+                                <div class="md-form amber-textarea active-amber-textarea-2">
+                                    <i class="fas fa-pencil-alt prefix"></i>
+                                    <textarea id="form24" class="md-textarea form-control" rows="3"></textarea>
+                                    <label for="form24">Material textarea with an always colorful prefix</label>
                                 </div>
                                 <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control textarea-post" />
                                 <FormGroup row>
@@ -110,12 +125,12 @@ function Post(props) {
 
         }
     }
-   
+
 
     function show(user, id, description) {
 
         if (user === context.user.user_name) {
-            
+
             return <div>
                 <Accordion>
                     <Card>
@@ -156,7 +171,7 @@ function Post(props) {
         }
     }
 
-    function renderChatLink(user, id, availability) {
+    function renderChatLink(solved,user, id, availability) {
         let date = new Date();
         let day = date.getDate();
         let hours = date.getHours();
@@ -164,24 +179,36 @@ function Post(props) {
         let month = date.getMonth() + 1;
         let timeSplit = availability.split('-')[0].split('/');
         timeSplit.push(availability.split('-')[1]);
-        console.log('time ====> ', timeSplit[0] >= years, timeSplit[1] >= month, timeSplit[2] >= day, timeSplit[3] >= hours);
-        if (timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day) {
-            if (context.user.role === 'Listener' || context.user.user_name === user) {
-                return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
-            }
-        } else if (timeSplit[2] == day && timeSplit[3] >= hours)
-            if (context.user.role === 'Listener' || context.user.user_name === user) {
-                return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
-            }
+        if(!solved)
+    {if ((timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day)) {
+        if (context.user.role === 'Listener' || context.user.user_name === user) {
+            return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
+        }
+    } else if (timeSplit[2] === day && timeSplit[3] >= hours)
+        if (context.user.role === 'Listener' || context.user.user_name === user) {
+            return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
+        }}
     }
     function renderUserName(user) {
-        console.log(user);
         if (user === "Anonymous") {
             return <h1>{user}</h1>;
         } else {
             return <Link to={`/otherProfile?name=${user}`}>{user}</Link>;
         }
     }
+    function solveProblemForm(val) {
+        if (context.user.user_name === val.user_name) {
+            return <form onSubmit={updateSolved} >
+                <input hidden={true} id="id" value={val._id}  />
+                <FormControlLabel
+                    control={<Checkbox type='submit' value={true} name="solved" />}
+                    label="solved"
+                />
+            </form>
+        }
+
+    }
+    let solve = "true"
     function renderPost() {
         let date = new Date();
         let day = date.getDate();
@@ -191,14 +218,15 @@ function Post(props) {
         let array = props.posts.posts.slice().reverse();
         if (toggle === 'All') {
             return array.map((val, i) => {
-
                 return <Toast key={i} className="post-box">
                     <Toast.Header closeButton={false}>
+
 
                         <div className="username-time">
                             <h1 className='head-post'>{renderUserName(val.view_as)}</h1>
                             <small>{val.date}</small>
                         </div>
+                        {solveProblemForm(val)}
                         <div className='delete-btn'>
                             <Show condition={val.user_name === context.user.user_name}>
                                 <Button variant="danger" id="delete-btn" onClick={() => deletes(val._id)}><i class="fa fa-trash" aria-hidden="true"></i></Button>
@@ -207,25 +235,18 @@ function Post(props) {
                     </Toast.Header>
 
                     <Toast.Body>
+                    {val.solved ? solve= "true" : solve="false"}         
+                           <p >Solved: {solve} </p>
+
                         <p className='description'>{val.description}</p>
                         {show(val.user_name, val._id, val.description)}
                         <div>
-                            {renderChatLink(val.user_name, val._id, val.availability)}
+                            {renderChatLink(val.solved,val.user_name, val._id, val.availability)}
                         </div>
                         <div className="time">
                         </div>
                     </Toast.Body>
                 </Toast>
-                // <div className="user-post" key={i}>
-
-                //     <small>{val.date}</small>
-                //     <p className='description'>{val.description}</p>
-                //     <p hidden={true} >{val.availability}</p>
-                //     {show(val.user_name, val._id, val.description)}
-                //     <div>
-                //         {renderChatLink(val.user_name, val._id, val.availability)}
-                //     </div>
-                // </div>
             })
         }
         else {
@@ -240,6 +261,7 @@ function Post(props) {
                                 <h1 className='head-post'>{renderUserName(val.view_as)}</h1>
                                 <small>{val.date}</small>
                             </div>
+                            {solveProblemForm(val)}
                             <div className='delete-btn'>
                                 <Show condition={val.user_name === context.user.user_name}>
                                     <Button variant="danger" id="delete-btn" onClick={() => deletes(val._id)}><i class="fa fa-trash" aria-hidden="true"></i></Button>
@@ -249,15 +271,18 @@ function Post(props) {
 
                         <Toast.Body>
                             <p className='description'>{val.description}</p>
+                            {val.solved ? solve= "true" : solve="false"}         
+                           <p >Solved: {solve} </p>
                             {show(val.user_name, val._id, val.description)}
                             <div>
-                                {renderChatLink(val.user_name, val._id, val.availability)}
+                            {renderChatLink(val.solved,val.user_name, val._id, val.availability)}
+
                             </div>
                             <div className="time">
                             </div>
                         </Toast.Body>
                     </Toast>
-                } else if (timeSplit[2] == day && timeSplit[3] >= hours) {
+                } else if (timeSplit[2] === day && timeSplit[3] >= hours) {
                     return <Toast key={i} className="post-box">
                         <Toast.Header closeButton={false}>
 
@@ -265,6 +290,7 @@ function Post(props) {
                                 <h1 className='head-post'>{renderUserName(val.view_as)}</h1>
                                 <small>{val.date}</small>
                             </div>
+                            {solveProblemForm(val)}
                             <div className='delete-btn'>
                                 <Show condition={val.user_name === context.user.user_name}>
                                     <Button variant="danger" id="delete-btn" onClick={() => deletes(val._id)}><i class="fa fa-trash" aria-hidden="true"></i></Button>
@@ -273,10 +299,14 @@ function Post(props) {
                         </Toast.Header>
 
                         <Toast.Body>
+                        {val.solved ? solve= "true" : solve="false"}         
+                           <p >Solved: {solve} </p>
+
                             <p className='description'>{val.description}</p>
                             {show(val.user_name, val._id, val.description)}
                             <div>
-                                {renderChatLink(val.user_name, val._id, val.availability)}
+                            {renderChatLink(val.solved,val.user_name, val._id, val.availability)}
+
                             </div>
                             <div className="time">
                             </div>

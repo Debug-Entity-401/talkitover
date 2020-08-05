@@ -48,10 +48,11 @@ const signUp = createSlice({
             })
         },
         addpass(state, action) {
-            Object.keys(action.payload).forEach(key => {
-
-                state.fpass[key] = action.payload[key];
-            })
+	        Object.keys(action.payload).forEach(key => {
+		        
+		        state.fpass[key] = action.payload[key];
+		})
+		console.log('prooooops===>',state.fpass);
         },
         validateToken(state, action) {
             let token = action.payload;

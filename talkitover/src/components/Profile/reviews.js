@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Reviews = (props) => {
   useEffect(() => {
     props.fetchData();
-  }, []);
+  });
   const ratingAvvg = () => {
     let sum = 0;
     let count = 0;
@@ -21,7 +21,7 @@ const Reviews = (props) => {
     if (avg > 0) {
       return avg;
     } else {
-      return 'There is no Reviews to show';
+      return 0;
     }
   };
 

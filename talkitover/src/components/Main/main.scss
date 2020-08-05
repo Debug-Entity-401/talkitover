@@ -1,20 +1,78 @@
 @import "../../main-css/variables.scss";
 
 .website-introduction h1 {
-    width: 65%;
+    width: 90%;
     font-size: 60px;
     text-transform: capitalize;
     font-weight: 700;
     margin-bottom: 27px;
     line-height: 75px;
+    text-align: center;
     font-family: 'Bebas Neue', cursive;
+    position: absolute;
 }
+
+// #heading-1 {
+//     animation: toggle-h1 4000ms linear;
+// }
+
+// #heading-2 {
+//     animation: toggle 5000ms linear 7500ms infinite;
+// }
+
+// #heading-3 {
+//     animation: toggle 4000ms linear 18000ms infinite;
+// }
+
+// #heading-4 {
+//     animation: toggle 4000ms linear 22000ms infinite;
+// }
+
+// @keyframes toggle {
+//     from {
+//        visibility:hidden;
+//     }
+// 50% {
+//        visibility:hidden;
+//     }
+// to {
+//        visibility:visible;
+//  }
+// }
+
+// @keyframes toggle-h1 {
+//     from {
+//        visibility:visible;
+//     }
+// 50% {
+//        visibility:hidden;
+//     }
+// to {
+//        display: none;
+//  }
+// }
+
+h1 {
+    font-size: 1.3em;
+}
+
+.animated-heading {
+    border-right: .05em solid;
+    animation: caret 1s steps(1) infinite;
+  }
+  
+  @keyframes caret {
+    50% {
+      border-color: transparent;
+    }
+  }
+
 .website-introduction span {
   color: $color2;
 }
 .website-introduction
 {
-    margin-top: 10%;
+    margin-top: 26%;
 }
 .carousel-indicators
 {
@@ -27,6 +85,7 @@
 {
     margin-top: 5%;
 }
+
 .our-objective h2
 {
     text-align: center;
@@ -46,17 +105,22 @@
     text-transform: uppercase;
     }
 }
+
+#intro-img {
+    width: 82%;
+}
+
 .talkitover-intro-description p {
     color: #707070;
     font-family: "Quicksand", Sans-serif;
     font-size: 16px;
     font-weight: 400;
-    line-height: 1.8em;
+    line-height: 2em;
 }
 .feature h2
 {
     text-align: center;
-    margin-top: 5%;
+    margin-top: 14%;
     font-size: 40px;
     line-height: 70px;
     font-weight: 700;
@@ -102,12 +166,14 @@
 .service-title h5
 {
    text-align: center;
-font-size: 15px;
+   font-size: 20px;
    color: #105f9c;
+   padding-top: 5%;
 }
 .service-description p {
     text-align: center;
     margin: 9%;
+    margin-top: 4%;
 }
 .features-items
 {
@@ -119,39 +185,42 @@ font-size: 15px;
 .overcome
 {
     margin-top: 5%;
+    margin-bottom: 15%;
 }
 .overcome h2
 {
     text-align: center;
     font-size: 40px;
     line-height: 70px;
+    margin-top: 9%;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .overcome-cards {
-    margin: 7%;
+    margin: 4% auto;
 }
+
+
+
 .service-icon {
     margin: 10px;
     text-align: center;
 }
 .overcome-card
 {
-    width:100%;
-    border-radius:15px;
-     padding:20px;
-     height: 15rem;
-     text-align:center;
-     box-shadow:  0 15px 10px #777;
-     margin-bottom: 15%;
-     margin: 5% auto;
+    width: 90%;
+    border-radius: 15px;
+    padding: 20px;
+    height: 465px;
+    text-align: center;
+    box-shadow: 0 15px 10px #777;
 }
 .overcome-card:hover
 {
     box-shadow:  0 15px 10px $color2;
     transition: 0.8s ease;
-    cursor: pointer;
+    cursor: default;
 }
 .icon
 {
@@ -162,12 +231,23 @@ font-size: 15px;
     color: $color1;
     transition: 0.3s ease;
 }
+
+.card-title {
+    text-align: center;
+    font-weight: bolder;
+}
+
 .card-title:hover
 {
     color: $color1;
     transition: 0.3s ease;
+    cursor: default;
+}
+.card-text:last-child {
+    margin-bottom: 0;
+    cursor: default;
 }
 .talkitover-intro-image
 {
-    margin-top: 5%;
+    margin-top: -8%;
 }

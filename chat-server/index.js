@@ -36,7 +36,7 @@ io.on('connection', socket => {
                 rooms[obj.room].users[socket.id] = { name: obj.name, role: obj.role };
         } else {
             user = { users: {} };
-            rooms[obj.room] = user;//{chat:{user:pppp:sondos2},{numberofUser:2}}
+            rooms[obj.room] = user; //{chat:{user:pppp:sondos2},{numberofUser:2}}
             rooms[obj.room].users[socket.id] = { name: obj.name, role: obj.role };
         }
         console.log('roooms obj ====> ', rooms);
@@ -44,9 +44,8 @@ io.on('connection', socket => {
         if (numberOfUsers.length > 2) {
             socket.emit('full-room', 'Room is full.');
             socket.disconnect(true);
-        }
-        else {
-            socket.on('disconnected', function () {
+        } else {
+            socket.on('disconnected', function() {
                 rooms[obj.room].numberOfuser = number--;
                 socket.leave(obj.room);
                 socket.to(obj.room).broadcast.emit('user-disconnected', { name: obj.name, message: 'disconnected' });

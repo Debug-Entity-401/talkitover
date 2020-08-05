@@ -1,19 +1,44 @@
 @import "../../main-css/variables.scss";
 footer {
     background-color: #ecf0f3; //#d4dade //#53a5eb
-    // margin-top: 5%;
+  
+
 }
 
 footer img {
-    margin: 6% 3%;
-    width: 30%;
+    margin: 13% 3%;
+    width: 50%;
 }
 
+.relatives
+{
+    position: relative;
+}
 
-footer ul {
-    padding-top: 7%;
-    text-align: center;
-    width: 75%;
+.footer-home
+{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    width: 100%;
+}
+
+.social-media-header
+{
+    margin-top: 13%;
+}
+
+.social-media-header {
+    margin-top: 10%;
+    padding-left: 16%;
+}
+
+footer .social-media {
+        text-align: center;
+        width: 75%;
+        margin-top: 5%;
+
+    
     li
 
     {
@@ -27,6 +52,30 @@ footer ul {
         border: 1px solid #ffffff;
         background-color: black;
         transition: 0.6s ease-in-out;
+    }
+}
+
+.contact
+{
+    margin-top: 10%;
+    width: 70%;
+    text-align: center;
+    list-style-type: none;
+    h5
+    {
+        width: 84%;
+    }
+    
+    li
+    {
+        padding: 4%;
+        text-align: left;
+        margin-left: 23%;
+    }
+    i
+    {
+        padding-right: 6%;
+        font-size: 15px;
     }
 }
 
@@ -56,3 +105,4 @@ footer ul {
     transition: 0.3s ease-in;
     color: #ecf0f3;
 }
+

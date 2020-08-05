@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import axiosConfig from '../axios-config';
 import { LoginContext } from '../auth/context';
 import Article from '../Articles/Articles.js';
 import Sidebar from '../Sidebar/Sidebar';
@@ -8,7 +7,7 @@ import {Row,Col} from 'react-bootstrap';
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './styles/home.scss';
-
+import cookie from 'react-cookies';
 
 //Homepage functional component:
 /**
@@ -24,26 +23,47 @@ function Homepage() {
   const username = contextValue.user.user_name;
   let url = "https://talkitover-staging.herokuapp.com/";
   
-  const fetchArticles = async () => {
-    const getArticles = await axios.get(`${url}articles`, axiosConfig);
-    const articlesArr = await getArticles.data;
-    setArticles(articlesArr);
-  };
-
+  // if (username) {
+    const fetchArticles = async () => {
+      try{
+        const axiosConfig = {
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            'cookies': `${cookie.load('remember token')}`,
+          },
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer',
+        };
+        const getArticles = await axios.get(`${url}articles`, axiosConfig);
+        const articlesArr = await getArticles.data;
+        setArticles(articlesArr);
+      }
+      catch(e){
+        console.error();
+      }
+    };
+  // }
   const getAllArticles = () => {
-    fetchArticles();
+    // setTimeout(()=>{
+      if(username) fetchArticles();
+    // }, 1000)
   }
   //fetch the articles on every re-render
   useEffect(() => {
+    console.log(document.querySelector('footer'));
+    document.querySelector('footer').removeAttribute('class');
     getAllArticles();
-  }, [])
+  }, [username])
+
 
 //control rendering according to whether the user is signed-in or not
 ////for signed-in users
 if (username && articles.length > 0) {  
   return (
     <>
-
     <div id="home">
     <Row>
     <Col xs={6} sm={6} md={1}>
@@ -59,7 +79,6 @@ if (username && articles.length > 0) {
 </svg>
 </div>
 <main id="home-body">
-      <h1 id="home-welcome">Welcome To Homepage, {username}.</h1>
       <h2 id="articles-heading">Selected Articles:</h2>
       <hr id="gradiant-trans-hr"/>
       <div className="articles">
@@ -76,16 +95,11 @@ if (username && articles.length > 0) {
     </>
   )
 } 
-if(username) {
+if(username && articles.length === 0) {
   return(
-    <Loader
-         type="Circles"
-         color="#00BFFF"
-         height={100}
-         width={100}
-         timeout={1000} 
- 
-      />
+    <div className="loader-div">
+    <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
+    </div>
   )
 }
 ////for unsigned-in users
