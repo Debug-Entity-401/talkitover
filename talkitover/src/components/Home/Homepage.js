@@ -5,6 +5,7 @@ import Article from '../Articles/Articles.js';
 import Sidebar from '../Sidebar/Sidebar';
 import {Row,Col} from 'react-bootstrap';
 import Loader from 'react-loader-spinner';
+import {connect} from 'react-redux';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './styles/home.scss';
 import cookie from 'react-cookies';
@@ -16,8 +17,8 @@ import cookie from 'react-cookies';
  * -> pass the fetched articles to the Articles component and render it in a list
  * -> render the Sidebar component
  */
-function Homepage() {
-
+function Homepage(props) {
+let token = cookie.load('remember token');
   const [articles, setArticles] = useState([]);  //store the fetched articles
   const contextValue = useContext(LoginContext);  // use the context api to get the username of the signed-in user
   const username = contextValue.user.user_name;
@@ -48,7 +49,7 @@ function Homepage() {
   // }
   const getAllArticles = () => {
     // setTimeout(()=>{
-      if(username) fetchArticles();
+      if(username || token) fetchArticles();
     // }, 1000)
   }
   //fetch the articles on every re-render
@@ -56,12 +57,12 @@ function Homepage() {
     console.log(document.querySelector('footer'));
     document.querySelector('footer').removeAttribute('class');
     getAllArticles();
-  }, [username])
+  }, [username, token])
 
 
 //control rendering according to whether the user is signed-in or not
 ////for signed-in users
-if (username && articles.length > 0) {  
+if ( token || username && articles.length > 0) {  
   return (
     <>
     <div id="home">
@@ -95,7 +96,8 @@ if (username && articles.length > 0) {
     </>
   )
 } 
-if(username && articles.length === 0) {
+console.log('======================>',username);
+if( token || username && articles.length === 0) {
   return(
     <div className="loader-div">
     <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
@@ -105,10 +107,16 @@ if(username && articles.length === 0) {
 ////for unsigned-in users
 return (
   <React.Fragment>
-  
+
+<p>helllloooo {username}</p>
   </React.Fragment>
 )
   
 }
 
-export default Homepage;
+const mapToProps = state =>({
+signUp : state.signUp
+})
+
+
+export default connect(mapToProps)(Homepage);
