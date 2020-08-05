@@ -14,6 +14,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Link } from 'react-router-dom';
 import { toggleLoader } from '../../store/loader';
 import Show from '../auth/show';
+import Loader from 'react-loader-spinner';
 
 function Post(props) {
     const [toggle, setToggle] = useState('All');
