@@ -32,7 +32,7 @@ const OtherProfile = (props) => {
 
   let query = useQuery();
   const name = query.get("name");
-  
+
   useEffect(() => {
     props.fetchOtherProfile(name);
   }, []);
@@ -81,7 +81,7 @@ const OtherProfile = (props) => {
     return new URLSearchParams(useLocation().search);
   }
   const photoRender = () => {
-    if (props.other.results.photo === "") {
+    if ( !props.other.results.photo || props.other.results.photo === "") {
       return (
         <Image
           src="https://www.beaconmanagement.com/wp-content/uploads/2018/04/no-person.jpg"
@@ -92,6 +92,20 @@ const OtherProfile = (props) => {
       return <Image src={props.other.results.photo} className="profile-img" />;
     }
   };
+  const quoteRender = () => {
+	if (props.other.results.role === "Listener") {
+	  return (
+	    <>
+	      <div class="mb-wrap mb-style-2">
+	        <blockquote cite="http://www.gutenberg.org/ebboks/11">
+		<p> Always here to listen and talk. Always on your side</p>
+	        </blockquote>
+	      </div>
+	    </>
+	  );
+	}
+        };
+        
   return (
     <>
       <Row>
@@ -100,8 +114,13 @@ const OtherProfile = (props) => {
         </Col>
         <Col xs={6} sm={6} md={11}>
           <div className="waves">
-            <h2 className="user-name">{props.other.results.username}</h2>
+	<div className="motivation">{quoteRender()}</div>
+	<div className="user-name-container">
             <div className="img-container">{photoRender()}</div>
+	  <div className="user-name">
+            <h2 >{props.other.results.username}</h2>
+	  </div>
+	  </div>
             <svg
               id="parent-wave"
               xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +136,7 @@ const OtherProfile = (props) => {
           <Container className="profile-container">
             <section className="profile">
               <div className="edit-container">
-                <div className="edit-btn">
+                <div className="edit-btn2">
                   <Button variant="primary" onClick={handleShow}>
                     Add Review
                   </Button>

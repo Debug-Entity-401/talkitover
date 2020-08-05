@@ -193,11 +193,8 @@ function Chat(props) {
 
   return (
     <>
-    <div className="loader-div">
-    <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
-    </div>
+    
       <div id="card" className="card">
-
         <div className="render-chat">
           {renderChat()}
         </div>
