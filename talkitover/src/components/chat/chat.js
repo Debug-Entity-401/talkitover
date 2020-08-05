@@ -112,7 +112,7 @@ function Chat(props) {
               <div class="msg-list">
                 <div class="messenger-container">
                   <div className="user-avatart">
-                    <Avatar src={message.message.image} className={classes.small} />
+                    <Avatar id="user1" src={message.message.image} className={classes.small} />
                   </div>
                   <div className="user-Mssg">
                       <p>{message.message.message}</p>
@@ -158,9 +158,10 @@ function Chat(props) {
               </div> */}
               <div className=' user-chat-box ' key={index}>
               <div class="sender">
+              <div class="msg-list">
                 <div class="messenger-container">
                   <div className="user-avatart">
-                    <Avatar src={message.message.image} className={classes.small} />
+                    <Avatar id="user1" src={message.message.image} className={classes.small} />
                   </div>
                   <div className="user-Mssg">
                       <p>{message.message.message}</p>
@@ -175,6 +176,7 @@ function Chat(props) {
                     <span class="time-left">{UTCHour}</span>
                   </div>
                 </div>
+              </div>
               </div>
               <div class="clear"></div>
 
