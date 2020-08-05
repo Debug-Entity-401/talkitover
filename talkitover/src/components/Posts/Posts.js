@@ -40,15 +40,15 @@ const useStyles = makeStyles({
 function Post(props) {
     const classes = useStyles();
     const [toggle, setToggle] = useState('All');
-    const [spinner, setSpinner] = useState(true);
+    // const [spinner, setSpinner] = useState(true);
     const [value, onChange] = useState(new Date());
     
 
     const context = useContext(LoginContext);
     useEffect(() => {
-        setSpinner(true);
+        // setSpinner(true);
         props.getPost();
-        setSpinner(false);
+        // setSpinner(false);
     },[]);
 
 
@@ -349,7 +349,7 @@ function Post(props) {
 
     console.log('props.posts.length ==>',props.posts.posts.length);
 
-    if(!props.posts.posts.length && spinner){
+    if(!props.posts.posts.length){
         return <div className="loader-div">
              <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
         </div>
