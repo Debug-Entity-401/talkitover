@@ -135,7 +135,7 @@ function Sidebar(props) {
                     <NavText>
                         <div className="label">
                             <Link to='/posts'>
-                                <span>Chat</span>
+                                <span>Posts</span>
                             </Link>
                         </div>
                     </NavText>

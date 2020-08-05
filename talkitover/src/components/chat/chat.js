@@ -10,6 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import '../chat/chat.scss';
 import Fade from 'react-reveal/Fade';
+import Loader from 'react-loader-spinner';
+
 let socket;
 
 const useStyles = makeStyles((theme) => ({
@@ -192,6 +194,9 @@ function Chat(props) {
 
   return (
     <>
+    <div className="loader-div">
+    <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
+    </div>
       <div id="card" className="card">
 
         <div className="render-chat">
