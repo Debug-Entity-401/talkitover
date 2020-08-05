@@ -41,7 +41,7 @@
             justify-content: center;
             align-items: center;
             .edit-btn {
-                width: 50%;
+                width: 55%;
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-end;
@@ -64,8 +64,8 @@
 
 .user-name {
     height: 50%;
-    width: 34%;
-    margin-top: 22%;
+    width: 45%;
+        margin-top: 22%;
     background-color: #6ec5b9b8;
     padding: 0.5% 0 0.5% 0;
     text-align: center;
@@ -279,6 +279,19 @@
     font-style: italic;
     font-size: 18px;
     line-height: 35px;
+}
+.username-time a
+{
+    text-decoration: none;
+}
+#profile-label
+{
+    border: 1px solid #427bff;
+    background-color: #427bff;
+    color:#fff;
+    padding: 10px;
+    border-radius:4px;
+    cursor: pointer;
 }
 
 .mb-attribution {

@@ -17,6 +17,7 @@ import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Checkbox } from "@material-ui/core";
+import Swal from 'sweetalert2';
 
 import Box from "@material-ui/core/Box";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -35,7 +36,7 @@ const OtherProfile = (props) => {
 
   useEffect(() => {
     props.fetchOtherProfile(name);
-  }, []);
+  });
 
   const onChangeHandler = async (event, newValue) => {
     let user;
@@ -73,8 +74,17 @@ const OtherProfile = (props) => {
         review_description: props.other.review.review_description,
       };
     }
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'you added a review',
+      showConfirmButton: false,
+      timer: 1500
+    })
     await props.addNewReview(obj, name);
     await props.fetchOtherProfile(name);
+  
+    
   };
 
   function useQuery() {

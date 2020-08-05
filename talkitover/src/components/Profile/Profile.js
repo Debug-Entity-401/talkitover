@@ -17,7 +17,7 @@ import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Row, Col } from "react-bootstrap";
 import Sidebar from "../Sidebar/Sidebar";
-
+import Swal from 'sweetalert2'
 var country1 = "Select Country";
 
 const useStyles = makeStyles((theme) => ({
@@ -111,6 +111,13 @@ const Profile = (props) => {
     console.log("obj in profile ===> ", obj);
     props.updateProfile(props.profile.results.id, obj);
     props.fetchData();
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your profile has been updated',
+      showConfirmButton: false,
+      timer: 1500
+    })
     setShow(false);
   };
   const photoRender = () => {
@@ -262,27 +269,20 @@ const Profile = (props) => {
                       <br />
 
                       <input
-                        accept="image/*"
-                        className={`${classes.input} uploadImage`}
-                        name="photo"
-                        onChange={onChangeHandler}
-                        // defaultValue={props.profile.results.photo}
-
-                        multiple
-                        type="file"
-                      />
-                      <label htmlFor="uploadImage" className="profile-label">
-                        Profile Picture
-                        <br />
-                        <Button
-                          variant="contained"
-                          style={{ color: "#fff" }}
-                          color="primary"
-                          component="span"
-                        >
-                          Upload
-                        </Button>
-                      </label>
+                    accept="image/*"
+                    className={classes.input} name="photo"
+                    onChange={onChangeHandler}
+                    id='uploadImage'
+                    multiple
+                    type="file"
+                  />
+                  <label htmlFor="uploadImage" id="profile-label">
+                  Profile Picture
+                  <br/>
+               
+        		<span id="upload-img"></span>
+                  </label>
+                  <br />
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                       <Form.Label>Country</Form.Label>

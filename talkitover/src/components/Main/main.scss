@@ -70,9 +70,13 @@ h1 {
 .website-introduction span {
   color: $color2;
 }
-.website-introduction
-{
-    margin-top: 26%;
+.website-introduction {
+    margin-top: 15%;
+}
+.btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: #105f9c;
+    border-color: #105f9c;
 }
 .carousel-indicators
 {
@@ -81,10 +85,10 @@ h1 {
 .hero-slider
 {
     clip-path: polygon(7% 0, 100% 0%, 100% 100%, 0% 100%);}
-.our-objective
-{
-    margin-top: 5%;
-}
+    .our-objective {
+        background-color: #f8f9fa;
+        margin-top: 5%;
+    }
 
 .our-objective h2
 {
@@ -182,10 +186,11 @@ h1 {
 .carousel-caption {
     bottom: 80px;  
 }
-.overcome
-{
+.overcome {
     margin-top: 5%;
     margin-bottom: 15%;
+    background-color: #f8f9fa;
+    height: 630px;
 }
 .overcome h2
 {

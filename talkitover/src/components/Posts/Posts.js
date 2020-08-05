@@ -19,23 +19,30 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import check from '../../assets/images/check.gif';
+import Swal from 'sweetalert2';
+
 const useStyles = makeStyles({
     root: {
-      minWidth: 275,
+        minWidth: 275,
     },
     bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
     },
     title: {
-      fontSize: 14,
+        fontSize: 14,
     },
     pos: {
-      marginBottom: 12,
+        marginBottom: 12,
     },
-  });
+});
 function Post(props) {
+
+    // document.querySelector('.solved').addEventListener('click',()=>{
+
+    // })
     const classes = useStyles();
     const [toggle, setToggle] = useState('All');
     const [value, onChange] = useState(new Date());
@@ -43,15 +50,26 @@ function Post(props) {
     const context = useContext(LoginContext);
     useEffect(() => {
         props.getPost();
-    },[]);
+    }, []);
     const deletes = async (id) => {
+        
         toggleLoader();
 
         await props.deletepost(id);
+       
         await props.getPost();
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your post has been deleted',
+            showConfirmButton: false,
+            timer: 1500
+          })
+       
         // toggleLoader();
     }
 
+  
 
     //for posting posts
     const handelSubmit = async e => {
@@ -69,7 +87,13 @@ function Post(props) {
         document.getElementById('post-form-main').reset();
         await props.addPost(obj);
         await props.getPost();
-
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'your post is Published',
+            showConfirmButton: false,
+            timer: 1500
+          })
         toggleLoader();
     }
 
@@ -89,6 +113,14 @@ function Post(props) {
         let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
         await props.updatepost(obj, id);
         await props.getPost();
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your Post has been Updated',
+            showConfirmButton: false,
+            timer: 1500
+          })
+       
         toggleLoader();
     }
     const updateSolved = async (e) => {
@@ -97,8 +129,9 @@ function Post(props) {
         let user;
         e.target.solved.value ? user = true : user = false;
         let id = e.target.id.value;
-        
-        let obj = { solved:user};
+        console.log( document.getElementById(`${id}`))
+        document.getElementById(`${id}`).classList.add("solved");
+        let obj = { solved: user };
         await props.updatepost(obj, id);
         await props.getPost();
         toggleLoader();
@@ -107,40 +140,41 @@ function Post(props) {
     function renderForm() {
         if (context.user.role === 'ventor') {
             return <div>
-          
+
                 <div id='post-form'>
                     <Container>
-                    <Card id="post-card" className={classes.root}>
-                    <CardContent>
-                      <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        Word of the Day
+                        <Card id="post-card" className={classes.root}>
+                            <CardContent>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                    Describe your Problem
                       </Typography>
-                    </CardContent>
-                                            <Form id='post-form-main' onSubmit={handelSubmit}>
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                              
-                                <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control textarea-post" />
-                                <FormGroup row>
-                                    <div id='form-footer'>
-                                        
-                                        <span>I am avaliable until</span>
-                                        <DateTimePicker
-                                            onChange={onChange}
-                                            value={value}
-                                        />
-                                    </div>
-                                    <div className="Post-button">
-                                    <FormControlLabel
-                                            control={<Checkbox name="user" />}
-                                            label="Post Anonymously"
-                      
-                                            />
-                                        <Button id="post-btn" type="submit">Post</Button>
-                                    </div>
-                                </FormGroup>
+                            </CardContent>
+                            <Form id='post-form-main' onSubmit={handelSubmit}>
+                                <Form.Group controlId="exampleForm.ControlTextarea1">
 
-                            </Form.Group>
-                        </Form>
+                                    <textarea name="description" rows="3" id="mains" placeholder="" className="form-control textarea-post" />
+                                   
+                                    <FormGroup row>
+                                        <div id='form-footer'>
+
+                                            <span>I am avaliable until</span>
+                                            <DateTimePicker
+                                                onChange={onChange}
+                                                value={value}
+                                            />
+                                        </div>
+                                        <div className="Post-button">
+                                            <FormControlLabel
+                                                control={<Checkbox name="user" />}
+                                                label="Post Anonymously"
+
+                                            />
+                                            <Button id="post-btn" type="submit">Post</Button>
+                                        </div>
+                                    </FormGroup>
+
+                                </Form.Group>
+                            </Form>
                         </Card>
                     </Container>
                 </div>
@@ -174,6 +208,7 @@ function Post(props) {
                                                     control={<Checkbox name="user" />}
                                                     label="Post Anonymously"
                                                 />
+                                                <br />
                                                 <span>I am avaliable until</span>
                                                 <DateTimePicker
                                                     onChange={onChange}
@@ -194,7 +229,7 @@ function Post(props) {
         }
     }
 
-    function renderChatLink(solved,user, id, availability) {
+    function renderChatLink(solved, user, id, availability) {
         let date = new Date();
         let day = date.getDate();
         let hours = date.getHours();
@@ -202,16 +237,16 @@ function Post(props) {
         let month = date.getMonth() + 1;
         let timeSplit = availability.split('-')[0].split('/');
         timeSplit.push(availability.split('-')[1]);
-        if(!solved)
-    {if ((timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day)) {
-        if (context.user.role === 'Listener' || context.user.user_name === user) {
-            return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
-        }
-    } else if (timeSplit[2] === day && timeSplit[3] >= hours)
-        if (context.user.role === 'Listener' || context.user.user_name === user) {
-            return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}>chat</Link></div>
+        if (!solved) {
+            if ((timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day)) {
+                if (context.user.role === 'Listener' || context.user.user_name === user) {
+                    return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}><i class="fa fa-comments" aria-hidden="true"></i>                    </Link></div>
+                }
+            } else if (timeSplit[2] === day && timeSplit[3] >= hours)
+                if (context.user.role === 'Listener' || context.user.user_name === user) {
+                    return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}><i class="fa fa-comments" aria-hidden="true"></i>                    </Link></div>
+                }
         }}
-    }
     function renderUserName(user) {
         if (user === "Anonymous") {
             return <h1>{user}</h1>;
@@ -220,14 +255,23 @@ function Post(props) {
         }
     }
     function solveProblemForm(val) {
-        if (context.user.user_name === val.user_name) {
+        if (context.user.user_name === val.user_name &&!val.solved) {
             return <form onSubmit={updateSolved} >
-                <input hidden={true} id="id" value={val._id}  />
-                <FormControlLabel
-                    control={<Checkbox type='submit' value={true} name="solved" />}
+                <input  hidden={true} id="id" value={val._id} />
+                <FormControlLabel id={val._id}  
+                    control={<Checkbox type='submit'    value={true} name="solved" />}
                     label="solved"
                 />
             </form>
+        }
+        else if(val.solved)
+        {
+            return(
+                <div className="checked">
+                <img src={check} className="check" />
+                </div>
+            )
+           
         }
 
     }
@@ -258,14 +302,12 @@ function Post(props) {
                     </Toast.Header>
 
                     <Toast.Body>
-                    {val.solved ? solve= "true" : solve="false"}         
-                           <p >Solved: {solve} </p>
-
                         <p className='description'>{val.description}</p>
-                        {show(val.user_name, val._id, val.description)}
                         <div>
-                            {renderChatLink(val.solved,val.user_name, val._id, val.availability)}
+                            {renderChatLink(val.solved, val.user_name, val._id, val.availability)}
                         </div>
+                        {show(val.user_name, val._id, val.description)}
+                       
                         <div className="time">
                         </div>
                     </Toast.Body>
@@ -294,13 +336,12 @@ function Post(props) {
 
                         <Toast.Body>
                             <p className='description'>{val.description}</p>
-                            {val.solved ? solve= "true" : solve="false"}         
-                           <p >Solved: {solve} </p>
-                            {show(val.user_name, val._id, val.description)}
                             <div>
-                            {renderChatLink(val.solved,val.user_name, val._id, val.availability)}
+                                {renderChatLink(val.solved, val.user_name, val._id, val.availability)}
 
                             </div>
+                            {show(val.user_name, val._id, val.description)}
+                          
                             <div className="time">
                             </div>
                         </Toast.Body>
@@ -322,15 +363,13 @@ function Post(props) {
                         </Toast.Header>
 
                         <Toast.Body>
-                        {val.solved ? solve= "true" : solve="false"}         
-                           <p >Solved: {solve} </p>
-
                             <p className='description'>{val.description}</p>
-                            {show(val.user_name, val._id, val.description)}
                             <div>
-                            {renderChatLink(val.solved,val.user_name, val._id, val.availability)}
+                                {renderChatLink(val.solved, val.user_name, val._id, val.availability)}
 
                             </div>
+                            {show(val.user_name, val._id, val.description)}
+                           
                             <div className="time">
                             </div>
                         </Toast.Body>

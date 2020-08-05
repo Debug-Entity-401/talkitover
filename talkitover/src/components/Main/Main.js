@@ -69,7 +69,7 @@ const Main = () => {
             // start the text animation
             StartTextAnimation(0);
           })
-    },[])
+    })
  
 
 
@@ -80,18 +80,11 @@ const Main = () => {
 
             <div className="hero-main-section">
                 <Container>
-                    <Row>
+                <Row>
                         <Col xs={6} sm={6} md={6}>
                             <div className="website-introduction">
-                            {/*<Fade big collapse duration={3000}>*/}
-                            {/*</Fade>*/}
-                            {/*<h1 id="heading-1">You Don't Have To Struggle In <span>Silence</span> </h1>
-                                <h1 id="heading-2">Don't Hold It <span>Back</span> </h1>
-                                <h1 id="heading-3"> <span>TalkitOver</span> </h1>
-    <h1 id="heading-4">You Don't Have To Struggle In <span>Silence</span> </h1>*/}
-                            <h1 className="home-heading"></h1>
-                         
-
+                           
+                                <h1> You Don't Have To Struggle In Silence.<br /><span>Talkitover</span></h1>
                             </div>
                         </Col>
                         <Col xs={12} sm={12} md={6}>
@@ -282,7 +275,7 @@ const Main = () => {
 
                                         <img className="icon" src={meditation} style={{ width: '66%', margin: "0 auto", marginTop: '5%' }} />
                                         <Card.Body style={{marginTop: '12%'}}>
-                                            <Card.Title>Take a break</Card.Title>
+                                            <Card.Title>Medatation</Card.Title>
                                             <Card.Text>
                                                 Taking a break to relax is good to free your mind from stress, give yourself some ‘me time’ to meditate, this can help you improve your state of mind.
                                              </Card.Text>

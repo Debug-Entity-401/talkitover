@@ -24,15 +24,7 @@
 {
     width: 100%;
 }
-// #post-form
-// {
-//     margin: 19%;
-//     background-color: #6fc5ba;
-//     border: 1px solid #6fc5ba;
-//     height: 355px;
-//     border-radius: 30px;
-//     // clip-path: polygon(0% 0%, 100% 0%, 100% 59%, 36% 59%, 21% 76%, 20% 58%, 0 57%);
-// }
+
 .Post-button {
     float: right;
     width: 25%;
@@ -86,10 +78,6 @@ span
 {
     justify-content: space-between;
 }
-.delete-btn
-{
-    margin-top: 2%;
-}
 
 
 .Post-button {
@@ -113,9 +101,55 @@ span
   color: black;
   padding-right: 15px;
 }
-#post-card
-{
+#post-card {
   width: 55% !important;
+  box-shadow: 4px 9px 5px 0px rgba(0,0,0,0.25);
   margin: 4% auto;
   padding: 0% 5%;
+}
+#mains
+{
+    display: block;
+	width: 100%;
+	border: 0;
+	padding: 10px 5px;
+  background: white no-repeat;
+	background-image: linear-gradient(to bottom, #1abc9c, #1abc9c), linear-gradient(to bottom, silver, silver);
+	background-size: 0 2px, 100% 1px;
+	background-position: 5% 100%, 50% 100%;
+  transition: background-size 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  resize: none;
+  
+
+
+}
+#mains:focus{
+    /* sizes for the 2 images (focus state) */
+      background-size: 100% 2px, 100% 1px;
+      outline: none;
+}
+.check {
+    width: 10%;
+    float: left;
+    position: relative;
+    right: 27%;
+    bottom: 14px;
+}
+.chat-btn
+{
+    float: right;
+    width: 7%;
+    position: relative;
+    bottom: 35px;
+}
+.solved-section
+{
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#contain
+{
+  margin-bottom: 5%;
 }
