@@ -4,7 +4,7 @@
     border-radius: 40px 0 40px 0;
     margin-bottom: 5%;
     box-shadow: 0px 15px 23px -6px rgba(0, 0, 0, 0.75);
-    width: 75%;
+    width: 60%;
     padding-bottom: 2%;
     .profile-nav {
         background-color: #3781747c;
@@ -20,14 +20,18 @@
     .profile {
         height: 100%;
         margin-bottom: 3%;
-        border-radius: 40px 0 0;
         margin-top: 3%;
         display: flex;
         background-color: #3781732c;
         justify-content: center;
-        box-shadow: 0px 15px 23px -17px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 15px 13px -17px rgba(0, 0, 0, 0.75);
+        border-radius: 4%;
         ul {
             list-style: none;
+            h5 {
+                font-size: 16px;
+                width: 100%;
+            }
         }
         
         .edit-container {
@@ -37,7 +41,7 @@
             justify-content: center;
             align-items: center;
             .edit-btn {
-                width: 42%;
+                width: 50%;
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-end;
@@ -45,7 +49,7 @@
             }
         }
         .profile-data {
-            width: 37%;
+            width: 45%;
             text-align: left;
             display: inline-block;
             margin-bottom: 8%;
@@ -59,29 +63,51 @@
 }
 
 .user-name {
-    margin-bottom: 2%;
-    font-size: xx-large;
-    position: absolute;
-    top: 0;
-    margin: 5% auto;
-    /* left: 26%; */
-    font-weight: bold;
-    width: 86%;
+    height: 50%;
+    width: 34%;
+    margin-top: 22%;
+    background-color: #6ec5b9b8;
+    padding: 0.5% 0 0.5% 0;
     text-align: center;
+    position: relative;
+    right: 52px;
+    border-top-right-radius: 50px 40px;
+    border-bottom-right-radius: 50px 40px;
+    z-index: 0;
+    h2 {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    animation: mymove 2s
+}
+
+@keyframes mymove {
+    from {
+        right: 150px;
+    }
+    to {
+        right: 52px;
+    }
+}
+
+.user-name-container {
+    top: 41%;
+    left: 13%;
+    position: absolute;
+    display: flex;
+    width: 50%;
 }
 
 .img-container {
     display: inline-block;
-    position: absolute;
     overflow: hidden;
-    border: 6px solid #3781747c;
+    border: 6px solid #6ec5b9b8;
     margin: 3%;
-    top: 41%;
-    left: 13%;
     width: 200px;
     height: 200px;
     border-radius: 50%;
     box-shadow: 0px 15px 23px -17px rgba(0, 0, 0, 0.75);
+    z-index: 1;
     .profile-img {
         width: 100%;
         height: auto;
@@ -135,5 +161,126 @@
 }
 
 .MuiBox-root {
+    margin-left: 3.5%;
+    margin-top: 2%;
     text-align: center;
+}
+
+.accordion>.card {
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.toast.show {
+    opacity: 1;
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+.MuiRating-root {
+    color: #ffb400;
+    cursor: pointer;
+    display: inline-flex;
+    position: relative;
+    font-size: 23px;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    top: 6px;
+}
+
+.MuiTypography-body1 {
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+    font-size: 15px;
+    text-align: left;
+}
+
+.motivation {
+    z-index: 1;
+    display: flex;
+    position: absolute;
+    right: 25px;
+    height: 50%;
+}
+
+//////////////////////////
+.mb-wrap {
+    margin: 20px auto;
+    position: relative;
+    width: 300px;
+    bottom: 10px;
+    padding-right: 28%;
+}
+
+.mb-wrap p {
+    margin: 0;
+    padding: 0;
+}
+
+.mb-wrap blockquote {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    right: 50px;
+}
+
+.mb-wrap cite {
+    font-style: normal;
+}
+
+.mb-style-2 blockquote {
+    padding-top: 105px;
+}
+
+.mb-style-2 blockquote:after {
+    background: none repeat scroll 0 0 rgba(87, 181, 204, 0.8);
+    border-radius: 50% 50% 50% 50%;
+    color: white;
+    content: "❞";
+    font-family: 'icons';
+    font-size: 70px;
+    height: 50%;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 130px;
+}
+
+.mb-style-2 blockquote:before {
+    border-left: 5px solid rgba(87, 181, 204, 0.8);
+    border-radius: 50% 50% 50% 50%;
+    content: "";
+    height: 332px;
+    left: -50px;
+    position: absolute;
+    top: 0;
+    width: 500px;
+    z-index: -1;
+}
+
+.mb-style-2 blockquote p {
+    color: white;
+    display: inline;
+    font-family: Baskerville, Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 35px;
+}
+
+.mb-attribution {
+    text-align: right;
 }

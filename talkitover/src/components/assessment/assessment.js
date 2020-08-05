@@ -201,7 +201,7 @@ function Assessment(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <p>Your status is:{props.assessment.status}</p>
-                    <Link to="/">
+                    <Link to="/home">
                         Done
             </Link>
                 </Modal.Body>

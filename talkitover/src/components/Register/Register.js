@@ -91,14 +91,14 @@ function Register(props) {
             //     "File must be lest 100 kb");
             // }
             count++;
-            document.getElementById('upload-img').innerText = 'File must be less than 100 kb'
+            // document.getElementById('upload-img').innerText = 'File must be less than 100 kb'
           }
         }
         if(count === 0) {
           let reader = new FileReader();
           reader.onload = (e) => {
             // this.setState({image: e.target.result});
-            document.getElementById('upload-img').innerText = 'Image Uploaded';
+            // document.getElementById('upload-img').innerText = 'Image Uploaded';
             props.add({ photo: e.target.result });
           };
           reader.readAsDataURL(event.target.files[0]);
@@ -243,7 +243,7 @@ function Register(props) {
               
                       <br />
                        <div className="facebook-btn">
-                       <Oauth />
+                       {/*<Oauth />*/}
 <img src="https://img.icons8.com/color/48/000000/facebook-new.png"/>
                                             </div>
                        </div>

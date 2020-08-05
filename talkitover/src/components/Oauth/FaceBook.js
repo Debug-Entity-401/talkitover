@@ -28,7 +28,7 @@ const FaceBook = (props) => {
       };
       let request = { user_name: user };
       const response = await axios.post(
-        "http://localhost:3031/signinfp",
+        "https://talkitover-staging.herokuapp.com/signinfp",
         request,
         config,
       );
