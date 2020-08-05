@@ -1,44 +1,41 @@
-.contain{
+.contain {
     border: 1px solid gray;
     border-radius: 3px;
     margin: 0 auto;
     width: 50%;
     padding: 1%;
-    p{
+    p {
         padding-bottom: 5%;
     }
 }
 
-.mb-3{
-    #btn-ass{
+.mb-3 {
+    #btn-ass {
         margin: 0 auto;
-        
     }
 }
+
 .custom-control-inline {
-    border: 1px solid #f3f3f3;
-    padding: 15px 4%;
-    margin: 2%;
-    display: block;
     position: relative;
-    margin-right: 1rem;
-}
-.custom-control-inline {
+    margin: 2% 1rem 2% 2%;
     border: 1px solid #f3f3f3;
     padding: 15px 4%;
     display: block;
     width: 50%;
-    margin: 2%;
+    text-align: left;
+    margin: 2% auto;
 }
+
 .test-header {
     margin-top: 3%;
 }
+
 .makeStyles-root-1 {
-    width: 70% !important;
+    width: 55% !important;
     margin: 0 auto;
 }
-.test-header h1
-{
+
+.test-header h1 {
     font-family: "Open Sans";
     font-size: 40px;
     font-weight: 700;
