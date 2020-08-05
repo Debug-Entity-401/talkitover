@@ -14,7 +14,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import { IconButton, InputAdornment, FormControl, Input, TextField, MenuItem } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
-import chatFormImage from '../../assets/images/chat_form.svg'
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { sign } from "jsonwebtoken";
@@ -46,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 var country1 = "Select Country";
-
 function Register(props) {
   const classes = useStyles();
   const [redirict, setRedircit] = useState('');
@@ -74,12 +72,10 @@ function Register(props) {
       if (event.target.name === 'password') {
         setValues({ ...values, password: event.target.value });
       }
-
-      if (event.target.files && event.target.files[0]) {
+  if (event.target.files && event.target.files[0]) {
         //////////////////////////////
         let image = document.getElementById('uploadImage');
-        // Check if any file is selected.
-        let count = 0; 
+        // Check if any file is selected. 
         if (image.files.length > 0) {
           for (let i = 0; i <= image.files.length - 1; i++) {
 
@@ -87,22 +83,17 @@ function Register(props) {
             const file = Math.round((fsize / 1024));
             // The size of the file. 
             if (file >= 100) {
-            //   alert(
-            //     "File must be lest 100 kb");
-            // }
-            count++;
-            // document.getElementById('upload-img').innerText = 'File must be less than 100 kb'
+              alert(
+                "File must be lest 100 kb");
+            }
           }
         }
-        if(count === 0) {
-          let reader = new FileReader();
-          reader.onload = (e) => {
-            // this.setState({image: e.target.result});
-            // document.getElementById('upload-img').innerText = 'Image Uploaded';
-            props.add({ photo: e.target.result });
-          };
-          reader.readAsDataURL(event.target.files[0]);
-        }
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          // this.setState({image: e.target.result});
+          props.add({ photo: e.target.result });
+        };
+        reader.readAsDataURL(event.target.files[0]);
 
         // ////////////////////////////////
         // console.log('///////////////',typeof URL.createObjectURL(event.target.files[0]));
@@ -120,7 +111,6 @@ function Register(props) {
       });
     }
   }
-}
  
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -135,7 +125,7 @@ function Register(props) {
   }
   return (
     <>
-      <Container id="reg-cont">
+      <Container>
         <div className="signup">
           <Form className="signup-form" onSubmit={handelSubmit}>
             <Row>
@@ -192,12 +182,10 @@ function Register(props) {
                   <label htmlFor="uploadImage" id="profile-label">
                   Profile Picture
                   <br/>
-                  <div className="image-upload">
                     <Button variant="contained" style={{ color: '#fff' }} color="primary" component="span">
                       Upload 
-                  </Button>
-                  <span id="upload-img"></span>
-                  </div>
+       		 </Button>
+        		<span id="upload-img"></span>
                   </label>
                   <br />
                   <FormControl className={classes.formControl}>
@@ -243,7 +231,7 @@ function Register(props) {
               
                       <br />
                        <div className="facebook-btn">
-                       {/*<Oauth />*/}
+                       <Oauth />
 <img src="https://img.icons8.com/color/48/000000/facebook-new.png"/>
                                             </div>
                        </div>
@@ -258,7 +246,6 @@ function Register(props) {
     </>
   );
 }
-
 
 const mapStateToProps = (state) => ({
   signUp: state.signUp,
