@@ -179,7 +179,7 @@ function Register(props) {
                     multiple
                     type="file"
                   />
-                  <label htmlFor="uploadImage" id="profile-label">
+                  <label htmlFor="uploadImage" id="signup-profile-label">
                   Profile Picture
                   <br/>
                     <Button variant="contained" style={{ color: '#fff' }} color="primary" component="span">

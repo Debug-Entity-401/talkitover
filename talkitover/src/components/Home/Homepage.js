@@ -62,7 +62,13 @@ let token = cookie.load('remember token');
 
 //control rendering according to whether the user is signed-in or not
 ////for signed-in users
-if ( token || username && articles.length > 0) {  
+if( (token || username) && articles.length === 0) {
+  return <div className="loader-div">
+             <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
+        </div>
+}
+
+if ( (token || username) && articles.length > 0) {  
   return (
     <>
     <div id="home">
@@ -97,13 +103,7 @@ if ( token || username && articles.length > 0) {
   )
 } 
 console.log('======================>',username);
-if( token || username && articles.length === 0) {
-  return(
-    <div className="loader-div">
-    <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
-    </div>
-  )
-}
+
 ////for unsigned-in users
 return (
   <React.Fragment>
