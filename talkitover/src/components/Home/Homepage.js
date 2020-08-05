@@ -95,12 +95,11 @@ if (username && articles.length > 0) {
     </>
   )
 } 
-if(username) {
+if(username && articles.length === 0) {
   return(
-    <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
-
- 
-    
+    <div className="loader-div">
+    <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
+    </div>
   )
 }
 ////for unsigned-in users
