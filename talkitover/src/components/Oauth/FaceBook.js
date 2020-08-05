@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import cookie from "react-cookies";
 import axios from "axios";
+import {validateToken} from '../../store/signup'
+import {connect} from 'react-redux';
 import { Redirect , Link} from "react-router-dom";
 import { Modal , Button }  from "react-bootstrap";
 import FacebookLogin from "react-facebook-login";
@@ -44,6 +46,7 @@ const FaceBook = (props) => {
       } else {
         cookie.save("remember token", token);
         await setLoggedIn(true);
+        await props.validateToken(token)
       }
     } catch (err) {
       console.log("error ===>", err);
@@ -76,4 +79,11 @@ const FaceBook = (props) => {
   );
 };
 
-export default FaceBook;
+const mapToProps = state => ({
+signUp : state.signUp
+})
+const mapDispatchToProps = { validateToken };
+
+
+
+export default connect(mapToProps , mapDispatchToProps)(FaceBook);
