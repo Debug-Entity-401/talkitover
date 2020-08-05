@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Reviews = (props) => {
   useEffect(() => {
     props.fetchData();
-  }, []);
+  });
   const ratingAvvg = () => {
     let sum = 0;
     let count = 0;

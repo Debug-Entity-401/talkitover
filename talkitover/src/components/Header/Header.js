@@ -63,7 +63,7 @@ class Header extends React.Component {
 
 
     render() {
-        if (this.state.redirect || this.props.signUp.loggedIn) {
+        if ((this.state.redirect || this.props.signUp.loggedIn) && this.context.user.user_name) {
             return <Redirect to={this.state.redirect} />
           }
           
@@ -71,16 +71,16 @@ class Header extends React.Component {
             <header>
                 <Navbar bg="light" expand="lg">
                     <Container>
-                        <Navbar.Brand ><img className="logo" src={logo} alt="main-logo" /></Navbar.Brand>
+                        <Navbar.Brand ><Nav.Link href="/"><img className="logo" src={logo} alt="main-logo" /></Nav.Link></Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="justify-content-end main-div" style={{ width: "50%" }} >
                                 <ul>
                                     <li><Nav.Link href="/">Main</Nav.Link></li>
-                                    <li><Nav.Link className="scroll" href="#misson">Misson</Nav.Link></li>
+                                    <li><Nav.Link className="scroll" href="#misson">Our Mission</Nav.Link></li>
                                     <li><Nav.Link className="scroll" href="#services">Services</Nav.Link></li>
                                     <li><Nav.Link className="scroll" href="#overcome">Overcome</Nav.Link></li>
-                                    <li> <Nav.Link className="scroll" href="#testominals">Testmonials</Nav.Link></li>
+                                    <li> <Nav.Link className="scroll" href="#about-us">About Us</Nav.Link></li>
                                 </ul>
                             </Nav>
                             <Nav className="justify-content-end  " style={{ width: "50%" }}>

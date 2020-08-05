@@ -33,6 +33,7 @@
                 width: 100%;
             }
         }
+        
         .edit-container {
             width: 30%;
             display: flex;
@@ -132,8 +133,25 @@
     background-color: #3c83bbb5;
     border-color: #3c83bbb5;
 }
-
+.MuiBox-root-11
+{text-align: center;
+}
+.MuiBox-root-7
+{
+    text-align: center;
+}
+#profile-label2
+{
+    background-color: #105f9c;
+    padding: 3%;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 25%;
+    color: #fff;
+    text-align: center;
+}
 .review-container {
+    text-align: center;
     width: 80%;
     margin: 2% auto;
 }

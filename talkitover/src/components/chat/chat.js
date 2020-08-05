@@ -10,6 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import '../chat/chat.scss';
 import Fade from 'react-reveal/Fade';
+import Loader from 'react-loader-spinner';
+
 let socket;
 
 const useStyles = makeStyles((theme) => ({
@@ -108,24 +110,28 @@ function Chat(props) {
         {message.name === "You" ?
           <Fade duration={500} top>
 
-            <div className='containers user-chat-box ' key={index}>
+            <div className=' user-chat-box ' key={index}>
+              <div class="msg-list">
+                <div class="messenger-container">
+                  <div className="user-avatart">
+                    <Avatar id="user1" src={message.message.image} className={classes.small} />
+                  </div>
+                  <div className="user-Mssg">
+                      <p>{message.message.message}</p>
 
-              <div className='chat-div' id='You'>
-                <div className="chat-boxx">
-                  <Avatar src={message.message.image} className={classes.small} />
-                  <span className="username"> {message.name}</span>
-                </div>
-                <div className="chat-message">
-                  <Container>
-                    <h3>
-                      <span>{message.message.message}</span>
-                    </h3>
-                  </Container>
+                  </div>
+                  <div className='chat-div' id='You'>
+                    <div className="chat-boxx">
+                      <span className="username"> {message.name}</span>
+                    </div>
+                  </div>
+                  <div className="message-time-box">
+                    <span class="time-left">{UTCHour}</span>
+                  </div>
                 </div>
               </div>
-              <div className="message-time-box">
-                <span class="time-left">{UTCHour}</span>
-              </div>
+              <div class="clear"></div>
+
             </div>
 
           </Fade>
@@ -133,8 +139,8 @@ function Chat(props) {
           :
           <Fade duration={500} top>
 
-            <div className='containers-right  chat-div' key={index}>
-              <div className="containerw">
+            <div className='  chat-div' key={index}>
+              {/* <div className="containerw">
 
                 <div className="chat-boxx">
                   <Avatar src={message.message.image} className={classes.small} />
@@ -151,10 +157,33 @@ function Chat(props) {
                   </Container>
                 </div>
 
+              </div> */}
+              <div className=' user-chat-box ' key={index}>
+              <div class="sender">
+              <div class="msg-list">
+                <div class="messenger-container">
+                  <div className="user-avatart">
+                    <Avatar id="user1" src={message.message.image} className={classes.small} />
+                  </div>
+                  <div className="user-Mssg">
+                      <p>{message.message.message}</p>
+
+                  </div>
+                  <div className='chat-div' id='You'>
+                    <div className="chat-boxx">
+                      <span className="username"> {message.name}</span>
+                    </div>
+                  </div>
+                  <div className="message-time-box">
+                    <span class="time-left">{UTCHour}</span>
+                  </div>
+                </div>
               </div>
+              </div>
+              <div class="clear"></div>
 
             </div>
-
+</div>
           </Fade>
 
         }
@@ -165,6 +194,9 @@ function Chat(props) {
 
   return (
     <>
+    <div className="loader-div">
+    <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
+    </div>
       <div id="card" className="card">
 
         <div className="render-chat">
@@ -185,8 +217,10 @@ function Chat(props) {
 
             <div className="chat-btns">
               <ul>
-              <li><Button type="submit" id="send" variant="success"><i class="fa fa-paper-plane" aria-hidden="true"></i></Button></li>
-                <li><Link to="/posts"><Button variant="danger" onClick={endChat}>End Chat</Button></Link></li>
+                <li><Button type="submit" id="send" variant="success"><i class="fa fa-paper-plane" aria-hidden="true"></i></Button></li>
+                <div className="dissconnect">
+                <li><Link to="/posts"><Button variant="danger" onClick={endChat}><i class="fa fa-sign-out" aria-hidden="true"></i></Button></Link></li>
+                </div>
 
               </ul>
 

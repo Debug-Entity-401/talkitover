@@ -31,7 +31,8 @@ class LoginProvider extends React.Component {
             }
             const response = await axios.post(`${API}`, obj, config);
             let token = await response.data;
-            this.validateToken(token);
+            console.log('__TOKEN__', token);
+            if(token) this.validateToken(token);
         } catch (ex) {
 
         }

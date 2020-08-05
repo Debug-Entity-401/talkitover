@@ -15,3 +15,35 @@
         
     }
 }
+.custom-control-inline {
+    border: 1px solid #f3f3f3;
+    padding: 15px 4%;
+    margin: 2%;
+    display: block;
+    position: relative;
+    margin-right: 1rem;
+}
+.custom-control-inline {
+    border: 1px solid #f3f3f3;
+    padding: 15px 4%;
+    display: block;
+    width: 50%;
+    margin: 2%;
+}
+.test-header {
+    margin-top: 3%;
+}
+.makeStyles-root-1 {
+    width: 70% !important;
+    margin: 0 auto;
+}
+.test-header h1
+{
+    font-family: "Open Sans";
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 45px;
+    color: #212121;
+    margin-bottom: 2rem;
+}
