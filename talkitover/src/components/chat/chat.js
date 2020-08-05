@@ -11,7 +11,6 @@ import Avatar from '@material-ui/core/Avatar';
 import '../chat/chat.scss';
 import Fade from 'react-reveal/Fade';
 import Loader from 'react-loader-spinner';
-
 let socket;
 
 const useStyles = makeStyles((theme) => ({
