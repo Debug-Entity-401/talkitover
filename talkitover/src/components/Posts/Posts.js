@@ -15,8 +15,28 @@ import { Link } from 'react-router-dom';
 import { toggleLoader } from '../../store/loader';
 import Show from '../auth/show';
 import Loader from 'react-loader-spinner';
-
+import { makeStyles } from '@material-ui/core/styles';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+const useStyles = makeStyles({
+    root: {
+      minWidth: 275,
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
 function Post(props) {
+    const classes = useStyles();
     const [toggle, setToggle] = useState('All');
     const [value, onChange] = useState(new Date());
 
@@ -87,26 +107,22 @@ function Post(props) {
     function renderForm() {
         if (context.user.role === 'ventor') {
             return <div>
+          
                 <div id='post-form'>
                     <Container>
-
-                        <Form id='post-form-main' onSubmit={handelSubmit}>
+                    <Card id="post-card" className={classes.root}>
+                    <CardContent>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        Word of the Day
+                      </Typography>
+                    </CardContent>
+                                            <Form id='post-form-main' onSubmit={handelSubmit}>
                             <Form.Group controlId="exampleForm.ControlTextarea1">
-                                <div className="Messge-title">
-                                    <Form.Label className="user-post-title">Talk Free</Form.Label>
-                                </div>
-                                <div class="md-form amber-textarea active-amber-textarea-2">
-                                    <i class="fas fa-pencil-alt prefix"></i>
-                                    <textarea id="form24" class="md-textarea form-control" rows="3"></textarea>
-                                    <label for="form24">Material textarea with an always colorful prefix</label>
-                                </div>
+                              
                                 <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control textarea-post" />
                                 <FormGroup row>
                                     <div id='form-footer'>
-                                        <FormControlLabel
-                                            control={<Checkbox name="user" />}
-                                            label="Post Anonymously"
-                                        />
+                                        
                                         <span>I am avaliable until</span>
                                         <DateTimePicker
                                             onChange={onChange}
@@ -114,12 +130,18 @@ function Post(props) {
                                         />
                                     </div>
                                     <div className="Post-button">
+                                    <FormControlLabel
+                                            control={<Checkbox name="user" />}
+                                            label="Post Anonymously"
+                      
+                                            />
                                         <Button id="post-btn" type="submit">Post</Button>
                                     </div>
                                 </FormGroup>
 
                             </Form.Group>
                         </Form>
+                        </Card>
                     </Container>
                 </div>
             </div>
