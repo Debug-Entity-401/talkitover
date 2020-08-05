@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button, Modal } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sum, postAssess } from "../../store/assessment";
 import './assessment.scss';
@@ -41,6 +41,7 @@ function Assessment(props) {
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
     };
 
     const handleBack = () => {
@@ -201,9 +202,7 @@ function Assessment(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <p>Your status is:{props.assessment.status}</p>
-                    <Link to="/">
-                        Done
-            </Link>
+                    <Redirect to="/home" />
                 </Modal.Body>
             </Modal>
 
