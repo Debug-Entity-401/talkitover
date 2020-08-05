@@ -105,8 +105,7 @@ const Profile = (props) => {
     if (!props.profile.profile.email) obj.email = props.profile.results.email; else obj.email = props.profile.profile.email;
     if (!props.profile.profile.photo) obj.photo = props.profile.results.photo; else obj.photo = props.profile.profile.photo;
     if (!props.profile.profile.country) obj.country = props.profile.results.country; else obj.country = props.profile.profile.country;
-    // let obj= {};
-    console.log('obj in profile ===> ',obj);
+    
     props.updateProfile(props.profile.results.id, obj);
     props.fetchData();
     setShow(false);
