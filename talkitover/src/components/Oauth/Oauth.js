@@ -4,6 +4,7 @@ import { add, post, loginFacbook, post2, addpass } from "../../store/signup";
 import faker from "faker";
 import axios from "axios";
 import FacebookLogin from "react-facebook-login";
+import cookies from 'react-cookies';
 function Oauth(props) {
 
   let country = "country";
@@ -18,6 +19,8 @@ function Oauth(props) {
       })
       .catch((error) => {
         console.log(error);
+        cookies.remove("remember token");
+        
       });
   };
 
@@ -37,7 +40,6 @@ function Oauth(props) {
       role: "ventor",
     };
     await props.post2(data);
-    props.loginFacbook(response);
   };
   let facebookData = (
     <FacebookLogin
