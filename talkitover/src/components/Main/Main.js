@@ -69,7 +69,7 @@ const Main = () => {
             // start the text animation
             StartTextAnimation(0);
           })
-    })
+    },[])
  
 
 
