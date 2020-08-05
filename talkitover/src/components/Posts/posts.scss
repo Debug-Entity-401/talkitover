@@ -12,9 +12,14 @@
 {
     max-width: none !important;
 }
+
+.toast:not(:last-child) {
+    margin-bottom: 4.75rem;
+}
+
 .post-box
 {
-    width: 80% !important;
+    width: 40% !important;
 }
 .head-post
 {
@@ -27,12 +32,12 @@
 }
 #post-form
 {
-    margin: 5%;
+    margin: 19%;
     background-color: #6fc5ba;
     border: 1px solid #6fc5ba;
-    height: 550px;
+    height: 355px;
     border-radius: 30px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 59%, 36% 59%, 21% 76%, 20% 58%, 0 57%);
+    // clip-path: polygon(0% 0%, 100% 0%, 100% 59%, 36% 59%, 21% 76%, 20% 58%, 0 57%);
 }
 .Post-button {
     float: right;
@@ -237,3 +242,37 @@ span
 // .toggles{
 //     margin-right: 10px;
 // }
+
+  
+  .active-amber-textarea.md-form label.active {
+    color: #ffa000;
+  }
+  .amber-textarea textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #ffa000;
+    box-shadow: 0 1px 0 0 #ffa000;
+  }
+  .amber-textarea.md-form .prefix.active {
+    color: #ffa000;
+  }
+  .active-amber-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
+    color: #ffa000;
+  }
+  
+ 
+  
+  .active-amber-textarea-2 textarea.md-textarea {
+    border-bottom: 1px solid #ffa000;
+    box-shadow: 0 1px 0 0 #ffa000;
+  }
+  .active-amber-textarea-2.md-form label.active {
+    color: #ffa000;
+  }
+  .active-amber-textarea-2.md-form label {
+    color: #ffa000;
+  }
+  .active-amber-textarea-2.md-form .prefix {
+    color: #ffa000;
+  }
+  .active-amber-textarea-2.md-form textarea.md-textarea:focus:not([readonly])+label {
+    color: #ffa000;
+  }

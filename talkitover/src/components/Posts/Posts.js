@@ -82,6 +82,11 @@ function Post(props) {
                                 <div className="Messge-title">
                                     <Form.Label className="user-post-title">Talk Free</Form.Label>
                                 </div>
+                                <div class="md-form amber-textarea active-amber-textarea-2">
+  <i class="fas fa-pencil-alt prefix"></i>
+  <textarea id="form24" class="md-textarea form-control" rows="3"></textarea>
+  <label for="form24">Material textarea with an always colorful prefix</label>
+</div>
                                 <textarea name="description" rows="3" id="mains" placeholder="Talk Free" className="form-control textarea-post" />
                                 <FormGroup row>
                                     <div id='form-footer'>
