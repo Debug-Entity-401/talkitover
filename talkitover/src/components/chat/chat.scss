@@ -53,12 +53,27 @@ bottom: 0px;  //if required overflow to scroll add below css
   width: 80px;
   height: 80px;
   float: left;
+  margin-top: 1.5%;
+}
+.dissconnect
+{
+  float: right;
 }
 .username {
   display: block;
-  font-size: 11px;
-  text-align: center;
+  font-size: 15px;
+  text-align: right;
+  width: 100%;
+  position: relative;
+  left: 8px;
 }
+.user-avatart .makeStyles-small-7
+{
+  width: 40px;
+height: 40px;
+float: right
+}
+
 .chat-message h3 span {
   font-size: 20px;
 }
@@ -74,9 +89,9 @@ bottom: 0px;  //if required overflow to scroll add below css
 }
 
 
-.chat-btns
-{
-    display: inline-block;
+.chat-btns {
+  display: inline-block;
+  width: 15%;
 }
 .chat-box
 {
@@ -170,4 +185,86 @@ bottom: 0px;  //if required overflow to scroll add below css
     }
 
 }
+.msg-list {
+  width: 100%;
+}
+.messenger-container {
+  padding: 8px 24px 3px 18px;
+  margin: 0 0 26px 35px;
+  float: left;
+  max-width: 50%;
+  background: #f2f2f2;
+  border-radius: 10px;
+  min-width: 25%;
+  position: relative;
+  box-sizing: border-box;
+  box-shadow: 7px 10px 6px -5px #BBC0C7;
+}
+.messenger-container p {
+  color: #3D3D3D;
+  font-size: 14px;
+  padding-left: 50px;
+  height: 32px;
+  padding-top: 1.8%;
+  word-wrap: break-word;
 
+}
+.user-avatart .makeStyles-small-3
+{
+  float: left;
+}
+
+.containers {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  line-height: 34px;
+}
+.sender .messenger-container {
+  float: right;
+  margin-right: 35px;
+  width: auto;
+  background: #D5DBFF;
+  margin-left: 0px;
+  padding: 8px 15px 8px 13px;
+}
+.clear {
+  clear:both;
+  width: 100%;
+  padding: 0px !important;
+  margin: 0px;
+  height:0px;
+}
+
+ .messenger-container::before {
+     width: 0px;
+     height: 0px;
+     border-top: 8px solid transparent;
+     border-bottom: 8px solid transparent; 
+
+     border-right:15px solid #f2f2f2; 
+     content: "";
+     position: absolute;
+     top: 9px;
+     left: -15px;
+ }
+.sender .messenger-container::before {
+    width: 0px;
+    height: 0px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 15px solid #D5DBFF;
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 99%;border-right: none;
+}
+
+.sender-username {
+  display: block;
+  font-size: 13px;
+  width: 100%;
+  padding-left: 9px;
+}
