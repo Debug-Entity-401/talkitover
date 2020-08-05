@@ -46,20 +46,20 @@ function Sidebar(props) {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
-          'cookies': `${cookie.load('remember token')}`,
+            'Content-Type': 'application/json',
+            'cookies': `${cookie.load('remember token')}`,
         },
         redirect: 'follow',
         referrerPolicy: 'no-referrer',
-      };
+    };
 
     const fetchUserArticles = async () => {
         const getUserArticles = await axios.get(url + "user-articles", axiosConfig);
         const articlesArr = await getUserArticles.data;
         await setUserArticles(articlesArr.articles);
-      };
-    
-      const getAllUserArticles = () => {
+    };
+
+    const getAllUserArticles = () => {
         fetchUserArticles();
     }
 
@@ -67,6 +67,31 @@ function Sidebar(props) {
         getAllUserArticles();
     }, [userArticles])
 
+    function renderSavedArticles() {
+        if (userArticles.length > 0) {
+            return <> <NavItem eventKey="articles">
+                <NavIcon>
+                    <Tooltip title="Saved Articles">
+                        <div className="icon">
+                            <Badge badgeContent={userArticles.length} color="primary">
+                                <Link className="sidebar-link" to='/myarticles'>
+                                    <i className="fa fa-bookmark" aria-hidden="true"></i>
+                                </Link>
+                            </Badge>
+                        </div>
+                    </Tooltip>
+                </NavIcon>
+                <NavText>
+                    <div className="label">
+                        <Link to='/myarticles'>
+                            <span>Saved Articles</span>
+                        </Link>
+                    </div>
+                </NavText>
+            </NavItem>
+            </>
+        }
+    }
 
 
     return (
@@ -121,34 +146,12 @@ function Sidebar(props) {
 
                     <NavItem eventKey="posts">
 
-                    <NavIcon>
-                    <Tooltip title="Chat">
-                        <div className="icon">
-                        <Badge badgeContent={props.posts.counter} color="primary">
-                            <Link className="sidebar-link" to='/posts'>
-                                <i className="fa fa-comments" aria-hidden="true"></i>
-                            </Link>
-                            </Badge>
-                        </div>
-                        </Tooltip>
-                    </NavIcon>
-                    <NavText>
-                        <div className="label">
-                            <Link to='/posts'>
-                                <span>Posts</span>
-                            </Link>
-                        </div>
-                    </NavText>
-                </NavItem>
-
-                    <NavItem eventKey="articles">
                         <NavIcon>
-                            <Tooltip title="Saved Articles">
+                            <Tooltip title="Chat">
                                 <div className="icon">
-                                    <Badge badgeContent={userArticles.length} color="primary">
-
-                                        <Link className="sidebar-link" to='/myarticles'>
-                                            <i className="fa fa-bookmark" aria-hidden="true"></i>
+                                    <Badge badgeContent={props.posts.counter} color="primary">
+                                        <Link className="sidebar-link" to='/posts'>
+                                            <i className="fa fa-comments" aria-hidden="true"></i>
                                         </Link>
                                     </Badge>
                                 </div>
@@ -156,21 +159,24 @@ function Sidebar(props) {
                         </NavIcon>
                         <NavText>
                             <div className="label">
-                                <Link to='/myarticles'>
-                                    <span>Saved Articles</span>
+                                <Link to='/posts'>
+                                    <span>Posts</span>
                                 </Link>
                             </div>
                         </NavText>
                     </NavItem>
 
+
+{renderSavedArticles()}
+
                     <NavItem eventKey="logout">
                         <NavIcon>
-                        <Tooltip title="Log Out">
-                            <div className="icon" onClick={context.logout}>
-                                <Link to='/'>
-                                    <i className="fa fa-power-off" aria-hidden="true"></i>
-                                </Link>
-                            </div>
+                            <Tooltip title="Log Out">
+                                <div className="icon" onClick={context.logout}>
+                                    <Link to='/'>
+                                        <i className="fa fa-power-off" aria-hidden="true"></i>
+                                    </Link>
+                                </div>
                             </Tooltip>
                         </NavIcon>
                         <NavText>

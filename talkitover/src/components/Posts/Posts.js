@@ -16,9 +16,10 @@ import { toggleLoader } from '../../store/loader';
 import Show from '../auth/show';
 import Loader from 'react-loader-spinner';
 import { makeStyles } from '@material-ui/core/styles';
-import CardActions from '@material-ui/core/CardActions';
+// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+
 const useStyles = makeStyles({
     root: {
       minWidth: 275,
@@ -35,15 +36,22 @@ const useStyles = makeStyles({
       marginBottom: 12,
     },
   });
+  
 function Post(props) {
     const classes = useStyles();
     const [toggle, setToggle] = useState('All');
+    const [spinner, setSpinner] = useState(true);
     const [value, onChange] = useState(new Date());
+    
 
     const context = useContext(LoginContext);
     useEffect(() => {
+        setSpinner(true);
         props.getPost();
+        setSpinner(false);
     },[]);
+
+
     const deletes = async (id) => {
         toggleLoader();
 
@@ -69,7 +77,6 @@ function Post(props) {
         document.getElementById('post-form-main').reset();
         await props.addPost(obj);
         await props.getPost();
-
         toggleLoader();
     }
 
@@ -340,19 +347,24 @@ function Post(props) {
         }
     }
 
+    console.log('props.posts.length ==>',props.posts.posts.length);
+
+    if(!props.posts.posts.length && spinner){
+        return <div className="loader-div">
+             <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
+        </div>
+    }
+
 
     return (
         <>
             <Row>
                 <Col xs={6} sm={6} md={1}>
-
                     <Sidebar />
                 </Col>
                 <Col xs={6} sm={6} md={11}>
-
                     <div id='contain'>
                         {renderForm()}
-
                         <div className="user-posts">
                             <div id="toggel-btns">
                                 <Button className='toggles' onClick={() => setToggle('All')} >All Post</Button>
@@ -362,7 +374,6 @@ function Post(props) {
                         </div>
                     </div>
                 </Col>
-
             </Row>
         </>
     )

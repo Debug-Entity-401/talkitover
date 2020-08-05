@@ -35,7 +35,7 @@ const OtherProfile = (props) => {
 
   useEffect(() => {
     props.fetchOtherProfile(name);
-  }, []);
+  });
 
   const onChangeHandler = async (event, newValue) => {
     let user;

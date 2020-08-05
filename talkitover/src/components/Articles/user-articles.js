@@ -6,6 +6,7 @@ import {Row,Col} from 'react-bootstrap';
 import Loader from 'react-loader-spinner';
 import './styles/articles.scss';
 import cookie from 'react-cookies';
+// import { Redirect } from 'react-router-dom';
 
 
 //get all user articles
@@ -78,7 +79,7 @@ function UserArticles() {
           <div className="loader-div">
           <Loader className="loader" type="Circles" color="#00BFFF" height={100} width={100} />
           </div>
-          <div className="saved-articles">
+          {/* <div className="saved-articles">
           <Row>
         <Col xs={6} sm={6} md={1}>
         <aside id="sidebar">
@@ -92,11 +93,12 @@ function UserArticles() {
         </div>
           </Col>
           </Row>
-          </div>
+          </div> */}
           </>
       )
     }
   }
+
 
 return (
   <>
