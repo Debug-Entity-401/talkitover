@@ -23,6 +23,53 @@ const Main = () => {
     useEffect(() => {
         Aos.init({ duration: 1500 })
     }, [])
+
+    useEffect(() => {
+        document.addEventListener('DOMContentLoaded',function(event){
+            // array with texts to type in typewriter
+            var dataText = [ "You Don't Have To Struggle In Silence.", "Don't Hold It Back.", "TalkitOver."];
+            
+            // type one text in the typwriter
+            // keeps calling itself until the text is finished
+            function typeWriter(text, i, fnCallback) {
+              // chekc if text isn't finished yet
+              if (i < (text.length) && document.querySelector(".home-heading")) {
+                // add next character to h1
+               document.querySelector(".home-heading").innerHTML = text.substring(0, i+1) +'<span class="animated-heading" aria-hidden="true"></span>';
+          
+                // wait for a while and call this function again for next character
+                setTimeout(function() {
+                  typeWriter(text, i + 1, fnCallback)
+                }, 100);
+              }
+              // text finished, call callback if there is a callback function
+              else if (typeof fnCallback == 'function') {
+                // call callback after timeout
+                setTimeout(fnCallback, 700);
+              }
+            }
+            // start a typewriter animation for a text in the dataText array
+             function StartTextAnimation(i) {
+               if (typeof dataText[i] == 'undefined'){
+                  setTimeout(function() {
+                    StartTextAnimation(0);
+                  }, 1000);
+               }
+               // check if dataText[i] exists
+               if(dataText[i]) {
+                   if (i < dataText[i].length) {
+                     // text exists! start typewriter animation
+                    typeWriter(dataText[i], 0, function(){
+                      // after callback (and whole text has been animated), start next text
+                      StartTextAnimation(i + 1);
+                    });
+                   }
+               }
+            }
+            // start the text animation
+            StartTextAnimation(0);
+          })
+    })
  
 
 
@@ -43,52 +90,7 @@ const Main = () => {
                                 <h1 id="heading-3"> <span>TalkitOver</span> </h1>
     <h1 id="heading-4">You Don't Have To Struggle In <span>Silence</span> </h1>*/}
                             <h1 className="home-heading"></h1>
-                            {
-                                document.addEventListener('DOMContentLoaded',function(event){
-                                    // array with texts to type in typewriter
-                                    var dataText = [ "You Don't Have To Struggle In Silence.", "Don't Hold It Back.", "TalkitOver."];
-                                    
-                                    // type one text in the typwriter
-                                    // keeps calling itself until the text is finished
-                                    function typeWriter(text, i, fnCallback) {
-                                      // chekc if text isn't finished yet
-                                      if (i < (text.length) && document.querySelector("h1")) {
-                                        // add next character to h1
-                                       document.querySelector(".home-heading").innerHTML = text.substring(0, i+1) +'<span class="animated-heading" aria-hidden="true"></span>';
-                                  
-                                        // wait for a while and call this function again for next character
-                                        setTimeout(function() {
-                                          typeWriter(text, i + 1, fnCallback)
-                                        }, 100);
-                                      }
-                                      // text finished, call callback if there is a callback function
-                                      else if (typeof fnCallback == 'function') {
-                                        // call callback after timeout
-                                        setTimeout(fnCallback, 700);
-                                      }
-                                    }
-                                    // start a typewriter animation for a text in the dataText array
-                                     function StartTextAnimation(i) {
-                                       if (typeof dataText[i] == 'undefined'){
-                                          setTimeout(function() {
-                                            StartTextAnimation(0);
-                                          }, 1000);
-                                       }
-                                       // check if dataText[i] exists
-                                       if(dataText[i]) {
-                                           if (i < dataText[i].length) {
-                                             // text exists! start typewriter animation
-                                            typeWriter(dataText[i], 0, function(){
-                                              // after callback (and whole text has been animated), start next text
-                                              StartTextAnimation(i + 1);
-                                            });
-                                           }
-                                       }
-                                    }
-                                    // start the text animation
-                                    StartTextAnimation(0);
-                                  })
-                                 }
+                         
 
                             </div>
                         </Col>
