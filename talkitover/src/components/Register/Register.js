@@ -121,7 +121,7 @@ function Register(props) {
 
   /////////////////////////////////////////
 
-  if (props.signUp.loggedIn) {
+  if (props.signUp.loggedIn === true) {
     return <Redirect to='/assess' />
   }
   return (
@@ -214,11 +214,11 @@ function Register(props) {
                     />
                   </Form.Group>
                   <br />
-                  <UserExist>
-          <Alert variant="danger" className="register-user-msg">
-            the user already exist
-        </Alert>
-        </UserExist>
+		<UserExist>
+		<Alert variant="danger" className="register-user-msg">
+		the user already exist
+		</Alert>
+		</UserExist>
                   <div className="sign-section">
                     <Button
                       type="submit"
