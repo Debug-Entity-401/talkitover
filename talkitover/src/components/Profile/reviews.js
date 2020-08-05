@@ -52,10 +52,8 @@ const Reviews = (props) => {
                       </Toast.Header>
                       <Toast.Body>{rev.review_description}</Toast.Body>
                       <Box component="fieldset" mb={3} borderColor="transparent">
-                        <Typography component="legend">User rate:</Typography>
-                        <Rating name="read-only" value={rev.rating} readOnly />
+                        <Typography component="legend">User rating: <Rating name="read-only" value={rev.rating} readOnly /></Typography>
                       </Box>
-
                     </Toast>
 
                   );

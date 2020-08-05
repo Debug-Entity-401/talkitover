@@ -127,6 +127,19 @@ const Profile = (props) => {
       );
     }
   };
+  const quoteRender = () => {
+    if (props.profile.results.role === "Listener") {
+      return (
+        <>
+          <div class="mb-wrap mb-style-2">
+            <blockquote cite="http://www.gutenberg.org/ebboks/11">
+              <p> Always here to listen and talk. Always on your side</p>
+            </blockquote>
+          </div>
+        </>
+      );
+    }
+  };
   return (
     <>
       <Row>
@@ -135,8 +148,13 @@ const Profile = (props) => {
         </Col>
         <Col xs={6} sm={6} md={11}>
           <div className="waves">
-            <h2 className="user-name">{props.profile.results.username}</h2>
-            <div className="img-container">{photoRender()}</div>
+            <div className="motivation">{quoteRender()}</div>
+            <div className="user-name-container">
+              <div className="img-container">{photoRender()}</div>
+              <div className="user-name">
+                <h2>{props.profile.results.username}</h2>
+              </div>
+            </div>
             <svg
               id="parent-wave"
               xmlns="http://www.w3.org/2000/svg"
@@ -168,8 +186,7 @@ const Profile = (props) => {
                   <br />
                   <li>
                     <h5>
-                      <b>Country</b> : <br />
-                      {props.profile.results.country}
+                      <b>Country</b> : {props.profile.results.country}
                     </h5>
                   </li>
                   <Divider variant="middle" component="li" />
