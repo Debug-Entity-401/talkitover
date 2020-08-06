@@ -352,7 +352,7 @@ function Post(props) {
                             </div>
                         </Toast.Body>
                     </Toast>
-                } else if (timeSplit[2] === day && timeSplit[3] >= hours) {
+                } else if (timeSplit[2] == day && timeSplit[3] >= hours) {
                     return <Toast key={i} className="post-box">
                         <Toast.Header closeButton={false}>
 

@@ -32,7 +32,7 @@ function Sidebar(props) {
     useEffect(() => {
         props.fetchData();
         props.getPost();
-    }, [props.posts.counter]);
+    }, []);
 
     const context = useContext(LoginContext);
     // useEffect(() => {
@@ -66,6 +66,7 @@ function Sidebar(props) {
 
     useEffect(() => {
         getAllUserArticles();
+        props.getPost();
     }, [userArticles])
 
     function renderSavedArticles() {
