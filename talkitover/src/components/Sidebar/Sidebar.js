@@ -31,12 +31,13 @@ function Sidebar(props) {
     const classes = useStyles();
     useEffect(() => {
         props.fetchData();
-    }, []);
-
-    const context = useContext(LoginContext);
-    useEffect(() => {
         props.getPost();
     }, [props.posts.counter]);
+
+    const context = useContext(LoginContext);
+    // useEffect(() => {
+    //     props.getPost();
+    // }, []);
 
     const [userArticles, setUserArticles] = useState([]);
 

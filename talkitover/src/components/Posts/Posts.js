@@ -86,6 +86,7 @@ function Post(props) {
         let hours = date.getHours()
         let years = date.getFullYear()
         let month = date.getMonth() + 1;
+        console.log('hours ===> ',hours);
         let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
         document.getElementById('post-form-main').reset();
         await props.addPost(obj);
@@ -240,12 +241,14 @@ function Post(props) {
         let month = date.getMonth() + 1;
         let timeSplit = availability.split('-')[0].split('/');
         timeSplit.push(availability.split('-')[1]);
+        console.log(timeSplit[3],' ====>  ',hours);
+        console.log('day ==> ',day,' === ',timeSplit[2]);
         if (!solved) {
             if ((timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day)) {
                 if (context.user.role === 'Listener' || context.user.user_name === user) {
                     return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}><i class="fa fa-comments" aria-hidden="true"></i>                    </Link></div>
                 }
-            } else if (timeSplit[2] === day && timeSplit[3] >= hours)
+            } else if (timeSplit[2] == day && timeSplit[3] >= hours)
                 if (context.user.role === 'Listener' || context.user.user_name === user) {
                     return <div class="chat-btn"><Link onClick={e => (!context.user.user_name) ? e.preventDefault() : null} to={`/chat?name=${context.user.user_name}&room=${id}`}><i class="fa fa-comments" aria-hidden="true"></i>                    </Link></div>
                 }
@@ -278,7 +281,7 @@ function Post(props) {
         }
 
     }
-    let solve = "true"
+    // let solve = "true"
     function renderPost() {
         let date = new Date();
         let day = date.getDate();
