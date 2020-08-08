@@ -29,10 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Sidebar(props) {
     const classes = useStyles();
-    useEffect(() => {
-        props.fetchData();
-        props.getPost();
-    }, []);
+    
 
     const context = useContext(LoginContext);
     // useEffect(() => {
@@ -63,11 +60,14 @@ function Sidebar(props) {
     const getAllUserArticles = () => {
         fetchUserArticles();
     }
-
     useEffect(() => {
-        getAllUserArticles();
+        props.fetchData();
         props.getPost();
-    }, [userArticles])
+        getAllUserArticles();
+    },[]);
+    // useEffect(() => {
+        
+    // }, )
 
     function renderSavedArticles() {
         if (userArticles.length > 0) {

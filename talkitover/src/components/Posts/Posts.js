@@ -52,8 +52,9 @@ function Post(props) {
     const context = useContext(LoginContext);
     useEffect(() => {
         // setSpinner(true);
+        console.log('<===== in post component -===>');
         props.getPost();
-    }, []);
+    },[]);
     const deletes = async (id) => {
         
         toggleLoader();

@@ -35,7 +35,19 @@ let config = {
     referrerPolicy: 'no-referrer',
   }
 export const getPost = ( ) => async dispatch =>{
-   let response = axios.get(`${API}/talkitoverposts`,config);
+    console.log('inposts ===> ',cookie.load('remember token'))
+    let axconfig = {
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'cookies': `${cookie.load('remember token')}`
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+      }
+   let response = axios.get(`${API}/talkitoverposts`,axconfig);
     let posts = await response;
     dispatch(renderpost(posts.data));
 }
