@@ -31,12 +31,13 @@ function Sidebar(props) {
     const classes = useStyles();
     useEffect(() => {
         props.fetchData();
+        props.getPost();
     }, []);
 
     const context = useContext(LoginContext);
-    useEffect(() => {
-        props.getPost();
-    }, [props.posts.counter]);
+    // useEffect(() => {
+    //     props.getPost();
+    // }, []);
 
     const [userArticles, setUserArticles] = useState([]);
 
@@ -65,6 +66,7 @@ function Sidebar(props) {
 
     useEffect(() => {
         getAllUserArticles();
+        props.getPost();
     }, [userArticles])
 
     function renderSavedArticles() {

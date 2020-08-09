@@ -106,10 +106,10 @@ function Assessment(props) {
                     `Moderate Struggle`,
                     `Significant Struggle`]
             case 3:
-                return ['Never',
-                    'Once in a While',
-                    'Some of the Time',
-                    'Frequently'];
+                return ['Not at all',
+                    'Several days',
+                    'More than half the days',
+                    'Nearly every day'];
             case 4:
                 return ['Id rather not answer at this time',
                     'Ive sought professional help one time in the past.',
@@ -128,7 +128,7 @@ function Assessment(props) {
             case 2:
                 return `${props.assessment.answer} impacts my work, school, or relationships:`;
             case 3:
-                return `Learning how to better manage ${props.assessment.answer} is:`;
+                return `How ready are you to make a change in your life?`;
             case 4:
                 return `Have you ever sought or received professional help (therapy, counseling, self-help, group support, or medication) for ${props.assessment.answer} is:`;
             default:
@@ -143,7 +143,7 @@ function Assessment(props) {
                 <div className="test-header">
                     <h1>Emotional Wellness Test</h1>
                 </div>
-                <div className={classes.root}>
+                <div className={classes.root} style={{margin:'0 auto'}}>
                     <Stepper activeStep={activeStep} orientation="vertical">
                         {steps.map((label, index) => (
                             <Step key={label}>
