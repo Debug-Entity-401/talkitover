@@ -89,7 +89,7 @@ class Header extends React.Component {
                                     <Button variant="primary" onClick={this.context.logout}><Link id='logout-link' to='/'>Logout</Link> </Button>
                                 </Show>
                                 <Show condition={(this.context.loggedIn === false || this.context.loggedIn === 'invalid') && this.props.signUp.loggedIn === ''}>
-                                    <Button className="primary-btn" variant="success" onClick={() => this.handleModalShowHide()}>
+                                    <Button className="primary-btn"  onClick={() => this.handleModalShowHide()}>
                                         Sign in
                                     </Button>
                                     <li> <Nav.Link href="/signup">Sign up</Nav.Link></li>

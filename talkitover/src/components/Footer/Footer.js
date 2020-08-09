@@ -12,11 +12,12 @@ function Footer() {
         <footer >
             <Container>
                 <Row>
-                    <Col xs={6} sm={6} md={4}>
+                    <Col xs={12} sm={12} md={4}>
+                        <div className="footer-logo-section">
                         <img className="footer-logo" src={logo} alt="logo"/>
-                      
+                        </div>
                     </Col>
-                    <Col xs={6} sm={6} md={4}>
+                    <Col xs={12} sm={12} md={4}>
 <ul className="contact">
     <h5>Contact</h5>
     <li><i class="fa fa-map-marker" aria-hidden="true"></i>Jordan,Amman</li>

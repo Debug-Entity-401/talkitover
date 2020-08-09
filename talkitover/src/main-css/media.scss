@@ -37,10 +37,14 @@ text-align: center;
     {
 text-align: center;
     }
-    .footer-nav ul li a
+    .footer-nav ul li 
+    {
+    display: block;
+    a
 {
     margin-bottom: 20;
 }
+  }
     .talkitover-intro-description
     {
         margin: 3%;
@@ -93,6 +97,13 @@ text-align: center;
         width: 30px;
         height: 30px;
     }
+    .navbar-nav ul {
+        text-align: left !important;
+        li
+        {
+            display: block !important;
+        }
+    }
     .testmonial-card {
         height: 300px;
         
@@ -127,12 +138,53 @@ text-align: center;
         margin-top: 3%;
         text-align: left;
     }
-    footer ul {
+
+    .primary-btn {
+        color: #fff;
+        width: 40%;
+        background-color: #105f9c;
+        border-color: #105f9c;
+    }
+    .overcome h2 {
+        font-size: 26px;
+    }
+    .testmonial-card
+    {
+        margin-bottom: 10%;
+    }
+    footer .social-media li {
+        display: block;
+        margin: 5% auto;
+        text-align: center;
+        padding: 2% 1%;
+    }
+    .social-media-header {
+        margin: 0;
+        text-align: center;
+         padding:0;
+    }
+    .footer-logo-section
+    {
+        text-align: center;
+    }
+    footer .social-media {
+        width: 90%;
+    }
+    #intro-img {
+        width: 82%;
+        margin-top: 10%;
+    }
+    .contact
+    {
+        width: 100%;
         li
-    
         {
-            margin-bottom: 20%;
-        }
+            padding: 6% 4%;
+                }
+    }
+    .overcome-card
+    {
+        margin-bottom: 9%;
     }
   }
 

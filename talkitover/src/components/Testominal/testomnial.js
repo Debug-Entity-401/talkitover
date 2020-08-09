@@ -21,7 +21,7 @@ class Testominial extends React.Component {
                     <div id="about-us">
 
                                 <Row>
-                                    <Col xs={4} sm={4} md={3}>
+                                    <Col xs={12} sm={12} md={3}>
 
                                         <Card className="testmonial-card" >
                                             <div className="user-image">
@@ -35,7 +35,7 @@ class Testominial extends React.Component {
                                             </Card.Body>
                                         </Card>
                                     </Col>
-                                    <Col xs={4} sm={4} md={3}>
+                                    <Col xs={12} sm={12} md={3}>
 
                                         <Card className="testmonial-card" >
                                             <div className="user-image">
@@ -50,7 +50,7 @@ class Testominial extends React.Component {
                                             </Card.Body>
                                         </Card>
                                     </Col>
-                                    <Col xs={4} sm={4} md={3}>
+                                    <Col xs={12} sm={12} md={3}>
 
                                         <Card className="testmonial-card" >
                                             <div className="user-image">
@@ -64,7 +64,7 @@ class Testominial extends React.Component {
                                             </Card.Body>
                                         </Card>
                                     </Col>
-                                    <Col xs={4} sm={4} md={3}>
+                                    <Col xs={12} sm={12} md={3}>
 
                                         <Card className="testmonial-card" >
                                             <div className="user-image">
