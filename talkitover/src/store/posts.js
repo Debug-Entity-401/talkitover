@@ -23,17 +23,7 @@ const posts = createSlice({
 });
 export const { renderpost } = posts.actions;
 let API = 'https://talkitover-staging.herokuapp.com';
-let config = {
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      'cookies': `${cookie.load('remember token')}`
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-  }
+
 export const getPost = ( ) => async dispatch =>{
     console.log('inposts ===> ',cookie.load('remember token'))
     let axconfig = {
@@ -52,16 +42,49 @@ export const getPost = ( ) => async dispatch =>{
     dispatch(renderpost(posts.data));
 }
 export const addPost = (obj ) => async dispatch =>{
+    let config = {
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'cookies': `${cookie.load('remember token')}`
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+      }
     let response = axios.post(`${API}/talkitoverposts`,obj,config);
      await response;
     //  dispatch(renderpost(posts.data));
  }
  export const deletepost=(id)=>async dispatch=>{
+    let config = {
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'cookies': `${cookie.load('remember token')}`
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+      }
     let response = axios.delete(`${API}/talkitoverposts/${id}`,config);
    await response;
  }
 
  export const updatepost=(obj,id)=> async dispatch=>{
+    let config = {
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'cookies': `${cookie.load('remember token')}`
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+      }
 let response=axios.put(`${API}/talkitoverposts/${id}`,obj,config);
 await response;
  }

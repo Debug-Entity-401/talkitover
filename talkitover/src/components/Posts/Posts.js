@@ -52,7 +52,6 @@ function Post(props) {
     const context = useContext(LoginContext);
     useEffect(() => {
         // setSpinner(true);
-        console.log('<===== in post component -===>');
         props.getPost();
     },[]);
     const deletes = async (id) => {
@@ -87,7 +86,6 @@ function Post(props) {
         let hours = date.getHours()
         let years = date.getFullYear()
         let month = date.getMonth() + 1;
-        console.log('hours ===> ',hours);
         let obj = { availability: `${years}/${month}/${day}-${hours}`, description, view_as: user, user_name: context.user.user_name };
         document.getElementById('post-form-main').reset();
         await props.addPost(obj);
@@ -134,7 +132,6 @@ function Post(props) {
         let user;
         e.target.solved.value ? user = true : user = false;
         let id = e.target.id.value;
-        console.log( document.getElementById(`${id}`))
         document.getElementById(`${id}`).classList.add("solved");
         let obj = { solved: user };
         await props.updatepost(obj, id);
@@ -242,8 +239,6 @@ function Post(props) {
         let month = date.getMonth() + 1;
         let timeSplit = availability.split('-')[0].split('/');
         timeSplit.push(availability.split('-')[1]);
-        console.log(timeSplit[3],' ====>  ',hours);
-        console.log('day ==> ',day,' === ',timeSplit[2]);
         if (!solved) {
             if ((timeSplit[0] >= years && timeSplit[1] >= month && timeSplit[2] > day)) {
                 if (context.user.role === 'Listener' || context.user.user_name === user) {
@@ -386,7 +381,6 @@ function Post(props) {
         }
     }
 
-    console.log('props.posts.length ==>',props.posts.posts.length);
 
     if(!props.posts.posts.length){
         return <div className="loader-div">
