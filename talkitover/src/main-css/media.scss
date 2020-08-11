@@ -5,9 +5,82 @@
      
         font-size: 60px;
     }
+    .check {
+        
+        right: 15%;
+        bottom: 10px;
+    }
+    .toast-body
+    {
+        font-size: 13px;
+    }
+    .motivation
+    {
+        display: none !important;
+    }
+    .post-box {
+        width: 65% !important;
+    }
+ 
+    
+    .profile-container .profile
+    {
+        margin-top: 40%;
+    }
+    
+    .navbar-nav ul li {
+        display: block !important;
+        text-align: left;
+    }
+    .article-li
+    {width: 80%;}
+    .justify-content-end
+    {
+        width: 12% !important;
+    }
+    .profile-container .profile .edit-container .edit-btn
+    {
+        width: 90%;
+    }
+    .article-li .MuiTypography-h5
+    {
+        font-size: 15px;
+    }
+    .post-box {
+        width: 65% !important;
+    }
+    .articles
+    {
+        margin-left: 10%;
+    }
+    .overcome h2
+    {
+        font-size: 30px;
+    }
     .full-footer {
         display: flex;
         justify-content: flex-start;
+    }
+    .overcome-card .card-text
+    {
+font-size: 11px;
+    }
+    .article-li .makeStyles-root-2
+    {
+        margin: 0 auto;
+    }
+    .testmonial-card .card-title
+    {
+        font-size: 11px;
+    } 
+    .profile-container .profile
+    {
+        margin-top: 40% !important;
+    }
+    .testmonial-card .card-text
+    {
+        font-size: 12px;
+
     }
     .footer-nav {
         margin-top: 3%;
@@ -21,10 +94,19 @@
     {
         height: 21rem;
     }
+    
     .talkitover-intro-image img
     {
 width: 100%;
 text-align: center;
+    }
+    .profile-container .profile
+    {
+        margin-top: 50%;
+    }
+    .user-name
+    {
+        right: 20px;
     }
     
   }
@@ -33,10 +115,54 @@ text-align: center;
     {
         text-align: center;
     }
-    .talkitover-intro-image
+    .profile-container .profile
     {
-text-align: center;
+        margin-top: 40%;
     }
+    .profile-container .profile .edit-container .edit-btn
+    {
+        width: 90%;
+    }
+    .img-container {
+      
+        width: 150px;
+        height: 150px;
+    }
+    .profile-container .profile
+    {
+        margin-top: 40%;
+    }
+    .img-container .profile-img
+    {
+        height: 200px !important;
+    }
+    .motivation
+    {
+        display: none !important;
+    }
+    .article-li .makeStyles-root-2
+    {
+        margin: 0 auto;
+    }
+    footer img
+    {
+        margin: 5% 3%; 
+    }
+    .testmonial-card {
+        width: 60% !important;
+        margin: 5% auto;
+        box-shadow: 0 15px 10px #777;
+    }
+    .footer-logo-section
+    {
+        text-align: center;
+    }
+   
+    .talkitover-intro-image {
+        text-align: center;
+        margin-top: 2%;
+    }
+    
     .footer-nav ul li 
     {
     display: block;
@@ -54,10 +180,10 @@ text-align: center;
     {
 text-align: center;
     }
-    .overcome-card
-    {
+    .overcome-card {
         width: 14rem;
         height: 18rem;
+        margin: 5% auto;
         text-align: center;
     }
     .website-introduction
@@ -68,12 +194,25 @@ text-align: center;
         margin-top: 1%;
         text-align: left;
     }
+    .card-text
+    {
+        font-size: 8px;
+    }
+    .user-name
+    {
+        right: 20px;
+    }
     .hero-slider    {
         clip-path: none !important;
     }
     .container
     {
         max-width: 767px;
+    }
+    .testmonial-card .card-text
+    {
+        font-size: 20px;
+        text-align: center;
     }
     .full-footer {
         display: flex;
@@ -87,15 +226,73 @@ text-align: center;
         width: 50px;
         height: 50px;
     }
+    .overcome h2
+    {
+        font-size: 25px;
+    }
+    .navbar-nav ul li {
+        display: block !important;
+        text-align: left;
+    }
+    .toast-body
+    {
+        font-size: 13px;
+    }
+    .justify-content-end 
+    {
+width: 15% !important;
+    }
+    .contact
+    {
+        width: 100%;
+    }
+    footer .social-media {
+        width: 95%;
+    }
+    footer .social-media li {
+        display: block;
+        margin: 2% auto;
+        padding: 1.5% 1%;
+    }
+    .social-media-header {
+        text-align: center;
+        padding-left: 2%;
+    }
+    .contact li {
+        padding: 4%;
+        text-align: left;
+        margin-left: 27%;
+    }
+    .profile-container .profile
+    {
+        margin-top: 40% !important;
+    }
+    .user-name
+    {
+        right: 15px;
+    }
+    .articles
+    {
+        margin-left: 10%;
+    }
   }
   @media (min-width: 120px) and (max-width: 480px) {
     .talkitover-intro-title h3
     {
         text-align: center;
     }
+   
     .user-image img {
         width: 30px;
         height: 30px;
+    }
+    .article-li .makeStyles-root-2
+    {
+        margin: 0 auto;
+    }
+    .motivation
+    {
+        display: none !important;
     }
     .navbar-nav ul {
         text-align: left !important;
@@ -103,6 +300,11 @@ text-align: center;
         {
             display: block !important;
         }
+    }
+    .img-container {
+      
+        width: 150px !important;
+        height: 150px !important;
     }
     .testmonial-card {
         height: 300px;
@@ -163,6 +365,10 @@ text-align: center;
         text-align: center;
          padding:0;
     }
+    .toast-body
+    {
+        font-size: 13px;
+    }
     .footer-logo-section
     {
         text-align: center;
@@ -185,6 +391,34 @@ text-align: center;
     .overcome-card
     {
         margin-bottom: 9%;
+    }
+    .articles
+    {
+        margin-left: 10%;
+    }
+    .profile-container .profile
+    {
+        margin-top: 50%;
+    }
+    .user-name
+    {
+        right: 25px;
+    }
+    .post-box {
+        width: 65% !important;
+    }
+    .profile-container .profile
+    {
+        margin-top: 40% !important;
+    }
+    .check {
+        right: 0%;
+        bottom: 25px;
+    }
+    
+    .profile-container .profile .edit-container .edit-btn
+    {
+        width: 90%;
     }
   }
 

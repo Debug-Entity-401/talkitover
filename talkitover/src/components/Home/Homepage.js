@@ -73,13 +73,13 @@ if ( (token || username) && articles.length > 0) {
     <>
     <div id="home">
     <Row>
-    <Col xs={6} sm={6} md={1}>
+    <Col xs={1} sm={1} md={1}>
 
     <aside id="sidebar">
     <Sidebar />
   </aside>
   </Col>
-  <Col xs={6} sm={6} md={11}>
+  <Col xs={11} sm={11} md={11}>
     <div className="waves">
     <svg  id="parent-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
   <path fill="#6fc5ba" fill-opacity="1" d="M0,288L40,293.3C80,299,160,309,240,288C320,267,400,213,480,186.7C560,160,640,160,720,176C800,192,880,224,960,245.3C1040,267,1120,277,1200,261.3C1280,245,1360,203,1400,181.3L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>

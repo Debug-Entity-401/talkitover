@@ -150,10 +150,10 @@ const Profile = (props) => {
   return (
     <>
       <Row>
-        <Col xs={6} sm={6} md={1}>
+        <Col xs={1} sm={1} md={1}>
           <Sidebar />
         </Col>
-        <Col xs={6} sm={6} md={11}>
+        <Col xs={11} sm={11} md={11}>
           <div className="waves">
             <div className="motivation">{quoteRender()}</div>
             <div className="user-name-container">

@@ -46,7 +46,7 @@ function Article(props) {
           return (
             <>
           
-              <Col xs={6} sm={6} md={6}>
+              <Col xs={12} sm={12} md={6}>
               <li key={idx} id={article._id} className="article-li">
                   {/*<a href={article.url}> {article.title} </a>
           <p> {article.text} </p>  */}
