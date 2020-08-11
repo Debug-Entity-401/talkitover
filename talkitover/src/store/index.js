@@ -6,8 +6,9 @@ import assessment from './assessment';
 import posts from "./posts";
 import chatSlice from './chat-store';
 import loader from './loader';
+import admin from './admin';
 
-const reducers = combineReducers({ signUp, createSlice, otherProfile, assessment, posts, chatSlice,loader });
+const reducers = combineReducers({ signUp, createSlice, otherProfile, assessment, posts, chatSlice,loader,admin });
 
 const store = configureStore({ reducer: reducers });
 

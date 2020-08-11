@@ -29,10 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Sidebar(props) {
     const classes = useStyles();
-    useEffect(() => {
-        props.fetchData();
-        props.getPost();
-    }, []);
+    
 
     const context = useContext(LoginContext);
     // useEffect(() => {
@@ -63,11 +60,13 @@ function Sidebar(props) {
     const getAllUserArticles = () => {
         fetchUserArticles();
     }
-
+    useEffect(() => {
+        props.fetchData();
+        props.getPost(); 
+    },[]);
     useEffect(() => {
         getAllUserArticles();
-        props.getPost();
-    }, [userArticles])
+    },[userArticles])
 
     function renderSavedArticles() {
         if (userArticles.length > 0) {
@@ -94,6 +93,29 @@ function Sidebar(props) {
             </>
         }
     }
+    function renderProfile (){
+        let path;
+        context.user.role === 'Adminstrator' ? path = '/profile' : path = '/admin';
+        return<NavItem eventKey="profile">
+
+        <NavIcon>
+            <Tooltip title="Profile">
+                <div className="icon">
+                    <Link to={path}>
+                        <Avatar src={props.profile.results.photo} />
+                    </Link>
+                </div>
+            </Tooltip>
+        </NavIcon>
+        <NavText>
+            <div className="label">
+                <Link to={path}>
+                    <span>Profile</span>
+                </Link>
+            </div>
+        </NavText>
+    </NavItem>
+    }
 
 
     return (
@@ -106,26 +128,8 @@ function Sidebar(props) {
                 <SideNav.Toggle />
                 <SideNav.Nav>
 
-                    <NavItem eventKey="profile">
-
-                        <NavIcon>
-                            <Tooltip title="Profile">
-                                <div className="icon">
-                                    <Link to='/profile'>
-                                        <Avatar src={props.profile.results.photo} />
-                                    </Link>
-                                </div>
-                            </Tooltip>
-                        </NavIcon>
-                        <NavText>
-                            <div className="label">
-                                <Link to='/profile'>
-                                    <span>Profile</span>
-                                </Link>
-                            </div>
-                        </NavText>
-                    </NavItem>
-
+                    
+{renderProfile()}
 
                     <NavItem eventKey="home">
                         <NavIcon>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useContext}from 'react';
 import Home from './components/Home/Homepage.js';
 import UserArticles from './components/Articles/user-articles'
 import { Route, Link } from 'react-router-dom';
@@ -18,7 +18,7 @@ import Testmonial from './components/Testominal/testomnial';
 // import Auth from './components/auth/auth';
 import LoginContext from "./components/auth/context.js";
 import Show from './components/auth/show.js';
-
+import Admin from './components/Admin/admin'
 
 
 function App() {
@@ -61,9 +61,15 @@ function App() {
         
       <Chat />
       </Route>
+      
       <Route path="/profile">
         <Profile />
       </Route>
+      <Route path="/admin">
+        <Admin/>
+      </Route>
+     
+      
       <Route path="/otherProfile">
         <OtherProfile />
       </Route>
