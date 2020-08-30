@@ -16,7 +16,6 @@ import { IconButton, InputAdornment, FormControl, Input, TextField, MenuItem } f
 import InputLabel from '@material-ui/core/InputLabel';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { sign } from "jsonwebtoken";
 
 
 const useStyles = makeStyles((theme) => ({

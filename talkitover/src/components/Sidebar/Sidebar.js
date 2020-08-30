@@ -101,7 +101,7 @@ function Sidebar(props) {
         <NavIcon>
             <Tooltip title="Profile">
                 <div className="icon">
-                    <Link to={path}>
+                    <Link to='/profile'>
                         <Avatar src={props.profile.results.photo} />
                     </Link>
                 </div>
@@ -109,7 +109,7 @@ function Sidebar(props) {
         </NavIcon>
         <NavText>
             <div className="label">
-                <Link to={path}>
+                <Link to='/profile'>
                     <span>Profile</span>
                 </Link>
             </div>
